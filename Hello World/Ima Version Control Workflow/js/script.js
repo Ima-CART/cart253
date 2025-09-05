@@ -21,16 +21,16 @@ function setup() {
 }
 
 /**
- * Draws a top-down view of a pyramid and also a red circle
+ * Draws a top-down view of a pyramid and also a teal oval
  * at the position of the user's cursor
 */
 function draw() {
-    // Make the background black (specified as RGB)
-    background(0, 0, 0);
+    // Make the background blue (specified as RGB)
+    background(25, 160, 191);
 
     // Draw a pyramid
     // How many levels for the pyramid
-    const levels = 10;
+    const levels = 13;
     // Loop through every level (backwards)
     for (let level = levels; level > 0; level--) {
         // Draw this layer
@@ -47,19 +47,19 @@ function draw() {
         rectMode(CENTER);
         // Draw the rectangle in the centre of the canvas
         // (320, 320) with a size based on the level
-        // e.g. level 1 will be a 48x48 rectangle and
-        // level 10 will be a 480x480 rectangle
-        rect(320, 320, level * 48, level * 48);
+        // e.g. level 1 will be a 32x32 rectangle and
+        // level 10 will be a 320x32 rectangle
+        rect(320, 320, level * 32, level * 32);
         pop();
     }
 
-    // Draw a red circle at the position of the mouse
+    // Draw a teal oval at the position of the mouse
     push();
     // No line around the shape
     noStroke();
-    // Make it red (RGB)
-    fill(255, 0, 0);
-    // Draw a 100x100 circle at the mouse position
-    ellipse(mouseX, mouseY, 100, 100);
+    // Make it teal; (RGB)
+    fill(25, 191, 136);
+    // Draw a 90x60 oval at the mouse position
+    ellipse(mouseX, mouseY, 90, 60);
     pop();
 }
