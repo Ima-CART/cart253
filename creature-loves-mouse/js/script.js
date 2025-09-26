@@ -48,6 +48,12 @@ function draw() {
  * Responds to user input
  */
 function checkInput() {
+    if(mouseIsPressed){
+       //change the colour of the creature to show it's happy
+       //It likes the mouse
+        creature.fill=creature.fills.happy;}
+
+        else{creature.fill=creature.fills.bored;}
     // We'll need to figure this out
 }
 
