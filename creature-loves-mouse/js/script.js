@@ -52,7 +52,13 @@ function checkInput() {
        //change the colour of the creature to show it's happy
        //It likes the mouse
         creature.fill=creature.fills.happy;}
+        //creature hates keys being press
+        //creature becomes vicious burning red
+        else if(keyIsPressed){
+            creature.fill=creature.fills.angry;
+        }
 
+      //the mouse becomes bored when left alone
         else{creature.fill=creature.fills.bored;}
     // We'll need to figure this out
 }
