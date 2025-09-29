@@ -57,7 +57,7 @@ function draw() {
 }
 
 
-
+//moving the puck by overlap
 function movePuck(){
 
   const d=dist(puck.x, puck.y, user.x, user.y,);
@@ -91,17 +91,6 @@ if (mouseoverlap) {
   }
 }
 
-  //const overlap2 = (d< puck.y/4 + user.y/4);
-  
-  
- //if (overlap1) { puck.x = puck.x+150;
-
- //}
-
- //else  if(overlap2) { puck.y= puck.y-150;
-
-
- //}
 
 
 }
@@ -157,13 +146,17 @@ pop();
 
 }
 
+//changing the target when puck overlaps
 function checkTarget() {
+  //repeating the same distance but this time using the target
  const d=dist(puck.x, puck.y, Target.x, Target.y,);
 const Targetoverlap = (d< puck.size/2 + Target.size/2);
 
+//When you score a goal the goal light up
+
 if (Targetoverlap){ Target.fill=Target.fills.overlap}
 
-
+//no goal means no light
   else {Target.fill=Target.fills.noOverlap}
 
 
