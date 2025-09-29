@@ -1,6 +1,6 @@
 /**
- * Circle Master
- * Pippin Barr
+ * Scoring a hockey goal
+ * Ima Williams
  *
  * This will be a program in which the user can push a circle
  * on the canvas using their own circle.
@@ -10,16 +10,28 @@ const puck = {
   x: 200,
   y: 200,
   size: 100,
-  fill: "#ff0000"
-};
+  fill: "#ff0000",
+}
 
 const user = {
   x: undefined, // will be mouseX
   y: undefined, // will be mouseY
   size: 75,
-  fill: "#000000"
+  fill: "#000000",
 };
 
+const Target ={
+   x: 350,
+   y: 200,
+   size: 150,
+   fill: "#183ba6ff", //blue to start
+   fills:{ noOverlap:  "#183ba6ff", //blue for no overlap
+         overlap: "#4db9efff", //light blue for overlap
+   }
+
+
+
+}
 /**
  * Create the canvas
  */
@@ -36,9 +48,62 @@ function draw() {
   // Move user circle
   moveUser();
   
+  movePuck();
   // Draw the user and puck
+  drawTarget();
   drawUser();
   drawPuck();
+  checkTarget();
+}
+
+
+
+function movePuck(){
+
+  const d=dist(puck.x, puck.y, user.x, user.y,);
+  
+
+  //Pushing the puck on the right side
+  const mouseoverlap = (d< puck.size/2 + user.size/2);
+
+
+// Asssuming you already have the overlap check
+if (mouseoverlap) {
+  // If the user is to the left
+  if (user.x < puck.x) {
+    // Push left
+    puck.x = puck.x + 5;
+  }
+  // Or if the user to the right
+  else if (user.x > puck.x) {
+    // Push right
+    puck.x = puck.x - 5;
+  }
+  // Or if the user is above
+  else if (user.y < puck.y) {
+    // Push down
+    puck.y = puck.y + 5;
+  }
+  // Or if the user is below
+  else if (user.y > puck.y) {
+    // Push up
+    puck.y = puck.y - 5;
+  }
+}
+
+  //const overlap2 = (d< puck.y/4 + user.y/4);
+  
+  
+ //if (overlap1) { puck.x = puck.x+150;
+
+ //}
+
+ //else  if(overlap2) { puck.y= puck.y-150;
+
+
+ //}
+
+
 }
 
 /**
@@ -48,6 +113,13 @@ function moveUser() {
   user.x = mouseX;
   user.y = mouseY;
 }
+
+// Check overlap
+
+
+
+
+
 
 /**
  * Displays the user circle
@@ -70,3 +142,30 @@ function drawPuck() {
   ellipse(puck.x, puck.y, puck.size);
   pop();
 }
+
+/**
+ *  Display the target
+ */
+function drawTarget(){
+push();
+noStroke();
+fill(Target.fill);
+ellipse(Target.x, Target.y, Target.size);
+pop();
+
+
+
+}
+
+function checkTarget() {
+ const d=dist(puck.x, puck.y, Target.x, Target.y,);
+const Targetoverlap = (d< puck.size/2 + Target.size/2);
+
+if (Targetoverlap){ Target.fill=Target.fills.overlap}
+
+
+  else {Target.fill=Target.fills.noOverlap}
+
+
+}
+
