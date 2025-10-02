@@ -29,6 +29,7 @@ function draw() {
 
     //starting of with naming all the required functions for this project
     Drawbackground();
+    Drawhair();
     Drawface();
     Drawneck();
     Drawbrow();
@@ -36,17 +37,26 @@ function draw() {
     Drawnose();
     Drawmouth();
     Drawears();
-    Drawhair();
     Drawsweater();
     Drawbangs();
     
     // Starting of wiht a nice light blue background
-function Drawbackground(){
-     push();
-     background(143, 234, 255);
-     pop();
-
+    function Drawbackground(){
+        push();
+        background(143, 234, 255);
+        pop();
+        
     }
+
+    //Drawing the hair
+    function Drawhair(){
+        push();
+        noStroke();
+        fill("#957011ff");
+        ellipse(320,285,270,350); // this is the hair in the back.
+        pop();
+    }
+
     //Draw face
     function Drawface(){
         push();
@@ -144,5 +154,8 @@ function Drawears(){
 
     pop();
 }
+
+
+
 }
 //**" */
