@@ -30,6 +30,7 @@ function draw() {
     //starting of with naming all the required functions for this project
     Drawbackground();
     Drawhair();
+    Drawhood();
     Drawface();
     Drawtshirt();
     Drawneck();
@@ -57,6 +58,19 @@ function draw() {
         ellipse(320,285,270,350); // this is the hair in the back.
         pop();
     }
+    //The hoodie hood will be here since it's in the back
+    function Drawhood (){
+        push();
+        stroke("#0619c5ff")
+        strokeWeight(12)
+        fill("#000c7aff");
+        ellipse(320, 470, 230, 150);
+
+        pop();
+
+
+
+    }
     
     //Draw face
     function Drawface(){
@@ -68,28 +82,29 @@ function draw() {
         
     }
     
-    //drawing the neck
-    function Drawneck(){
-        push();
-        noStroke();
-        fill("#8d6241ff")
-        rect(280, 350, 80, 130,40)
-        pop();
-           
-    }
-
+    
+    
     //Drawing the inner tshirt
     function Drawtshirt() {
     push();
     noStroke();
     fill("#ffff");
     rect(180, 450, 280, 250,80)
-     fill("#000")
+    fill("#000")
     //fill("#f1f5ffff")
     ellipse(320, 460, 85, 65)
     pop();
-    }
-    
+}
+
+//drawing the neck
+function Drawneck(){
+    push();
+    noStroke();
+    fill("#8d6241ff")
+    rect(280, 350, 80, 130,40)
+    pop();
+       
+}
     //Drawing Eyebrows    
     function Drawbrow() {
         push();
@@ -164,7 +179,6 @@ function Drawears(){
     fill("#8d6241ff")
     ellipse(420,285,40,55) //The right ear
     ellipse(220,285,40,55) //The left ear
-    
     pop();
 }
 
