@@ -38,6 +38,7 @@ function draw() {
     Drawneck();
     Drawhair();
     Drawsweater();
+    Drawbangs();
     
     // Starting of wiht a nice light blue background
 function Drawbackground(){
@@ -103,11 +104,27 @@ push();
 noFill();
 stroke("#2b2418ff");
 strokeWeight(2);
-arc(320,310,25,30,170,185)
+arc(320,320,25,30,170,185)
 pop();
 }
 
 
+
+//drawing the mouth
+function Drawmouth(){
+//drawing the upperlip
+push();
+fill("#6e3313ff");
+noStroke();
+arc(315,365, 40, 20, 154, 270.1);
+arc(330,365, 40, 20, 154, 270.1);
+
+//Lower lip
+ellipse(322,363, 50, 15,);
+
+pop();
+
+}
 
 
 }
