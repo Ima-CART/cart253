@@ -30,12 +30,12 @@ function draw() {
     //starting of with naming all the required functions for this project
     Drawbackground();
     Drawface();
+    Drawneck();
     Drawbrow();
     Draweyes();
     Drawnose();
     Drawmouth();
     Drawears();
-    Drawneck();
     Drawhair();
     Drawsweater();
     Drawbangs();
@@ -49,11 +49,21 @@ function Drawbackground(){
     }
     //Draw face
     function Drawface(){
-     push();
-     noStroke();
-     fill("#8d6241ff");
-     ellipse(320,280,200,270);
-     pop();
+        push();
+        noStroke();
+        fill("#8d6241ff");
+        ellipse(320,280,200,270);
+        pop();
+        
+    }
+    
+    //drawing the neck
+    function Drawneck(){
+        push();
+        noStroke();
+        fill("#8d6241ff")
+        rect(280, 350, 80, 130,40)
+        pop();
     
     }
 
@@ -125,15 +135,14 @@ ellipse(322,363, 50, 15,);
 pop();
 
 }
-//Drawing Ears
+//Drawing the Ears
 function Drawears(){
     push();
     fill("#8d6241ff")
-ellipse(420,285,40,55) //The right ear
-ellipse(220,285,40,55) //The left ear
+    ellipse(420,285,40,55) //The right ear
+    ellipse(220,285,40,55) //The left ear
 
     pop();
 }
-
 }
 //**" */
