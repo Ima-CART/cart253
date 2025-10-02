@@ -34,10 +34,10 @@ function draw() {
     Draweyes();
     Drawnose();
     Drawmouth();
+    Drawears();
     Drawneck();
     Drawhair();
     Drawsweater();
-    Drawears();
     
     // Starting of wiht a nice light blue background
 function Drawbackground(){
