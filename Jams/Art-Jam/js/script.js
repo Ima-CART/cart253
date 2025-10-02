@@ -24,8 +24,21 @@ function setup() {
 
 
 function draw() {
- // A grey background
- background(150, 150, 150);
+
+    //starting of with naming all the required functions for this project
+    Drawbackground();
+    Drawface();
+    Draweyes();
+    Drawbrow();
+    Drawneck();
+    Drawhair();
+    Drawsweater();
+    Drawears();
+    Drawnose();
+    Drawmouth();
+
+ // Starting of wiht a nice light blue background
+
  // A circle in the centre of the canvas
  ellipse(320, 320, 450, 580);
 }
