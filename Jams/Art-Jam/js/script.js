@@ -80,7 +80,7 @@ function Drawface(){
 function Drawtshirt() {
     push();
     noStroke();
-    fill("#ffff");
+    fill(mouseX,mouseY,10);
     rect(180, 450, 280, 250,80)
     fill("#f1f5ffff")
     ellipse(320, 460, 85, 65)//the neckline
@@ -227,6 +227,7 @@ function Drawbangs() {
 
      pop();
     }
+
 
 }
 /** */
