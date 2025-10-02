@@ -55,8 +55,9 @@ function Drawbackground(){
      pop();
     
     }
-    function Drawbrow() {
-     //Drawing Eyebrows    
+
+    //Drawing Eyebrows    
+function Drawbrow() {
      push();
      noFill();
      stroke("#2b2418ff");
@@ -66,7 +67,7 @@ function Drawbackground(){
      pop(); 
     }
 
-    function Draweyes() {
+function Draweyes() {
     push();
     
     noStroke();
@@ -95,5 +96,19 @@ function Drawbackground(){
     pop();
         
 }
-    
+
+//drawing the nose
+function Drawnose(){
+push();
+noFill();
+stroke("#2b2418ff");
+strokeWeight(2);
+arc(320,310,25,30,170,185)
+pop();
 }
+
+
+
+
+}
+//**" */
