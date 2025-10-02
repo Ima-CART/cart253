@@ -56,15 +56,44 @@ function Drawbackground(){
     
     }
     function Drawbrow() {
+     //Drawing Eyebrows    
      push();
      noFill();
      stroke("#2b2418ff");
-     strokeWeight(3);
-     arc(275, 270, 50, 30, 154, 270.1);  
-     arc(365, 270, 50, 30, 154, 270.1); 
+     strokeWeight(2);
+     arc(275, 260, 60, 20, 154, 270.1); //Left eyebrow  
+     arc(365, 260, 60, 20, 154, 270.1); //right eyebrow
      pop(); 
     }
 
+    function Draweyes() {
+    push();
+    
+    noStroke();
+    
+    //Starting of with the left eye
+    ellipse(275, 275, 55, 30);//the white part of the eye 
+    push(); //I don't want the colors to fall on the second eye. I verified without push and pop it does 
+    fill("#5c3427f2");
+    ellipse(275,275,30,30) //the brown eyeball
+    fill("#000000ff")
+    ellipse(275,275,15,15)  // the iris
+    fill("#fff")
+    ellipse(280,268,8,8) // the reflection
+    pop();
 
+    //The right eye
+    ellipse(365, 275, 55, 30);
+    push();// Keeping the same consistency as the first eye
+    fill("#5c3427f2");
+    ellipse(365,275,30,30) //the brown eyeball
+    fill("#000000ff")
+    ellipse(365,275,15,15)  //the iris
+    fill("#fff")
+    ellipse(370,268,8,8) // the reflection
+
+    pop();
+        
+}
     
 }
