@@ -44,8 +44,8 @@ function draw() {
     // Starting of wiht a nice light blue background
     function Drawbackground(){
     push();
-    background(143, 234, 255);
-    pop();    
+    background(mouseX, mouseY,255 );
+    pop();   
 }
     
     //Drawing the hair
