@@ -1,17 +1,19 @@
 /**
- * Title of Project
- * Author Name
+ * Art Jam Self Portrait
+ * Ima Williams
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * Creating a semi realistic portrait of myself
+ *
  */
 
 "use strict";
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * Canvas set up
 */
 function setup() {
+    createCanvas(640, 640);
+
 
 }
 
@@ -19,6 +21,11 @@ function setup() {
 /**
  * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
 */
-function draw() {
 
+
+function draw() {
+ // A grey background
+ background(150, 150, 150);
+ // A circle in the centre of the canvas
+ ellipse(320, 320, 450, 580);
 }
