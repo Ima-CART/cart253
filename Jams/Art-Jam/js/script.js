@@ -125,7 +125,15 @@ ellipse(322,363, 50, 15,);
 pop();
 
 }
+//Drawing Ears
+function Drawears(){
+    push();
+    fill("#8d6241ff")
+ellipse(420,285,40,55) //The right ear
+ellipse(220,285,40,55) //The left ear
 
+    pop();
+}
 
 }
 //**" */
