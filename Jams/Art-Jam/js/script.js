@@ -14,7 +14,7 @@
 function setup() {
     createCanvas(640, 640);
     //setting up the units and angle of the arcs
-    angleMode(degrees);
+    angleMode(DEGREES);
     
 }
 
@@ -102,8 +102,8 @@ function Drawbrow() {
         noFill();
         stroke("#2b2418ff");
         strokeWeight(2);
-        arc(275, 260, 60, 20, 154, 270.1); //Left eyebrow  
-        arc(365, 260, 60, 20, 154, 270.1); //right eyebrow
+        arc(275, 260, 60, 20, 180, 0); //Left eyebrow  
+        arc(365, 260, 60, 20, 180, 0); //right eyebrow
         pop(); 
     }
     
@@ -141,7 +141,7 @@ function Drawnose(){
     noFill();
     stroke("#2b2418ff");
     strokeWeight(2);
-    arc(320,320,25,30,170,185)
+    arc(320,320,20,20,0,180)
     pop();
 }
 
@@ -153,8 +153,8 @@ function Drawmouth(){
     push();
     fill("#6e3313ff");
     noStroke();
-    arc(315,365, 40, 20, 154, 270.1);
-    arc(330,365, 40, 20, 154, 270.1);
+    arc(315,365, 40, 20, 180, 0);
+    arc(330,365, 40, 20, 180, 0);
     
     //Lower lip
     ellipse(322,363, 50, 15,); 
@@ -190,14 +190,43 @@ function Drawbangs() {
     push();
     noStroke();
     fill("#957011ff")
-    //arc(290,190,50,50,0, 270);
-
-    //ellipse(290,190,10,100);
-    //ellipse(360, 290, 100, 150);
-
+    //
+    //right bangs
+    push();
+    translate(365, 190)
+    rotate(-55);
+    ellipse(0,0,100,170);
     pop();
+    //right strands
+    push();
+    //bezierVertex(x2, y2, x3, y3, x4, y4)
 
-}
+     //Left Bangs
+     push();
+     translate(275,190);
+     rotate(55);
+     ellipse(0, 0, 100, 175);
+     pop();
+     //right strand
+     beginShape();
+     translate(350,230);
+     vertex();
+     bezierVertex(80, 0, 80, 75, 30, 120);
+     bezierVertex(50, 80, 60, 25, 30, 20);
+     endShape();
+     pop();
+
+     //Left strand
+     beginShape();
+     translate(200,225);
+     vertex();
+     bezierVertex(10, 0, 0, 100, 60, 120);
+     bezierVertex(10, 70, 40, 40, 60, 20);
+     endShape();
+     pop();
+
+     pop();
+    }
 
 }
 /** */

@@ -80,7 +80,7 @@ if (mouseoverlap) {
     puck.x = puck.x - 5;
   }
   // Or if the user is above
-  else if (user.y < puck.y) {
+  if (user.y < puck.y) {
     // Push down
     puck.y = puck.y + 5;
   }
