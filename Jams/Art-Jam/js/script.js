@@ -174,22 +174,31 @@ function Drawears(){
 function Drawsweater(){
     push();
     fill("#0619c5ff")
-    //rect(180, 455, 120, 250,)
    //Left side hoodie
-    ellipse(240, 570, 120, 250)//the inner sweater
-    ellipse(210, 590, 100, 250)//the outer sweater arm
+    ellipse(240, 570, 120, 250);//the inner sweater
+    ellipse(210, 590, 100, 250);//the outer sweater arm
 
    //Right side hoodie
-    ellipse(400, 570, 120, 250)//the inner sweater
-    ellipse(430, 590, 100, 250)//the outer sweater arm
-
-
-
+    ellipse(400, 570, 120, 250);//the inner sweater
+    ellipse(430, 590, 100, 250);//the outer sweater arm
 
     pop();
 }
 
+    //Finishing the hair and drawing the bangs
+function Drawbangs() {
+    push();
+    noStroke();
+    fill("#957011ff")
+    //arc(290,190,50,50,0, 270);
+
+    //ellipse(290,190,10,100);
+    //ellipse(360, 290, 100, 150);
+
+    pop();
 
 }
-//**" */
+
+}
+/** */
 
