@@ -32,12 +32,12 @@ function draw() {
     Drawface();
     Drawbrow();
     Draweyes();
+    Drawnose();
+    Drawmouth();
     Drawneck();
     Drawhair();
     Drawsweater();
     Drawears();
-    Drawnose();
-    Drawmouth();
     
     // Starting of wiht a nice light blue background
 function Drawbackground(){
