@@ -1,35 +1,40 @@
-# TITLE OF PROJECT
+The Ever So Changing Color Portrait
 
-AUTHOR NAME
+Ima Williamas
 
-[View this project online](URL_FOR_THE_RUNNING_PROJECT)
+[View this project online](URhttps://ima-cart.github.io/cart253/Jams/Art-Jam/)
 
 ## Description
 
-This description should help the reader understand what the program is, anything they should know to be able to experience it (controls, special features, etc.), and what the desired user experience is. For example:
+Here is a portrait of Ima with an background and tshirt that changes colors. What makes the portrait is that unless the mouse is staying still something is always happening.
 
-> *The Mayor of Clown Town* is a simulator experience that allows the user to control a small town populated entirely by clowns.
+There is a variable in the fill of the tshirt which cause it to change color depening on where the mouse cursor is.
+There is also a condition for the background depening where the mouse moves on the x-axis. 
 
-> The experience is controlled via the mouse, with left click selecting a clown and bringing up a menu of options such as "slip of banana peel" or "get into impossible capacious clown-car."
+It's a simple portait using simple function in order to get the main outline of the portrait. The complication starts when adding the hair and a couple of the facial features as there are codes I have learned for p5js.org in order to further my knowledge and understanding.
 
-> The project is meant to give the user a sense of what it would be the mayor of a town of clowns, eventually getting the sense that clowns are not taking their civic duties seriously.
+The Changing background portrait is meant to express that a person has different color and persepective. Just my moving the mouse is the same as moving around it the world to experience different colors, but at the same time adding all the colors a person has.
 
 ## Screenshot(s)
 
 This bit should have some images of the program running so that the reader has a sense of what it looks like. For example:
 
-> ![Image of a clown face](./assets/images/clown.png)
+> ![Image of The Ever So Changing Color Portrait](./assets/images/Screenshot%202025-10-02%20222634.png)
 
 ## Attribution
 
 This bit should attribute any code, assets or other elements used taken from other sources. For example:
 
 > - This project uses [p5.js](https://p5js.org).
-> - The clown image is a capture of the clown from the Apple emoji character set.
-> - The barking sound effect is "single dog bark 1" by crazymonke9 from freesound.org: https://freesound.org/people/crazymonke9/sounds/418107/
+    -The functions for Arc, Beizervertex, arc, anglemode were from P5js.org to help create my piece
+> - The Portrait is a capture of my Art Jam assignment.
+
 
 ## License
 
-This bit should include the license you want to apply to your work. For example:
+The p5.js library is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, version 2.1.
 
-> This project is licensed under a Creative Commons Attribution ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)) license with the exception of libraries and other components with their own licenses.
+p5.js is currently led by Qianqian Ye and created by Lauren Lee McCarthy. The p5.js library and this website were developed by p5.js Contributors and the Processing Foundation.
+
+
+
