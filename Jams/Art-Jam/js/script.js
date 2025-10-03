@@ -41,11 +41,16 @@ function draw() {
     Drawsweater();
     Drawbangs();
     
-    // Starting of wiht a nice light blue background
+    // A ever changing background that depends on the mouse
     function Drawbackground(){
-    push();
-    background(mouseX, mouseY,255 );
-    pop();   
+      if (mouseX < 100){
+    background(166,249,255);
+  } else if (mouseX >= 100 && mouseX < 300){
+    background(176,149,232);
+  } else if (mouseX >= 300){
+    background(255, 235, 235);
+  }
+    
 }
     
     //Drawing the hair
@@ -80,7 +85,7 @@ function Drawface(){
 function Drawtshirt() {
     push();
     noStroke();
-    fill(mouseX,mouseY,10);
+    fill(mouseX,mouseY,10); //the inner tshirt will be changing colors
     rect(180, 450, 280, 250,80)
     fill("#f1f5ffff")
     ellipse(320, 460, 85, 65)//the neckline
@@ -123,7 +128,7 @@ function Draweyes() {
     pop();
         
     //The right eye
-    ellipse(365, 275, 55, 30);
+    ellipse(365, 275, 55, 30);//the white part of the eye
     push();// Keeping the same consistency as the first eye
     fill("#5c3427f2");
     ellipse(365,275,30,30) //the brown eyeball
@@ -131,8 +136,13 @@ function Draweyes() {
     ellipse(365,275,15,15)  //the iris
     fill("#fff")
     ellipse(370,268,8,8) // the reflection
+    
+    
         
     pop();
+
+ 
+
     }
     
     //drawing the nose
@@ -197,9 +207,7 @@ function Drawbangs() {
     rotate(-55);
     ellipse(0,0,100,170);
     pop();
-    //right strands
     push();
-    //bezierVertex(x2, y2, x3, y3, x4, y4)
 
      //Left Bangs
      push();
@@ -228,7 +236,7 @@ function Drawbangs() {
      pop();
     }
 
-
+    
 }
 /** */
 
