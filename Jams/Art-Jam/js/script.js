@@ -13,7 +13,8 @@
 */
 function setup() {
     createCanvas(640, 640);
-    //setting up the units and angle of the arcs
+
+//setting up the units and angle of the arcs
     angleMode(DEGREES);
     
 }
@@ -26,7 +27,7 @@ function setup() {
 
 function draw() {
     
-    //starting of with naming all the required functions for this project
+//starting of with naming all the required functions for this project
     Drawbackground();
     Drawhair();
     Drawhood();
@@ -40,20 +41,25 @@ function draw() {
     Drawears();
     Drawsweater();
     Drawbangs();
+
     
-    // A ever changing background that depends on the mouse
+// A ever changing background that depends on the mouse
+//Conditional used in order to change the background dependingn on the mouse 
     function Drawbackground(){
-      if (mouseX < 100){
+      if (mouseX < 200){
     background(166,249,255);
-  } else if (mouseX >= 100 && mouseX < 300){
+  } else if (mouseX >= 200 && mouseX < 400){
     background(176,149,232);
-  } else if (mouseX >= 300){
+  } else if (mouseX >= 400){
     background(255, 235, 235);
   }
+
+
+    
     
 }
     
-    //Drawing the hair
+//Drawing the hair
 function Drawhair(){
     push();
     noStroke();
@@ -101,6 +107,7 @@ function Drawneck(){
     pop();
        
 }
+//Using a new function in order to make the eyebrow, the arc function 
     //Drawing Eyebrows    
 function Drawbrow() {
         push();
