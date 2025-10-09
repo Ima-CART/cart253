@@ -45,4 +45,14 @@ The frog can be a different animal throwing things at the target(I was thinking 
 
 Continuing the ideas of throwing things. I was thinking of a hand Throwing ninja starts at a target(The hand or small ninja can throw ninja starts at an enemy or a target for target practice)
 
+When the bird is hit by the nut it can just fall. (The bird will stop its fly and just fall to the ground until it disappears)
+
+There can be trees that appears to block the squirrel( Hitting the trees either drops the nut or nothing happens.)
+
+The squirrel feels as though it is moving and finding birds and tree(It will be hard to create a function in which the squirrels like it is moving inside the screen and random obstacles are appearing. Don't know if idea is possible)
+
 It can also be a soccer ball with a moving next and you need to hit the ball to score(The soccer call can be aimed at a net in which goals are scored whent he soccer ball goes inside the net. The ball needs to go inside the net and not the sides)
+
+The soccer balls can have tshirt blocking the goals(The tshirt is a small indication of another person)
+
+Hitting the tshirt can cause the ball to fall down on the y axis(If the ball hits a shirt a the ball and the tshirt falls on the yaxis until the both disappear.)
