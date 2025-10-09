@@ -26,9 +26,23 @@ If the frog eat the wrong creature or insect the tongue can also be affected(If 
 
 If the sky turns dark the flies could fly faster(To make the game more difficult the flies could have a faster speed and velocity to make the game harder.)
 
+At night the mini bat can also eat the flies (The bat fly at random can also have an interation with the flie. When the bat and the fly touch or over lap the flies disappear. But the fly can only eat one fly at a time.)
 
+The frog can be hidden behind the fox tails or the grasses in the pond( It makes it more fun if the flies are not able to see what coming)
 
+Maybe add a lilypad in which the frog can be able to climb ( Add lilypad in which the frog can climb or sit on in order to catch the flies quicker. However the frog will be a much easier target for the second creatures attacks.)
+
+The frog can be move with a Keyboard and the tongue can be release with the space bar instead ( Change the function of the mouse into a keyboard. For better engagement with the back. Although the idea would be more for a computer game in which ipad and phones can not be used. The tongue can be released with the pressing of the space bar instead of a mouse click.)
+
+The frog can have both the mouse and the keyboard function. (The mouse can move the frog while the keyboard can be pressed to get the flies. Or the Keyboard can be used to move the frog around and the mousepress can be used to catch the flies
+)
+
+If the fly is caught while the second creature touches the tongue but the tongue can return. The fly is released (The second creature can disrupt the catching process as the tongue needs a bit of time to return the the frogs mouth.)
 
 Ideas outside the frog
-The frog can be an different animal throwing things at the target
-It can also be a soccer ball with a moving next and you need to hit the ball to score
+
+The frog can be a different animal throwing things at the target(I was thinking of a squirrel throwing a nut at a fly or a bird.)
+
+Continuing the ideas of throwing things. I was thinking of a hand Throwing ninja starts at a target(The hand or small ninja can throw ninja starts at an enemy or a target for target practice)
+
+It can also be a soccer ball with a moving next and you need to hit the ball to score(The soccer call can be aimed at a net in which goals are scored whent he soccer ball goes inside the net. The ball needs to go inside the net and not the sides)
