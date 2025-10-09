@@ -1,15 +1,30 @@
-Add another insect to disrupt the game
-Catching the second insect would decrease points
-The second insect could move randomly
-There can be a swamp background instead of a blue one
-There is a nest on the right to count the number of flies caught
-If the second insect is caught the frog would change color
-The regular flies can return the frog back to normal slowly
-You can only eat the bees 3 times before the frog completely dies
-The tongue can move from different direction instead on just straight
-Try to make the frog look a bit more realistic with images
+Add another insect to disrupt the game(the second insect can be a bumble bee or a tiny mostquito)
 
+Catching the second insect would decrease points(If fly would increase the number, how would the second insect decrease the number)
 
+The second insect could move randomly(Use the random variable to have the second insect move randomly. It can even overlap the fly and see what happens)
+
+There can be a swamp background instead of a blue one(Draw a different background with a lake in the middle and a couple of long tall grass. Or maybe even long fox tail, reeds,catt etc..)
+
+There is a nest on the right to count the number of flies caught (The nest can be seen as a counter for the flies caught. It could even be a basket...(Hard to create))
+
+If the second insect is caught the frog would change color (The frog's color can be changed from green->blue->purple->red-> and maybe black can be the final color)
+
+The regular flies can return the frog back to normal slowly (catching the fly can have the frogs color work in the opposite direction as what was shown in the top line where it regains its strenght black->red->purple->blue->green being regular)
+
+You can only eat the bees 3 times before the frog completely dies (Once the frog colro becomes black it would be considred game over. Maybe instead of 3 bad insect it can be 4 or 5)
+
+The tongue can move from different direction instead on just straight ( The variable and the position of the tongue would need to be changed in order to allow for flexibility)
+
+Try to make the frog look a bit more realistic with images (Instead of having a green circle, an image of a frog outline can be used instead)
+
+The background could also change from day to night(Depending on how long the games goes on the sky can get darker, maybe a moon and start can appear)
+
+If it becomes dark the bees can be change to a mini bat instead(The second insect can become a large creature which would make the game become a bit difficult as the game drags on)
+
+If the frog eat the wrong creature or insect the tongue can also be affected(If the frog eats the wrong creaure or insect the tongue could get thinner or it could also not reach as long. The y of the tongue can get smaller to add a bit more difficulty )
+
+If the sky turns dark the flies could fly faster(To make the game more difficult the flies could have a faster speed and velocity to make the game harder.)
 
 
 
