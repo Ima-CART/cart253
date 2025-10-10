@@ -1,6 +1,7 @@
 Christie Leung Art Jam
 
  https://christieleung.github.io/cart253/assignments/art-jam/
+
  https://github.com/christieleung/cart253/tree/main/assignments/art-jam
 
 
@@ -9,6 +10,7 @@ Christie Leung's Art Jam was very interesting. The nice image in the middle with
 Lucas Meldrum
 
  https://lucasmeldrum.github.io/CART253/topics/assignments/art-jam/
+
  https://github.com/LucasMeldrum/CART253/tree/main/topics/assignments/art-jam
 
 Lucas Meldrum's Art Jam is exactly as he said, its fun and interactive. I find it more cool than silly. Althought, it does not look like a self portrait. It is a 3D portrait in a different sense. It could be a portrayal of one mind and how complex and all over the place it is. Being watched and feeling that you are always being watched. Having the mini eyes move and follow the direction of the mouse was creepy and interesting, as if someone is always watching your every movement. I do wish the big eyes followed the mouse as well to keep the consistency, but the big eye is always moving around the sphere. It was fun to start of by clicking the mouse and seeing the big sphere pulse and the colors of the background and mini sphere change. The fun continued as I learned that I could rotate the sphere by dragging the sphere left, right, up and down. The sphere felt like an interactive game as I was clicking and holding down the mouse and moving the sphere in all sorts of directions to see different changes. The whole canvas was always shifting and changing, so it felt like there was always something to do. The code for this project was intense. There was so much going on, the portrait in 3D, the color changing, the random movement of the main eye along the sphere and the mini spheres following the mouse. I really couldn't understand how Lucas was able to put everything together. There was so many codes I did not know and no matter how I tried to read it, I couldn't figure out how the function worked. Starting off with the code being in 3D using WEBGL, in order to have the project interact from 2D to 3D. Then having the mini spheres to be drawn all around the giant sphere by using functions I've never seen. In the draw sphere function he used lat, lon, with degrees 90 and -90. I'm sure there is an algorithm for it all. Lucas Meldrum was able to bring everything together and they all complimented his work even if it was complex. Playing around with a 3D sphere took the Art Jam to another level in which it is not flat and 2D. Lucas Meldrum made a really captivating Art Jam. 
@@ -16,6 +18,7 @@ Lucas Meldrum's Art Jam is exactly as he said, its fun and interactive. I find i
 Ashmitha Kanagiah
 
  https://ashmyytaa.github.io/cart253/jams/art-jam/
+ 
  https://github.com/ashmyytaa/cart253/tree/main/jams/art-jam
 
 Ashmitha Kanagiah's Art Jam is an adorable smiling Lady with different changijng variables. I enjoyed being able to hover over the cheeks and having both cheeks change color. It did not matter which cheek I hover over, both changed color. Having to press the mouse and seeing the hair color change was also very interesting. Besides those 2 functions there was not much to do. The bow changed and grew on it's own and the bubble in the back appeared at random without any interaction. Looking at the bow it was hard to see much changes. You had to really focus on it to see the color changed from bright blue to a darker blue. Ashmitha said the bow will grow bigger over time, however it was only the middle cirle that grew. The triangluar sides of the bow stayed the same size. Looking at the code of the bow growing it only applied to the middle circle(The bow detail) but not the triangle as it was a different function on it own and not a variable. I found it interesting that the code for the triangle had 6 points, I would have thought there was only three points, being a triangle, but that was not the case. That was a new one. I read arc function for the eyes, nose and mouth, it was interesting to see PI being put in play instead of regular numbers and degree. The function was used in a different way which I found interesting. Besides that, I wish there a bit more things to do and say but it did exactly what the code said and did not do extra. A nice Radiant Art Jam for a forever happy and smiling lady. 
