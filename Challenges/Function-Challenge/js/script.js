@@ -1,6 +1,6 @@
 /**
  * Bouncy Ball Ball Bonanza
- * Pippin Barr
+ * Ash & Ima
  * 
  * The starting point for a ball-bouncing experience of
  * epic proportions!
