@@ -46,12 +46,13 @@ const fly = {
 //Second insect. The infamous bumblebee
 
 const bumblebee = {
-    x: undefined,
-    y: undefined,
-    size: 20,
-    speed: 2
-
+    x: 240,
+    y: 200,
+    size: 25,
+    speed: 20
 }
+
+
 /**
  * Creates the canvas and initializes the fly
  */
@@ -66,6 +67,8 @@ function draw() {
     background("#87ceeb");
     moveFly();
     drawFly();
+    drawbumblebee();
+    movebumblebee();
     moveFrog();
     moveTongue();
     drawFrog();
@@ -103,6 +106,21 @@ function resetFly() {
     fly.x = 0;
     fly.y = random(0, 300);
 }
+
+function drawbumblebee() {
+    push()
+    noStroke();
+    fill("#fff563ff");
+    ellipse(bumblebee.x, bumblebee.y, bumblebee.size);
+    pop();
+}
+
+function movebumblebee() {
+    bumblebee.x += random(-bumblebee.speed, bumblebee.speed);
+    bumblebee.y += random(-bumblebee.speed, bumblebee.speed);
+
+}
+
 
 /**
  * Moves the frog to the mouse position on x
