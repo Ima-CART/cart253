@@ -1,6 +1,6 @@
 /**
  * Frogfrogfrog
- * Pippin Barr
+ * Ima Williams
  * 
  * A game of catching flies with your frog-tongue
  * 
@@ -43,6 +43,15 @@ const fly = {
     speed: 3
 };
 
+//Second insect. The infamous bumblebee
+
+const bumblebee = {
+    x: undefined,
+    y: undefined,
+    size: 20,
+    speed: 2
+
+}
 /**
  * Creates the canvas and initializes the fly
  */
