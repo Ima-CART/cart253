@@ -1,4 +1,5 @@
 Add another insect to disrupt the game(the second insect can be a bumble bee or a tiny mostquito)
+-The Bumblebee will come after 5 flies have been eated/captured 
 
 Catching the second insect would decrease points(If fly would increase the number, how would the second insect decrease the number)
 
