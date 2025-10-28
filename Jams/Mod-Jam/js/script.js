@@ -14,6 +14,15 @@
  */
 
 "use strict";
+let sky = {
+    r: 135,
+    g: 206,
+    b: 235,
+
+
+
+
+}
 
 // Our frog
 const frog = {
@@ -80,6 +89,17 @@ function draw() {
     drawFrog();
     checkTongueFlyOverlap();
 }
+
+/*function background(sky.r, sky.g, sky.b) {
+    sky.r = sky.r - 0.5
+    sky.g = sky.g - 0.5
+    sky.b = sky.b - 0.5
+    
+
+
+
+} */
+
 
 /**
  * Moves the fly according to its speed
@@ -156,7 +176,7 @@ function moveFrog() {
 /**
  * Handles moving the tongue based on its state
  */
-function moveTongue() {
+/*function moveTongue() {
     // Tongue matches the frog's x
     frog.tongue.x = frog.body.x;
     // If the tongue is idle, it doesn't do anything
@@ -179,7 +199,7 @@ function moveTongue() {
             frog.tongue.state = "idle";
         }
     }
-}
+}*/
 
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
@@ -229,5 +249,33 @@ function checkTongueFlyOverlap() {
 function mousePressed() {
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
+    }
+}
+
+
+//Handles moving the tongue based on its state
+
+function moveTongue() {
+    // Tongue matches the frog's x
+    frog.tongue.x = frog.body.x;
+    // If the tongue is idle, it doesn't do anything
+    if (frog.tongue.state === "idle") {
+        // Do nothing
+    }
+    // If the tongue is outbound, it moves up
+    else if (frog.tongue.state === "outbound") {
+        frog.tongue.y += -frog.tongue.speed;
+        // The tongue bounces back if it hits the top
+        if (frog.tongue.y <= 0) {
+            frog.tongue.state = "inbound";
+        }
+    }
+    // If the tongue is inbound, it moves down
+    else if (frog.tongue.state === "inbound") {
+        frog.tongue.y += frog.tongue.speed;
+        // The tongue stops if it hits the bottom
+        if (frog.tongue.y >= height) {
+            frog.tongue.state = "idle";
+        }
     }
 }
