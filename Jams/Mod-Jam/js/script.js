@@ -123,7 +123,7 @@ function drawBumblebee() {
 
 function moveBumblebee() {
     bumblebee.x += random(-bumblebee.speed, bumblebee.speed);
-    if (bumblebee.x > 480) {
+    if (bumblebee.x > 480 || bumblebee.x < 0) {
         resetBumblebee();
 
 
@@ -131,7 +131,7 @@ function moveBumblebee() {
 
 
     bumblebee.y += random(-bumblebee.speed, bumblebee.speed);
-    if (bumblebee.y > height) {
+    if (bumblebee.y > height || bumblebee.y < 0) {
         resetBumblebee();
 
     }
