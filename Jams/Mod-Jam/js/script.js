@@ -140,8 +140,8 @@ function moveBumblebee() {
 }
 
 function resetBumblebee() {
-    bumblebee.x = random(50, 630)
-    bumblebee.y = random(200, 470)
+    bumblebee.x = random(50, 600)
+    bumblebee.y = random(200, 400)
 
 
 }
