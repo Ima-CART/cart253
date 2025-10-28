@@ -61,14 +61,20 @@ function setup() {
 
     // Give the fly its first random position
     resetFly();
+
+
+    //rest the positon of the bumblebee
+    resetBumblebee();
+
+
 }
 
 function draw() {
     background("#87ceeb");
     moveFly();
     drawFly();
-    drawbumblebee();
-    movebumblebee();
+    drawBumblebee();
+    moveBumblebee();
     moveFrog();
     moveTongue();
     drawFrog();
@@ -107,7 +113,7 @@ function resetFly() {
     fly.y = random(0, 300);
 }
 
-function drawbumblebee() {
+function drawBumblebee() {
     push()
     noStroke();
     fill("#fff563ff");
@@ -115,12 +121,30 @@ function drawbumblebee() {
     pop();
 }
 
-function movebumblebee() {
+function moveBumblebee() {
     bumblebee.x += random(-bumblebee.speed, bumblebee.speed);
+    if (bumblebee.x > 480) {
+        resetBumblebee();
+
+
+    }
+
+
     bumblebee.y += random(-bumblebee.speed, bumblebee.speed);
+    if (bumblebee.y > height) {
+        resetBumblebee();
+
+    }
+
 
 }
 
+function resetBumblebee() {
+    bumblebee.x = random(50, 630)
+    bumblebee.y = random(200, 470)
+
+
+}
 
 /**
  * Moves the frog to the mouse position on x
