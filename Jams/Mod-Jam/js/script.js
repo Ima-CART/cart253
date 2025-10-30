@@ -251,6 +251,8 @@ function checkTongueFlyOverlap() {
         resetFly();
         // Bring back the tongue
         frog.tongue.state = "inbound";
+        //change the color of the frog
+        frog.body.fill.g += 100
     }
 }
 
