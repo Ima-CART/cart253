@@ -30,7 +30,13 @@ const frog = {
     body: {
         x: 320,
         y: 520,
-        size: 150
+        size: 150,
+        fill: {
+            r: 0,
+            g: 255,
+            b: 0,
+
+        }
     },
     // The frog's tongue has a position, size, speed, and state
     tongue: {
@@ -57,7 +63,7 @@ const fly = {
 const bumblebee = {
     x: 240,
     y: 200,
-    size: 25,
+    size: 20,
     speed: 20
 }
 
@@ -79,7 +85,10 @@ function setup() {
 }
 
 function draw() {
-    background("#87ceeb");
+    background(sky.r, sky.g, sky.b);
+    sky.r = sky.r - 0.01
+    sky.g = sky.g - 0.01
+    sky.b = sky.b - 0.01
     moveFly();
     drawFly();
     drawBumblebee();
@@ -223,7 +232,7 @@ function drawFrog() {
 
     // Draw the frog's body
     push();
-    fill("#00ff00");
+    fill(frog.body.fill.r, frog.body.fill.g, frog.body.fill.b);
     noStroke();
     ellipse(frog.body.x, frog.body.y, frog.body.size);
     pop();
@@ -256,16 +265,18 @@ function checkTongueBumblebeeOverlap() {
         resetBumblebee();
         // Bring back the tongue
         frog.tongue.state = "inbound";
+        //Change the color of the frog
+        frog.body.fill.g -= 100
     }
 }
 
 
 function bumblebeeFlyOverlap() {
     //Get the distance from bumblebee to gly
-    const d = (bumblebee.x, bumblebee.y, fly.x, fly.y);
+    const d = dist(fly.x, fly.y, bumblebee.x, bumblebee.y);
     //check overlap
-    const eaten = (d < bumblebee.size / 2 + fly.size / 2)
-    if (eaten) {
+    const overlap = (d < fly.size / 2 + bumblebee.size / 2)
+    if (overlap) {
         // Reset fly (Only the fly will be targeted as it is smaller than the bumblebee )
         resetFly();
     }
