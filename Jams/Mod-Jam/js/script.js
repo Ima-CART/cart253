@@ -31,6 +31,7 @@ const frog = {
         x: 320,
         y: 520,
         size: 150
+        fill: "#00ff00"
     },
     // The frog's tongue has a position, size, speed, and state
     tongue: {
@@ -88,6 +89,7 @@ function draw() {
     moveTongue();
     drawFrog();
     checkTongueFlyOverlap();
+    checkTongueBumblebeeOverlap();
 }
 
 /*function background(sky.r, sky.g, sky.b) {
@@ -221,7 +223,7 @@ function drawFrog() {
 
     // Draw the frog's body
     push();
-    fill("#00ff00");
+    frog.fill;
     noStroke();
     ellipse(frog.body.x, frog.body.y, frog.body.size);
     pop();
@@ -242,6 +244,25 @@ function checkTongueFlyOverlap() {
         frog.tongue.state = "inbound";
     }
 }
+
+
+function checkTongueBumblebeeOverlap() {
+    // Get distance from tongue to fly
+    const d = dist(frog.tongue.x, frog.tongue.y, bumblebee.x, bumblebee.y);
+    // Check if it's an overlap
+    const eaten = (d < frog.tongue.size / 2 + bumblebee.size / 2);
+    if (eaten) {
+        // Reset the fly
+        resetBumblebee();
+        // Bring back the tongue
+        frog.tongue.state = "inbound";
+    }
+}
+
+
+
+
+
 
 /**
  * Launch the tongue on click (if it's not launched yet)
