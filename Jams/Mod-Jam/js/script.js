@@ -63,7 +63,7 @@ const fly = {
 const bumblebee = {
     x: 240,
     y: 200,
-    size: 20,
+    size: 30,
     speed: 20
 }
 
