@@ -14,14 +14,12 @@
  */
 
 "use strict";
+
+//The sky
 let sky = {
     r: 135,
     g: 206,
     b: 235,
-
-
-
-
 }
 
 // Our frog
@@ -35,9 +33,9 @@ const frog = {
             r: 0,
             g: 255,
             b: 0,
-
         }
     },
+
     // The frog's tongue has a position, size, speed, and state
     tongue: {
         x: undefined,
@@ -81,14 +79,13 @@ function setup() {
     //rest the positon of the bumblebee
     resetBumblebee();
 
-
 }
 
 function draw() {
     background(sky.r, sky.g, sky.b);
-    sky.r = sky.r - 0.01
-    sky.g = sky.g - 0.01
-    sky.b = sky.b - 0.01
+    //sky.r = sky.r - 0.1
+    //sky.g = sky.g - 0.1
+    //sky.b = sky.b - 0.08
     moveFly();
     drawFly();
     drawBumblebee();
@@ -106,10 +103,6 @@ function draw() {
     sky.g = sky.g - 0.5
     sky.b = sky.b - 0.5
     
-
-
-
-} */
 
 
 /**
