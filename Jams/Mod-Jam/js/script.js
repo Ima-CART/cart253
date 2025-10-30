@@ -76,7 +76,7 @@ function setup() {
     resetFly();
 
 
-    //rest the positon of the bumblebee
+    //rest the positon of the bumblebee at a random position
     resetBumblebee();
 
 }
@@ -137,6 +137,7 @@ function resetFly() {
     fly.y = random(0, 300);
 }
 
+//Draw Bumblebee
 function drawBumblebee() {
     push()
     noStroke();
@@ -145,11 +146,11 @@ function drawBumblebee() {
     pop();
 }
 
+//The bumblebee will be buzzing and moving at random
 function moveBumblebee() {
     bumblebee.x += random(-bumblebee.speed, bumblebee.speed);
     if (bumblebee.x > 480 || bumblebee.x < 0) {
         resetBumblebee();
-
 
     }
 
@@ -163,6 +164,7 @@ function moveBumblebee() {
 
 }
 
+//Reset bumblebee randomly when it reaches the maximums of the canvas
 function resetBumblebee() {
     bumblebee.x = random(50, 600)
     bumblebee.y = random(200, 400)
@@ -249,7 +251,9 @@ function checkTongueFlyOverlap() {
     }
 }
 
-
+/**
+ *  Tongue overlapping the bumblebee
+ */
 function checkTongueBumblebeeOverlap() {
     // Get distance from tongue to bumblebee
     const d = dist(frog.tongue.x, frog.tongue.y, bumblebee.x, bumblebee.y);
@@ -265,6 +269,9 @@ function checkTongueBumblebeeOverlap() {
     }
 }
 
+/**
+ * Function for the bumblebee overlapping the fly
+ */
 
 function bumblebeeFlyOverlap() {
     //Get the distance from bumblebee to gly
@@ -272,7 +279,7 @@ function bumblebeeFlyOverlap() {
     //check overlap
     const overlap = (d < fly.size / 2 + bumblebee.size / 2)
     if (overlap) {
-        // Reset fly (Only the fly will be targeted as it is smaller than the bumblebee )
+        // Reset fly (Flies are the prey. When bumblebee overlaps, they get eaten)
         resetFly();
     }
 
