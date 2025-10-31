@@ -178,7 +178,24 @@ function resetBumblebee() {
  * Moves the frog to the mouse position on x
  */
 function moveFrog() {
-    frog.body.x = mouseX;
+    //frog.body.x = mouseX;
+    //frog.body.x = 320
+
+    if (keyIsDown(LEFT_ARROW)) {
+        frog.body.x = frog.body.x - 2;
+    }
+
+    else if (keyIsDown(RIGHT_ARROW)) {
+        frog.body.x = frog.body.x + 2
+    }
+
+    if (keyIsDown(UP_ARROW)) {
+        frog.body.y = frog.body.y - 2
+    }
+
+    else if (keyIsDown(DOWN_ARROW)) {
+        frog.body.y = frog.body.y + 2
+    }
 }
 
 /**
@@ -279,7 +296,7 @@ function checkTongueBumblebeeOverlap() {
  */
 
 function bumblebeeFlyOverlap() {
-    //Get the distance from bumblebee to gly
+    //Get the distance from bumblebee to fly
     const d = dist(fly.x, fly.y, bumblebee.x, bumblebee.y);
     //check overlap
     const overlap = (d < fly.size / 2 + bumblebee.size / 2)
