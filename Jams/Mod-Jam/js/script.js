@@ -82,10 +82,21 @@ function setup() {
 }
 
 function draw() {
+    //The sky backgrpund will become over a short period of time
     background(sky.r, sky.g, sky.b);
-    //sky.r = sky.r - 0.1
-    //sky.g = sky.g - 0.1
-    //sky.b = sky.b - 0.08
+    sky.r = constrain(sky.r - 1, 5, 135)
+    sky.g = constrain(sky.g - 1, 55, 206)
+    sky.b = constrain(sky.b - 1, 110, 235)
+    //constrain(sky.r, 3, 135),
+    //constrain(sky.g, 45, 206),
+    //constrain(sky.b, 105, 235)
+
+    /**
+     *r: 135,
+    g: 206,
+    b: 235,
+     */
+
     moveFly();
     drawFly();
     drawBumblebee();
