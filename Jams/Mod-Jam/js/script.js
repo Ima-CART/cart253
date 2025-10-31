@@ -87,15 +87,6 @@ function draw() {
     sky.r = constrain(sky.r - 1, 5, 135)
     sky.g = constrain(sky.g - 1, 55, 206)
     sky.b = constrain(sky.b - 1, 110, 235)
-    //constrain(sky.r, 3, 135),
-    //constrain(sky.g, 45, 206),
-    //constrain(sky.b, 105, 235)
-
-    /**
-     *r: 135,
-    g: 206,
-    b: 235,
-     */
 
     moveFly();
     drawFly();
@@ -108,6 +99,7 @@ function draw() {
     checkTongueBumblebeeOverlap()
     bumblebeeFlyOverlap();
 }
+
 
 
 
