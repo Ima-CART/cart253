@@ -42,6 +42,12 @@ const frog = {
         y: 480,
         size: 20,
         speed: 20,
+        fill: {
+            r: 255,
+            g: 0,
+            b: 0,
+        },
+
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     }
@@ -56,8 +62,8 @@ const fly = {
     speed: 3
 };
 
-//Second insect. The infamous bumblebee
 
+//Second insect. The infamous bumblebee
 const bumblebee = {
     x: 240,
     y: 200,
@@ -99,8 +105,6 @@ function draw() {
     checkTongueBumblebeeOverlap()
     bumblebeeFlyOverlap();
 }
-
-
 
 
 /**
@@ -211,14 +215,14 @@ function moveFrog() {
 function drawFrog() {
     // Draw the tongue tip
     push();
-    fill("#ff0000");
+    fill(frog.tongue.fill.r, frog.tongue.fill.g, frog.tongue.fill.b);
     noStroke();
     ellipse(frog.tongue.x, frog.tongue.y, frog.tongue.size);
     pop();
 
     // Draw the rest of the tongue
     push();
-    stroke("#ff0000");
+    stroke(frog.tongue.fill.r, frog.tongue.fill.g, frog.tongue.fill.b);
     strokeWeight(frog.tongue.size);
     line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
     pop();
@@ -245,7 +249,7 @@ function checkTongueFlyOverlap() {
         // Bring back the tongue
         frog.tongue.state = "inbound";
         //change the color of the frog
-        frog.body.fill.g += 100
+        frog.body.fill.g = constrain(frog.body.fill.g + 100, 0, 255)
     }
 }
 
@@ -263,7 +267,10 @@ function checkTongueBumblebeeOverlap() {
         // Bring back the tongue
         frog.tongue.state = "inbound";
         //Change the color of the frog
-        frog.body.fill.g -= 100
+        frog.body.fill.g = constrain(frog.body.fill.g - 100, 0, 255)
+        //frog.tongue.fill.r -= 10
+        //frog.tongue.fill.g += 50
+        //frog.tongue.fill.b += 20
     }
 }
 
@@ -322,3 +329,6 @@ function moveTongue() {
         }
     }
 }
+
+
+
