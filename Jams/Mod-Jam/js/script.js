@@ -109,11 +109,6 @@ function draw() {
     bumblebeeFlyOverlap();
 }
 
-/*function background(sky.r, sky.g, sky.b) {
-    sky.r = sky.r - 0.5
-    sky.g = sky.g - 0.5
-    sky.b = sky.b - 0.5
-    
 
 
 /**
