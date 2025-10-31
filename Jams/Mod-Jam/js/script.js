@@ -182,11 +182,11 @@ function moveFrog() {
     //frog.body.x = 320
 
     if (keyIsDown(LEFT_ARROW)) {
-        frog.body.x = frog.body.x - 2;
+        frog.body.x = constrain(frog.body.x - 4, 10, 630)
     }
 
     else if (keyIsDown(RIGHT_ARROW)) {
-        frog.body.x = frog.body.x + 2
+        frog.body.x = constrain(frog.body.x + 4, 10, 630)
     }
 
     if (keyIsDown(UP_ARROW)) {
