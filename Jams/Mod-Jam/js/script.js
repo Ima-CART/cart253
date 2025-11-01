@@ -117,7 +117,7 @@ function moveFly() {
     // Move the fly
     fly.x += fly.speed;
     //fly will be buzzing and movin in a wave using the sin function
-    let buzzingY = sin(angle) * 20;
+    let buzzingY = sin(angle) * 15;
     fly.y = constrain(fly.y - buzzingY, 0, 460);
     angle += 20;
     // Handle the fly going off the canvas
