@@ -59,7 +59,7 @@ const frog = {
 const fly = {
     x: 0,
     y: 200, // Will be random
-    size: 10,
+    size: 12,
     speed: 3
 };
 
@@ -126,10 +126,32 @@ function moveFly() {
     }
 }
 
+
 /**
  * Draws the fly as a black circle
  */
 function drawFly() {
+
+
+    //Drawing the top wing
+    push();
+    noStroke();
+    //strokeWeight(1);
+    fill("#ffffffc2");
+    ellipse(fly.x, fly.y - 10, fly.size - 2);
+    pop();
+
+    //Drawing the bottom wing
+    push();
+    noStroke();
+    fill("#ffffffc2");
+    ellipse(fly.x, fly.y + 10, fly.size - 2);
+    pop();
+
+
+
+
+    //The fly body
     push();
     noStroke();
     fill("#000000");
