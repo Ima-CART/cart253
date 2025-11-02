@@ -138,14 +138,14 @@ function drawFly() {
     noStroke();
     //strokeWeight(1);
     fill("#ffffffc2");
-    ellipse(fly.x, fly.y - 10, fly.size - 2);
+    ellipse(fly.x, fly.y - 10, fly.size - 3);
     pop();
 
     //Drawing the bottom wing
     push();
     noStroke();
     fill("#ffffffc2");
-    ellipse(fly.x, fly.y + 10, fly.size - 2);
+    ellipse(fly.x, fly.y + 10, fly.size - 3);
     pop();
 
 
