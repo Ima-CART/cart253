@@ -168,7 +168,7 @@ function resetFly() {
 //Draw Bumblebee
 function drawBumblebee() {
 
-    /*//Draw wing 1
+    //Draw wing 1
     push();
     fill("#E6F9FBhe")
     ellipse(bumblebee.x + 18, bumblebee.y - 3, bumblebee.length - 30, bumblebee.size - 3, 20
@@ -180,13 +180,13 @@ function drawBumblebee() {
     fill("#E6F9FBhe")
     ellipse(bumblebee.x + 25, bumblebee.y - 3, bumblebee.length - 30, bumblebee.size - 3, 20
     );
-    pop();*/
+    pop();
 
     //Draw bumblebee body
-    push()
-    noStroke();
+    push();
+    strokeWeight(2);
     fill("#fff563ff");
-    ellipse(bumblebee.x, bumblebee.y, bumblebee.size);
+    rect(bumblebee.x, bumblebee.y, bumblebee.length, bumblebee.size, 50);
     pop();
 
 
