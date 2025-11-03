@@ -208,6 +208,11 @@ function drawBumblebee() {
     fill("#000"); triangle(bumblebee.x, bumblebee.y + 10, bumblebee.x, bumblebee.y + 20, bumblebee.x - 8, bumblebee.y + 15);
     pop();
 
+    //Bumble eyes
+    push();
+    fill("#000");
+    ellipse(bumblebee.x + 39, bumblebee.y + 10, bumblebee.size - 26);
+    pop();
 
 
 }
