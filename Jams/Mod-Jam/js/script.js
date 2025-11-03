@@ -149,8 +149,6 @@ function drawFly() {
     pop();
 
 
-    triangle(x1, y1, x2, y2, x3, y3)
-
     //The fly body
     push();
     noStroke();
@@ -170,7 +168,7 @@ function resetFly() {
 //Draw Bumblebee
 function drawBumblebee() {
 
-    //Draw wing 1
+    /*//Draw wing 1
     push();
     fill("#E6F9FBhe")
     ellipse(bumblebee.x + 18, bumblebee.y - 3, bumblebee.length - 30, bumblebee.size - 3, 20
@@ -182,13 +180,16 @@ function drawBumblebee() {
     fill("#E6F9FBhe")
     ellipse(bumblebee.x + 25, bumblebee.y - 3, bumblebee.length - 30, bumblebee.size - 3, 20
     );
-    pop();
+    pop();*/
 
+    //Draw bumblebee body
     push()
     noStroke();
     fill("#fff563ff");
     ellipse(bumblebee.x, bumblebee.y, bumblebee.size);
     pop();
+
+
 }
 
 //The bumblebee will be buzzing and moving at random
