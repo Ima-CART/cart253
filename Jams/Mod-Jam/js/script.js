@@ -69,7 +69,8 @@ const bumblebee = {
     x: 240,
     y: 200,
     size: 30,
-    speed: 20
+    speed: 20,
+    length: 45
 }
 
 
