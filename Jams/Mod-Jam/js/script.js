@@ -174,7 +174,14 @@ function drawBumblebee() {
     fill("#E6F9FBhe")
     ellipse(bumblebee.x + 18, bumblebee.y - 3, bumblebee.length - 30, bumblebee.size - 3, 20
     );
-    pop;
+    pop();
+
+    //Draw wing 2
+    push();
+    fill("#E6F9FBhe")
+    ellipse(bumblebee.x + 25, bumblebee.y - 3, bumblebee.length - 30, bumblebee.size - 3, 20
+    );
+    pop();
 
     push()
     noStroke();
