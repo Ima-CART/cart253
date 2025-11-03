@@ -189,6 +189,13 @@ function drawBumblebee() {
     rect(bumblebee.x, bumblebee.y, bumblebee.length, bumblebee.size, 50);
     pop();
 
+    //Bumble Stripe 1
+    push();
+    fill("#000");
+    rect(bumblebee.x + 13, bumblebee.y, bumblebee.length - 40, bumblebee.size,
+    );
+    pop;
+
 
 }
 
