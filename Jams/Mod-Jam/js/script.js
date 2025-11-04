@@ -19,6 +19,9 @@
 //scoreboard
 let score = 0
 
+//inserting images
+let flyicon;
+
 //The sky
 let angle;
 let sky = {
@@ -77,6 +80,14 @@ const bumblebee = {
     length: 45
 }
 
+//Images that will be added to the game 
+function preload() {
+    flyicon = loadImage("assets/images/fly-silhouette-vector copy.png");
+
+
+
+
+}
 
 /**
  * Creates the canvas and initializes the fly
@@ -398,8 +409,11 @@ function mousePressed() {
 
 function scoreboard() {
 
-
+    //image(img, x, y, width, height)
     push();
+    image(flyicon, 565, 405, 64, 64);
+    pop();
+    /*push();
     fill("#ffffffc2")
     ellipse(628, 450, 20);
     pop();
@@ -413,7 +427,7 @@ function scoreboard() {
     push();
     fill("#000")
     ellipse(600, 450, 40);
-    pop();
+    pop();*/
 
     textSize(20);
     textAlign(CENTER);
