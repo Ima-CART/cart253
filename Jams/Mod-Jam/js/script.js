@@ -397,8 +397,27 @@ function mousePressed() {
 //scoreboard
 
 function scoreboard() {
+
+
+    push();
+    fill("#ffffffc2")
+    ellipse(628, 450, 20);
+    pop();
+
+    push();
+    fill("#ffffffc2")
+    ellipse(572, 450, 20);
+    pop();
+
+    //fly body for the scoreboard
+    push();
+    fill("#000")
+    ellipse(600, 450, 40);
+    pop();
+
     textSize(20);
     textAlign(CENTER);
+    fill("#fff");
     text(score, 600, 450);
 
 }
