@@ -15,6 +15,10 @@
 
 "use strict";
 
+
+//scoreboard
+let score = 0
+
 //The sky
 let angle;
 let sky = {
