@@ -15,6 +15,11 @@
 
 "use strict";
 
+// The title screen
+let gameState = "titlescreen"
+
+//Game over screen
+let gameOver;
 
 //scoreboard
 let score = 0
@@ -100,12 +105,14 @@ function setup() {
     resetFly();
 
 
+
     //rest the positon of the bumblebee at a random position
     resetBumblebee();
 
 }
 
 function draw() {
+    drawTitleScreen();
     //The sky backgrpund will become over a short period of time
     background(sky.r, sky.g, sky.b);
     sky.r = constrain(sky.r - 1, 5, 135)
@@ -125,6 +132,17 @@ function draw() {
     scoreboard()
 }
 
+
+/**
+ * Draw the titlescreen 
+ * Title will begin at the beginning of the game
+ */
+
+function drawTitleScreen() {
+    background(sky.r, sky.g, sky.b);
+
+
+}
 
 /**
  * Moves the fly according to its speed
@@ -230,13 +248,13 @@ function drawBumblebee() {
     ellipse(bumblebee.x + 39, bumblebee.y + 10, bumblebee.size - 26);
     pop();
 
-    if (scoreboard < 5) {
-        bumblebee.hide();
-    }
-
-    else if (score >= 5) {
-        bumblebee = bumblebee
-    }
+    /* if (score < 5) {
+         bumblebee.hide();
+     }
+ 
+     else if (score >= 5) {
+         bumblebee.show();
+     }*/
 
 }
 
