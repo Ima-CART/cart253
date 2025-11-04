@@ -407,11 +407,10 @@ function mousePressed() {
 
 
 //scoreboard
-
 function scoreboard() {
 
-    //image(img, x, y, width, height)
-    push();
+    //image of the flyicon
+    push()
     image(flyicon, 566, 405, 64, 64);
     pop();
 
