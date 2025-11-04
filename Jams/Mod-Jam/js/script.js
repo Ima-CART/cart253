@@ -351,6 +351,7 @@ function checkTongueFlyOverlap() {
         frog.tongue.state = "inbound";
         //change the color of the frog
         frog.body.fill.g = constrain(frog.body.fill.g + 100, 0, 255)
+        score = score + 1;
     }
 }
 
@@ -411,7 +412,7 @@ function scoreboard() {
 
     //image(img, x, y, width, height)
     push();
-    image(flyicon, 565, 405, 64, 64);
+    image(flyicon, 566, 405, 64, 64);
     pop();
     /*push();
     fill("#ffffffc2")
