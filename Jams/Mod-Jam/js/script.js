@@ -230,8 +230,16 @@ function drawBumblebee() {
     ellipse(bumblebee.x + 39, bumblebee.y + 10, bumblebee.size - 26);
     pop();
 
+    if (scoreboard < 5) {
+        bumblebee.hide();
+    }
+
+    else if (score >= 5) {
+        bumblebee = bumblebee
+    }
 
 }
+
 
 //The bumblebee will be buzzing and moving at random
 function moveBumblebee() {
@@ -285,7 +293,7 @@ function moveFrog() {
 /**
  * Handles moving the tongue based on its state
  */
-/*function moveTongue() {
+function moveTongue() {
     // Tongue matches the frog's x
     frog.tongue.x = frog.body.x;
     // If the tongue is idle, it doesn't do anything
@@ -308,7 +316,7 @@ function moveFrog() {
             frog.tongue.state = "idle";
         }
     }
-}*/
+}
 
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
@@ -422,32 +430,7 @@ function scoreboard() {
 
 }
 
-//Handles moving the tongue based on its state
 
-function moveTongue() {
-    // Tongue matches the frog's x
-    frog.tongue.x = frog.body.x;
-    // If the tongue is idle, it doesn't do anything
-    if (frog.tongue.state === "idle") {
-        // Do nothing
-    }
-    // If the tongue is outbound, it moves up
-    else if (frog.tongue.state === "outbound") {
-        frog.tongue.y += -frog.tongue.speed;
-        // The tongue bounces back if it hits the top
-        if (frog.tongue.y <= 0) {
-            frog.tongue.state = "inbound";
-        }
-    }
-    // If the tongue is inbound, it moves down
-    else if (frog.tongue.state === "inbound") {
-        frog.tongue.y += frog.tongue.speed;
-        // The tongue stops if it hits the bottom
-        if (frog.tongue.y >= height) {
-            frog.tongue.state = "idle";
-        }
-    }
-}
 
 
 
