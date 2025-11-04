@@ -111,6 +111,7 @@ function draw() {
     checkTongueFlyOverlap();
     checkTongueBumblebeeOverlap()
     bumblebeeFlyOverlap();
+    scoreboard()
 }
 
 
@@ -391,6 +392,16 @@ function mousePressed() {
     }
 }
 
+
+
+//scoreboard
+
+function scoreboard() {
+    textSize(20);
+    textAlign(CENTER);
+    text(score, 600, 450);
+
+}
 
 //Handles moving the tongue based on its state
 
