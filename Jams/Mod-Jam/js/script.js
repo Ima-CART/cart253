@@ -262,13 +262,6 @@ function drawBumblebee() {
     ellipse(bumblebee.x + 39, bumblebee.y + 10, bumblebee.size - 26);
     pop();
 
-    if (score < 5) {
-        bumblebee.visible = false;
-    }
-
-    else if (score >= 5) {
-        bumblebee.visible = true
-    }
 
 }
 
@@ -440,6 +433,15 @@ function mousePressed() {
 
 //scoreboard
 function scoreboard() {
+
+
+    if (score >= 5) {
+        bumblebee.visible = true;
+    }
+
+    if (score <= 5) {
+        bumblebee.visible = false;
+    }
 
     //image of the flyicon
     push()
