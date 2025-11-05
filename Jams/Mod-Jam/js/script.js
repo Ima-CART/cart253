@@ -26,7 +26,8 @@ let score = 0
 
 //inserting images
 let flyicon;
-let frogeatingfly
+let frogeatingfly;
+let batflying;
 
 //The sky
 let angle;
@@ -91,6 +92,7 @@ const bumblebee = {
 function preload() {
     flyicon = loadImage("assets/images/fly-silhouette-vector copy.png");
     frogeatingfly = loadImage("assets/images/cartoon-frog-sitting-on-a-lily-pad-catching-a-fly.png");
+    batflying = loadImage("assets/images/flying-bat-silhouettes-with-wings.png")
 
 }
 
@@ -111,11 +113,10 @@ function setup() {
     // Give the fly its first random position
     resetFly();
 
-
-
     //rest the positon of the bumblebee at a random position
     resetBumblebee();
-
+    //the bat will only appear at night
+    batflying.visible = false;
 }
 
 function draw() {
