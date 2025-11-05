@@ -262,13 +262,13 @@ function drawBumblebee() {
     ellipse(bumblebee.x + 39, bumblebee.y + 10, bumblebee.size - 26);
     pop();
 
-    /*  if (score < 5) {
-          bumblebee.visible = false;
-      }
-  
-      else if (score >= 5) {
-          bumblebee.visible = true
-      }*/
+    if (score < 5) {
+        bumblebee.visible = false;
+    }
+
+    else if (score >= 5) {
+        bumblebee.visible = true
+    }
 
 }
 
@@ -431,7 +431,6 @@ function bumblebeeFlyOverlap() {
  * Launch the tongue on click (if it's not launched yet)
  */
 function mousePressed() {
-    bumblebee.visible = true;
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
     }
