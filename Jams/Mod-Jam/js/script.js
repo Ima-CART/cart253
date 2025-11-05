@@ -26,6 +26,7 @@ let score = 0
 
 //inserting images
 let flyicon;
+let frogeatingfly
 
 //The sky
 let angle;
@@ -88,6 +89,7 @@ const bumblebee = {
 //Images that will be added to the game 
 function preload() {
     flyicon = loadImage("assets/images/fly-silhouette-vector copy.png");
+    frogeatingfly = loadImage("assets/images/cartoon-frog-sitting-on-a-lily-pad-catching-a-fly.png");
 
 
 
@@ -112,7 +114,7 @@ function setup() {
 }
 
 function draw() {
-    drawTitleScreen();
+    // drawTitleScreen();
     //The sky backgrpund will become over a short period of time
     background(sky.r, sky.g, sky.b);
     sky.r = constrain(sky.r - 1, 5, 135)
@@ -130,6 +132,7 @@ function draw() {
     checkTongueBumblebeeOverlap()
     bumblebeeFlyOverlap();
     scoreboard()
+    drawTitleScreen();
 }
 
 
@@ -138,11 +141,14 @@ function draw() {
  * Title will begin at the beginning of the game
  */
 
-function drawTitleScreen() {
+/*function drawTitleScreen() {
     background(sky.r, sky.g, sky.b);
+    image(frogeatingfly, 240, 320, 100, 100);
+    textSize(48);
+    text("Frog in a swamp" , 250, 370, 50, 60)
 
 
-}
+}*/
 
 /**
  * Moves the fly according to its speed
@@ -298,14 +304,6 @@ function moveFrog() {
     else if (keyIsDown(RIGHT_ARROW)) {
         frog.body.x = constrain(frog.body.x + 4, 10, 630)
     }
-
-    if (keyIsDown(UP_ARROW)) {
-        frog.body.y = frog.body.y - 2
-    }
-
-    else if (keyIsDown(DOWN_ARROW)) {
-        frog.body.y = frog.body.y + 2
-    }
 }
 
 /**
@@ -449,6 +447,16 @@ function scoreboard() {
 }
 
 
+function drawTitleScreen() {
+    background(sky.r, sky.g, sky.b);
+    image(frogeatingfly, 200, 150, 250, 250);
+    textAlign(CENTER);
+    textSize(48);
+    text("Frog in a swamp", 200, 50, 240, 200);
 
+
+
+
+}
 
 
