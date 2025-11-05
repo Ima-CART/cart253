@@ -91,9 +91,13 @@ function preload() {
     flyicon = loadImage("assets/images/fly-silhouette-vector copy.png");
     frogeatingfly = loadImage("assets/images/cartoon-frog-sitting-on-a-lily-pad-catching-a-fly.png");
 
+}
 
-
-
+const startButton = {
+    x: 240,
+    y: 370,
+    height: 50,
+    length: 150
 }
 
 /**
@@ -454,9 +458,22 @@ function drawTitleScreen() {
     textSize(48);
     text("Frog in a swamp", 200, 50, 240, 200);
 
-
-
+    //Start button
+    push();
+    strokeWeight(2);
+    fill("#81ef85ff");
+    rect(startButton.x, startButton.y, startButton.length, startButton.height, 30);
+    pop();
+    //text in button
+    push();
+    fill("#000000ff");
+    textAlign(CENTER);
+    textSize(36);
+    text("Start", startButton.x, startButton.y + 8, startButton.length, startButton.height,);
+    pop();
 
 }
+
+
 
 
