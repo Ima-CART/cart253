@@ -83,7 +83,8 @@ const bumblebee = {
     y: 200,
     size: 30,
     speed: 20,
-    length: 45
+    length: 45,
+    visible: false
 }
 
 //Images that will be added to the game 
@@ -127,7 +128,9 @@ function draw() {
 
     moveFly();
     drawFly();
-    drawBumblebee();
+    if (bumblebee.visible) {
+        drawBumblebee();
+    }
     moveBumblebee();
     moveFrog();
     moveTongue();
@@ -136,7 +139,8 @@ function draw() {
     checkTongueBumblebeeOverlap()
     bumblebeeFlyOverlap();
     scoreboard()
-    drawTitleScreen();
+    //drawTitleScreen();
+    //drawInstructionScreen();
 }
 
 
@@ -258,13 +262,13 @@ function drawBumblebee() {
     ellipse(bumblebee.x + 39, bumblebee.y + 10, bumblebee.size - 26);
     pop();
 
-    /* if (score < 5) {
-         bumblebee.hide();
-     }
- 
-     else if (score >= 5) {
-         bumblebee.show();
-     }*/
+    /*  if (score < 5) {
+          bumblebee.visible = false;
+      }
+  
+      else if (score >= 5) {
+          bumblebee.visible = true
+      }*/
 
 }
 
@@ -427,6 +431,7 @@ function bumblebeeFlyOverlap() {
  * Launch the tongue on click (if it's not launched yet)
  */
 function mousePressed() {
+    bumblebee.visible = true;
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
     }
@@ -451,7 +456,7 @@ function scoreboard() {
 }
 
 
-function drawTitleScreen() {
+/*function drawTitleScreen() {
     background(sky.r, sky.g, sky.b);
     image(frogeatingfly, 200, 150, 250, 250);
     textAlign(CENTER);
@@ -472,7 +477,7 @@ function drawTitleScreen() {
     text("Start", startButton.x, startButton.y + 8, startButton.length, startButton.height,);
     pop();
 
-}
+}*/
 
 
 
