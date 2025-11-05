@@ -27,7 +27,7 @@ let score = 0
 //inserting images
 let flyicon;
 let frogeatingfly;
-let batflying;
+let batflyingIMG;
 
 //The sky
 let angle;
@@ -85,7 +85,16 @@ const bumblebee = {
     size: 30,
     speed: 20,
     length: 45,
-    visible: false
+    visible: false //the bumblebee will start of invisible 
+}
+
+// the secret creature that comes at night 
+const batflying = {
+    x: 240,
+    y: 200,
+    size: 40,
+    speed: 30,
+    visible: false// the bat will only come out at night
 }
 
 //Images that will be added to the game 
@@ -108,27 +117,33 @@ const startButton = {
  */
 function setup() {
     createCanvas(640, 480);
-    angleMode(DEGREES);
-    angle = 0;
+    angleMode(DEGREES); //added angle for the fly sin function
+    angle = 0; //added angle for the fly sin function
+
     // Give the fly its first random position
     resetFly();
 
     //rest the positon of the bumblebee at a random position
     resetBumblebee();
+
     //the bat will only appear at night
     batflying.visible = false;
 }
 
 function draw() {
     // drawTitleScreen();
+
     //The sky backgrpund will become over a short period of time
     background(sky.r, sky.g, sky.b);
     sky.r = constrain(sky.r - 1, 5, 135)
     sky.g = constrain(sky.g - 1, 55, 206)
     sky.b = constrain(sky.b - 1, 110, 235)
 
+    drawnightsky();
     moveFly();
     drawFly();
+
+    //the bumblebee will start of invisible and only when visible does the function draws it
     if (bumblebee.visible) {
         drawBumblebee();
     }
@@ -158,6 +173,18 @@ function draw() {
 
 
 }*/
+
+/** 
+ * The night background
+ * 
+*/
+
+function drawnightsky() {
+
+
+
+
+}
 
 /**
  * Moves the fly according to its speed
