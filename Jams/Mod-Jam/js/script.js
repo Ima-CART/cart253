@@ -139,6 +139,14 @@ function draw() {
     sky.g = constrain(sky.g - 1, 55, 206)
     sky.b = constrain(sky.b - 1, 110, 235)
 
+    //The lake
+    pop();
+    fill("#488ec4ff");
+    stroke("#488ec4ff")
+    rect(0, 380, 640, 150);
+    push();
+
+
     drawnightsky();
     moveFly();
     drawFly();
