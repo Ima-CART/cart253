@@ -222,7 +222,7 @@ function draw() {
 
         pop();
 
-        drawnightsky();
+
         moveFly();
         drawFly();
 
@@ -276,12 +276,6 @@ function drawTitleScreen() {
  * 
 */
 
-function drawnightsky() {
-
-
-
-
-}
 
 /**
  * Moves the fly according to its speed
@@ -635,7 +629,7 @@ function drawTitleScreen() {
     fill("#000000ff");
     textAlign(CENTER);
     textSize(36);
-    text("Start", startButton.x, startButton.y + 8, startButton.length, startButton.height);
+    text("Instruction", startButton.x, startButton.y + 8, startButton.length, startButton.height);
     pop();
 
 }
@@ -660,8 +654,23 @@ function drawInstructionScreen() {
     text("Beware", 200, 230, 250, 250)
 
 
+    //Start button
+    push();
+    strokeWeight(2);
+    fill("#81ef85ff");
+    rect(startButton.x, startButton.y + 35, startButton.length, startButton.height, 30);
+    pop();
 
+    //text in button
+    push();
+    fill("#000000ff");
+    textAlign(CENTER);
+    textSize(36);
+    text("Start", startButton.x, startButton.y + 43, startButton.length, startButton.height);
+    pop();
 
 }
+
+
 
 
