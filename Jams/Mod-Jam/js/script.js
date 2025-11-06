@@ -458,6 +458,21 @@ function drawFrog() {
     noStroke();
     ellipse(frog.body.x, frog.body.y, frog.body.size);
     pop();
+
+    //Draw the frog's white part of the eye
+    //The right eye
+    push();
+    fill(frog.eye.fill.r, frog.eye.fill.g, frog.eye.fill.b)
+    noStroke();
+    ellipse(frog.eye.x, frog.eye.y, frog.eye.size)
+    pop();
+
+    //The left eye
+    push();
+    fill(frog.eye.fill.r, frog.eye.fill.g, frog.eye.fill.b)
+    noStroke();
+    ellipse(frog.eye.x + 100, frog.eye.y, frog.eye.size)
+    pop();
 }
 
 /**
