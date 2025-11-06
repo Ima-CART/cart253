@@ -192,8 +192,8 @@ function draw() {
         sky.r = constrain(sky.r - .05, 5, 135)
         sky.g = constrain(sky.g - .05, 55, 206)
         sky.b = constrain(sky.b - .05, 110, 235)
-        if (sky.r === 135 && sky.g === 206 && sky.b === 235) {
-            daytime = true
+        if (sky.r === 5 && sky.g === 55 && sky.b === 110) {
+            daytime = false
         }
 
 
@@ -612,6 +612,10 @@ function scoreboard() {
 
     if (score >= 5 && daytime) {
         bumblebee.active = true;
+    }
+
+    else if (!daytime) {
+        bumblebee.active = false
     }
 
 
