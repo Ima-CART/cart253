@@ -28,6 +28,9 @@ let score = 0
 let flyicon;
 let frogeatingfly;
 let batflyingIMG;
+let bumblebeeflying;
+let houseflyIMG;
+let frogonlilypad;
 
 //The sky
 let angle;
@@ -127,7 +130,10 @@ const batflying = {
 function preload() {
     flyicon = loadImage("assets/images/fly-silhouette-vector copy.png");
     frogeatingfly = loadImage("assets/images/cartoon-frog-sitting-on-a-lily-pad-catching-a-fly.png");
-    batflying = loadImage("assets/images/flying-bat-silhouettes-with-wings.png")
+    batflyingIMG = loadImage("assets/images/flying-bat-silhouettes-with-wings.png");
+    bumblebeeflying = loadImage("assets/images/Bumblebee-Flying.png");
+    houseflyIMG = loadImage("assets/images/house-fly-24629_1280.png");
+    frogonlilypad = loadImage("assets/images/Frog-On-Lilypad.png")
 
 }
 
@@ -631,12 +637,26 @@ function drawTitleScreen() {
 
 }
 
-
+//Instructions Page
+//text(str, x, y, x2, y2)
 function drawInstructionScreen() {
     background(sky.r, sky.g, sky.b);
+    image(houseflyIMG, 100, 10, 70, 70);
+    image(bumblebeeflying, 450, 280, 150, 150)
     textAlign(CENTER);
-    textSize(48)
-    text("Instructions", 200, 50, 250, 250)
+    textSize(48);
+    text("Instructions", 200, 30, 250, 250);
+    textSize(16)
+    text("The starving frog just wants to eat flies in peace", 80, 110, 500, 100);
+    text("Use move the frog left and right with the keyboard", 80, 145, 500, 400);
+    text("Click on the mouse to launch the tongue and eat what is in sight", 80, 180, 500, 400);
+    text("You aren't the only ones hungry", 80, 290, 500, 400,);
+    text("Eat flies without interacting with your competition", 80, 325, 500, 400);
+    text("Last note: The day will change and the competiton will become harder", 80, 360, 500, 400)
+    textSize(36);
+    text("Beware", 200, 230, 250, 250)
+
+
 
 
 }
