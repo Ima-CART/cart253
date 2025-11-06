@@ -146,6 +146,15 @@ function draw() {
     rect(0, 380, 640, 150);
     push();
 
+    //Lily pads
+    pop();
+    fill("#02bd02ff")
+    arc(80, 440, 70, 30, 60, PI);
+    arc(150, 410, 50, 20, 0, 270, PI);
+    arc(300, 420, 50, 20, 0, 330, PI);
+    arc(500, 410, 70, 30, 60, PI);
+    arc(560, 450, 50, 20, 0, 270, PI);
+    push();
 
     drawnightsky();
     moveFly();
