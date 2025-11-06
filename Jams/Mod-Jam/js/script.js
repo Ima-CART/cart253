@@ -16,13 +16,16 @@
 "use strict";
 
 // The title screen
-let gameState = "titlescreen"
+let gameState = "titlescreen";
+
 
 //Game over screen
 let gameOver;
 
 //scoreboard
 let score = 0
+let daytime = true//setting function for day time
+let angle; //setting the able for the fly
 
 //inserting images
 let flyicon;
@@ -33,14 +36,12 @@ let houseflyIMG;
 let frogonlilypad;
 
 //The sky
-let angle;
 let sky = {
     r: 135,
     g: 206,
     b: 235,
 }
 
-let daytime = true
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -164,7 +165,17 @@ function setup() {
 }
 
 function draw() {
-    if (gameState === "title screen") { drawTitleScreen(); }
+
+    if (gameState === "titlescreen") {
+
+        drawTitleScreen();
+
+    }
+
+    else if (gameState === "instruction") {
+        drawInstructionScreen();
+    }
+
     else if (gameState === "game") {
 
 
@@ -239,12 +250,8 @@ function draw() {
         drawFrog();
         checkTongueFlyOverlap();
         scoreboard();
-
     }
 
-    else if (gameState === "instrustion") {
-        drawInstructionScreen();
-    }
 
     else if (gameState === "end") {
         drawEndScreen();
@@ -252,8 +259,8 @@ function draw() {
 
 
 
-    drawTitleScreen();
-    drawInstructionScreen();
+    //drawTitleScreen();
+    //drawInstructionScreen();
 }
 
 
@@ -584,6 +591,12 @@ function mousePressed() {
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
     }
+
+
+}
+
+function keyPressed() {
+    if (gameState === "titlescreen") { gameState = "game" }
 }
 
 
