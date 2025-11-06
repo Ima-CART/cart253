@@ -632,6 +632,13 @@ function drawTitleScreen() {
 }
 
 
+function drawInstructionScreen() {
+    background(sky.r, sky.g, sky.b);
+    textAlign(CENTER);
+    textSize(48)
+    text("Instructions", 200, 50, 250, 250)
 
+
+}
 
 
