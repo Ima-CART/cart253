@@ -43,7 +43,7 @@ const frog = {
     body: {
         x: 320,
         y: 520,
-        size: 150,
+        size: 180,
         fill: {
             r: 0,
             g: 255,
@@ -472,6 +472,21 @@ function drawFrog() {
     fill(frog.eye.fill.r, frog.eye.fill.g, frog.eye.fill.b)
     noStroke();
     ellipse(frog.eye.x + 100, frog.eye.y, frog.eye.size)
+    pop();
+
+    //The pupil
+    //The right pupil
+    push();
+    fill(frog.pupil.fill.r, frog.pupil.fill.g, frog.pupil.fill.b)
+    noStroke();
+    ellipse(frog.pupil.x, frog.pupil.y, frog.pupil.size)
+    pop();
+
+    //The left pupil
+    push();
+    fill(frog.pupil.fill.r, frog.pupil.fill.g, frog.pupil.fill.b)
+    noStroke();
+    ellipse(frog.pupil.x + 100, frog.pupil.y, frog.pupil.size)
     pop();
 }
 
