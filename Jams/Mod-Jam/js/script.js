@@ -121,9 +121,9 @@ const bumblebee = {
 
 // the secret creature that comes at night 
 const batflying = {
-    x: 240,
-    y: 200,
-    size: 40,
+    x: 0,
+    y: 10,
+    size: 5,
     speed: 30,
     active: false// the bat will only come out at night
 }
@@ -153,6 +153,13 @@ const startButton = {
     length: 150
 }
 
+const retryButton = {
+    x: 240,
+    y: 370,
+    height: 100,
+    length: 150
+}
+
 /**
  * Creates the canvas and initializes the fly
  */
@@ -164,8 +171,11 @@ function setup() {
     // Give the fly its first random position
     resetFly();
 
-    //rest the positon of the bumblebee at a random position
+    //reset the positon of the bumblebee at a random position
     resetBumblebee();
+
+    //reset the position of the flyingbat at random
+    resetBatFlying();
 
     //the bat will only appear at night
     batflying.active = false;
@@ -189,9 +199,9 @@ function draw() {
 
         //The sky backgrpund will become over a short period of time
         background(sky.r, sky.g, sky.b);
-        sky.r = constrain(sky.r - .05, 5, 135)
-        sky.g = constrain(sky.g - .05, 55, 206)
-        sky.b = constrain(sky.b - .05, 110, 235)
+        sky.r = constrain(sky.r - .01, 5, 135)
+        sky.g = constrain(sky.g - .01, 55, 206)
+        sky.b = constrain(sky.b - .01, 110, 235)
         if (sky.r === 5 && sky.g === 55 && sky.b === 110) {
             daytime = false
         }
@@ -252,11 +262,17 @@ function draw() {
             bumblebeeFlyOverlap();
         }
 
+
         moveFrog();
         moveTongue();
         drawFrog();
         checkTongueFlyOverlap();
-        scoreboard();
+        drawScoreBoard();
+        if (batflying.active) {
+            drawBatFlying();
+            moveBatFlying();
+        }
+
     }
 
 
@@ -562,10 +578,13 @@ function checkTongueBumblebeeOverlap() {
         frog.eye.fill.r = constrain(frog.eye.fill.r - 100, 0, 255)
         frog.eye.fill.g = constrain(frog.eye.fill.g - 100, 0, 255)
         frog.eye.fill.b = constrain(frog.eye.fill.b - 100, 0, 255)
+
+
         //frog.tongue.fill.r -= 10
         //frog.tongue.fill.g += 50
         //frog.tongue.fill.b += 20
     }
+
 }
 
 /**
@@ -602,12 +621,22 @@ function mousePressed() {
 
     else if (gameState === "instruction" && mouseX > instructionsButton.x && mouseX < instructionsButton.x + instructionsButton.length && mouseY > instructionsButton.y && mouseY < instructionsButton.y + instructionsButton.height) {
         gameState = "game"
+
+
     }
+
+    else if (gameState === "end" && mouseX > retryButtonButton.x && mouseX < retryButtonButton.x + retryButtonButton.length && mouseY > retryButtonButton.y && mouseY < retryButtonButton.y + retryButtonButton.height) {
+        gameState = "game"
+
+
+    }
+
+
 }
 
 
 //scoreboard
-function scoreboard() {
+function drawScoreBoard() {
 
 
     if (score >= 5 && daytime) {
@@ -616,7 +645,10 @@ function scoreboard() {
 
     else if (!daytime) {
         bumblebee.active = false
+        batflying.active = true
     }
+
+
 
 
 
@@ -626,12 +658,42 @@ function scoreboard() {
     pop();
 
 
+
+
     textSize(20);
     textAlign(CENTER);
     fill("#fff");
     text(score, 600, 450);
 
 }
+
+function drawBatFlying() {
+
+    image(batflyingIMG, batflying.x, batflying.y, batflying.size);
+
+
+}
+
+function moveBatFlying() {
+    // Move the fly
+    batflying.x += batflying.speed;
+    /*//fly will be buzzing and movin in a wave using the sin function
+    let buzzingY = sin(angle) * 15;
+    batflying.y = constrain(batflying.y - buzzingY, 0, 460);
+    angle += 20;*/
+    // Handle the fly going off the canvas
+    if (batflying.x > width) {
+        resetBatFlying();
+    }
+
+
+}
+
+function resetBatFlying() {
+    batflying.x = 0;
+    batflying.y = random(0, 300);
+}
+
 
 
 function drawTitleScreen() {
@@ -658,7 +720,6 @@ function drawTitleScreen() {
 }
 
 //Instructions Page
-//text(str, x, y, x2, y2)
 function drawInstructionScreen() {
     background(sky.r, sky.g, sky.b);
     image(houseflyIMG, 100, 10, 70, 70);
@@ -695,5 +756,32 @@ function drawInstructionScreen() {
 }
 
 
+function drawEndScreen() {
+    background("#000");
+    image(frogonlilypad, 200, 150, 250, 250);
+    textAlign(CENTER);
+    textAlign(48);
+    fill("#fff");
+    text("GAME OVER", 50, 240, 250, 250)
 
+
+    //Retry button
+
+    push();
+    strokeWeight(2);
+    fill("#81ef85ff");
+    rect(retryButton.x, retryButton.y + 35, retryButton.length, retryButton.height, 30);
+    pop();
+
+    //text in button
+    push();
+    fill("#000000ff");
+    textAlign(CENTER);
+    textSize(36);
+    text("Rery", retryButton.x, retryButton.y + 43, retryButtone.length, retryButton.height);
+    pop();
+
+
+
+}
 
