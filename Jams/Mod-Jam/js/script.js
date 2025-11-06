@@ -157,7 +157,10 @@ function setup() {
 }
 
 function draw() {
-    // drawTitleScreen();
+    // if (gameState === "title screen") {drawTitleScreen();}
+    //else if (gameState === "game"){
+
+
 
     //The sky backgrpund will become over a short period of time
     background(sky.r, sky.g, sky.b);
@@ -223,7 +226,20 @@ function draw() {
     checkTongueFlyOverlap();
     checkTongueBumblebeeOverlap()
     bumblebeeFlyOverlap();
-    scoreboard()
+    scoreboard();
+
+    /* }
+
+else if (gameState === "instrustion"){
+drawInstructionScreen();
+} 
+
+else if (gameState === "end"){
+drawEndScreen();
+} 
+
+*/
+
     drawTitleScreen();
     drawInstructionScreen();
 }
@@ -610,10 +626,11 @@ function drawTitleScreen() {
     fill("#000000ff");
     textAlign(CENTER);
     textSize(36);
-    text("Start", startButton.x, startButton.y + 8, startButton.length, startButton.height,);
+    text("Start", startButton.x, startButton.y + 8, startButton.length, startButton.height);
     pop();
 
 }
+
 
 
 
