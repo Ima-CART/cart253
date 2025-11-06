@@ -198,7 +198,6 @@ function draw() {
 
 
     //Grass on the right side
-
     bezier(620, 440, 620, 400, 615, 380, 625, 330);
     bezier(615, 440, 615, 400, 610, 380, 615, 330);
     bezier(610, 440, 610, 400, 615, 380, 605, 330);
@@ -207,7 +206,6 @@ function draw() {
     bezier(590, 430, 590, 400, 595, 380, 585, 330);
     bezier(580, 420, 580, 400, 585, 380, 575, 330);
 
-    //bezier(x1, y1, cx1, cy1, cx2, cy2, x2, y2);
     pop();
 
     drawnightsky();
@@ -226,8 +224,8 @@ function draw() {
     checkTongueBumblebeeOverlap()
     bumblebeeFlyOverlap();
     scoreboard()
-    //drawTitleScreen();
-    //drawInstructionScreen();
+    drawTitleScreen();
+    drawInstructionScreen();
 }
 
 
@@ -236,14 +234,14 @@ function draw() {
  * Title will begin at the beginning of the game
  */
 
-/*function drawTitleScreen() {
+function drawTitleScreen() {
     background(sky.r, sky.g, sky.b);
     image(frogeatingfly, 240, 320, 100, 100);
     textSize(48);
-    text("Frog in a swamp" , 250, 370, 50, 60)
+    text("Frog in a swamp", 250, 370, 50, 60)
 
 
-}*/
+}
 
 /** 
  * The night background
@@ -479,14 +477,14 @@ function drawFrog() {
     push();
     fill(frog.pupil.fill.r, frog.pupil.fill.g, frog.pupil.fill.b)
     noStroke();
-    ellipse(frog.pupil.x, frog.pupil.y, frog.pupil.size)
+    ellipse(frog.body.x - 50, frog.body.y - 80, frog.body.size - 140)
     pop();
 
     //The left pupil
     push();
     fill(frog.pupil.fill.r, frog.pupil.fill.g, frog.pupil.fill.b)
     noStroke();
-    ellipse(frog.pupil.x + 100, frog.pupil.y, frog.pupil.size)
+    ellipse(frog.body.x + 50, frog.body.y - 80, frog.body.size - 140)
     pop();
 }
 
@@ -505,6 +503,10 @@ function checkTongueFlyOverlap() {
         frog.tongue.state = "inbound";
         //change the color of the frog
         frog.body.fill.g = constrain(frog.body.fill.g + 100, 0, 255)
+        //change color of the white part of the eye
+        frog.eye.fill.r = constrain(frog.eye.fill.r + 100, 0, 255)
+        frog.eye.fill.g = constrain(frog.eye.fill.g + 100, 0, 255)
+        frog.eye.fill.b = constrain(frog.eye.fill.b + 100, 0, 255)
         score = score + 1;
     }
 }
@@ -524,6 +526,10 @@ function checkTongueBumblebeeOverlap() {
         frog.tongue.state = "inbound";
         //Change the color of the frog
         frog.body.fill.g = constrain(frog.body.fill.g - 100, 0, 255)
+        //change color of the white part of the eye
+        frog.eye.fill.r = constrain(frog.eye.fill.r - 100, 0, 255)
+        frog.eye.fill.g = constrain(frog.eye.fill.g - 100, 0, 255)
+        frog.eye.fill.b = constrain(frog.eye.fill.b - 100, 0, 255)
         //frog.tongue.fill.r -= 10
         //frog.tongue.fill.g += 50
         //frog.tongue.fill.b += 20
@@ -586,7 +592,7 @@ function scoreboard() {
 }
 
 
-/*function drawTitleScreen() {
+function drawTitleScreen() {
     background(sky.r, sky.g, sky.b);
     image(frogeatingfly, 200, 150, 250, 250);
     textAlign(CENTER);
@@ -607,7 +613,7 @@ function scoreboard() {
     text("Start", startButton.x, startButton.y + 8, startButton.length, startButton.height,);
     pop();
 
-}*/
+}
 
 
 
