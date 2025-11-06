@@ -139,6 +139,13 @@ function preload() {
 
 }
 
+const instructionsButton = {
+    x: 240,
+    y: 370,
+    height: 50,
+    length: 150
+}
+
 const startButton = {
     x: 240,
     y: 370,
@@ -182,9 +189,9 @@ function draw() {
 
         //The sky backgrpund will become over a short period of time
         background(sky.r, sky.g, sky.b);
-        sky.r = constrain(sky.r - 1, 5, 135)
-        sky.g = constrain(sky.g - 1, 55, 206)
-        sky.b = constrain(sky.b - 1, 110, 235)
+        sky.r = constrain(sky.r - .05, 5, 135)
+        sky.g = constrain(sky.g - .05, 55, 206)
+        sky.b = constrain(sky.b - .05, 110, 235)
         if (sky.r === 135 && sky.g === 206 && sky.b === 235) {
             daytime = true
         }
@@ -257,10 +264,6 @@ function draw() {
         drawEndScreen();
     }
 
-
-
-    //drawTitleScreen();
-    //drawInstructionScreen();
 }
 
 
@@ -605,9 +608,10 @@ function keyPressed() {
 function scoreboard() {
 
 
-    if (score >= 5 && !daytime) {
+    if (score >= 5 && daytime) {
         bumblebee.active = true;
     }
+
 
 
     //image of the flyicon
@@ -631,18 +635,18 @@ function drawTitleScreen() {
     textSize(48);
     text("Frog in a swamp", 200, 50, 240, 200);
 
-    //Start button
+    //instructions button
     push();
     strokeWeight(2);
     fill("#81ef85ff");
-    rect(startButton.x, startButton.y, startButton.length, startButton.height, 30);
+    rect(instructionsButton.x, instructionsButton.y, instructionsButton.length, instructionsButton.height, 30);
     pop();
     //text in button
     push();
     fill("#000000ff");
     textAlign(CENTER);
-    textSize(36);
-    text("Instruction", startButton.x, startButton.y + 8, startButton.length, startButton.height);
+    textSize(28);
+    text("Instructions", instructionsButton.x, instructionsButton.y + 11, instructionsButton.length, instructionsButton.height);
     pop();
 
 }
