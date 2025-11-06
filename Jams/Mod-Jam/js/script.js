@@ -598,7 +598,7 @@ function mousePressed() {
 function scoreboard() {
 
 
-    if (score >= 5) {
+    if (score >= 5 && !daytime) {
         bumblebee.active = true;
     }
 
