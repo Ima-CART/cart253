@@ -8,6 +8,7 @@ let x2 = 500;
 
 
 
+
 /**
  * Creates the canvas
 */
@@ -22,6 +23,17 @@ function setup() {
  * gradually lightening colour
  */
 function draw() {
+    //Drawing Gradient
+    for (let i = 0; i < 500; i++) {
+        line(x + i, y, x + i, 500);
+        stroke(map(i, 0, 255, 0, 500));
+        x += 1;
+        y = 0;
+
+    }
+
+    x = 0;
+    //Drawing grid lines
     color = 0;
     while (x <= 500) {
         stroke(color);
@@ -38,8 +50,8 @@ function draw() {
         x = 0;
         y += 50;
         color += 25;
-
     }
+
 
     /*stroke(0);
     line(0, 0, 0, height);
