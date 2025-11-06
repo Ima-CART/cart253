@@ -40,6 +40,7 @@ let sky = {
     b: 235,
 }
 
+let daytime = true
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -173,23 +174,27 @@ function draw() {
     sky.r = constrain(sky.r - 1, 5, 135)
     sky.g = constrain(sky.g - 1, 55, 206)
     sky.b = constrain(sky.b - 1, 110, 235)
+    if (sky.r === 135 && sky.g === 206 && sky.b === 235) {
+        daytime = true
+    }
+
 
     //The lake
-    pop();
+    push();
     fill("#488ec4ff");
     stroke("#488ec4ff")
     rect(0, 380, 640, 150);
-    push();
+    pop();
 
     //Lily pads
-    pop();
+    push();
     fill("#02bd02ff")
     arc(80, 440, 70, 30, 60, PI);
     arc(150, 410, 50, 20, 0, 270, PI);
     arc(300, 420, 50, 20, 0, 330, PI);
     arc(500, 410, 70, 30, 60, PI);
     arc(560, 450, 50, 20, 0, 270, PI);
-    push();
+    pop();
 
     //Grass
     push();
