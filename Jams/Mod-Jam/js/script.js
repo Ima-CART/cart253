@@ -114,7 +114,7 @@ const bumblebee = {
     size: 30,
     speed: 20,
     length: 45,
-    visible: false //the bumblebee will start of invisible 
+    active: false //the bumblebee will start of invisible 
 }
 
 // the secret creature that comes at night 
@@ -123,7 +123,7 @@ const batflying = {
     y: 200,
     size: 40,
     speed: 30,
-    visible: false// the bat will only come out at night
+    active: false// the bat will only come out at night
 }
 
 //Images that will be added to the game 
@@ -159,7 +159,7 @@ function setup() {
     resetBumblebee();
 
     //the bat will only appear at night
-    batflying.visible = false;
+    batflying.active = false;
 }
 
 function draw() {
@@ -222,16 +222,17 @@ function draw() {
     drawFly();
 
     //the bumblebee will start of invisible and only when visible does the function draws it
-    if (bumblebee.visible) {
+    if (bumblebee.active) {
         drawBumblebee();
+        moveBumblebee();
+        checkTongueBumblebeeOverlap()
+        bumblebeeFlyOverlap();
     }
-    moveBumblebee();
+
     moveFrog();
     moveTongue();
     drawFrog();
     checkTongueFlyOverlap();
-    checkTongueBumblebeeOverlap()
-    bumblebeeFlyOverlap();
     scoreboard();
 
     /* }
@@ -593,12 +594,9 @@ function scoreboard() {
 
 
     if (score >= 5) {
-        bumblebee.visible = true;
+        bumblebee.active = true;
     }
 
-    if (score <= 5) {
-        bumblebee.visible = false;
-    }
 
     //image of the flyicon
     push()
