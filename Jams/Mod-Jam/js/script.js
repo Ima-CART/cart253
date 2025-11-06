@@ -65,7 +65,33 @@ const frog = {
 
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
-    }
+    },
+
+    //The frog's eyes
+    //the white part of the eye
+    eye: {
+        x: 270,
+        y: 440,
+        size: 55,
+        fill: {
+            r: 255,
+            g: 255,
+            b: 255
+        },
+    },
+
+    //The pupil
+    pupil: {
+        x: 270,
+        y: 440,
+        size: 40,
+        fill: {
+            r: 0,
+            g: 0,
+            b: 0
+        },
+    },
+
 };
 
 // Our fly
