@@ -164,93 +164,93 @@ function setup() {
 }
 
 function draw() {
-    // if (gameState === "title screen") {drawTitleScreen();}
-    //else if (gameState === "game"){
+    if (gameState === "title screen") { drawTitleScreen(); }
+    else if (gameState === "game") {
 
 
 
-    //The sky backgrpund will become over a short period of time
-    background(sky.r, sky.g, sky.b);
-    sky.r = constrain(sky.r - 1, 5, 135)
-    sky.g = constrain(sky.g - 1, 55, 206)
-    sky.b = constrain(sky.b - 1, 110, 235)
-    if (sky.r === 135 && sky.g === 206 && sky.b === 235) {
-        daytime = true
+        //The sky backgrpund will become over a short period of time
+        background(sky.r, sky.g, sky.b);
+        sky.r = constrain(sky.r - 1, 5, 135)
+        sky.g = constrain(sky.g - 1, 55, 206)
+        sky.b = constrain(sky.b - 1, 110, 235)
+        if (sky.r === 135 && sky.g === 206 && sky.b === 235) {
+            daytime = true
+        }
+
+
+        //The lake
+        push();
+        fill("#488ec4ff");
+        stroke("#488ec4ff")
+        rect(0, 380, 640, 150);
+        pop();
+
+        //Lily pads
+        push();
+        fill("#02bd02ff")
+        arc(80, 440, 70, 30, 60, PI);
+        arc(150, 410, 50, 20, 0, 270, PI);
+        arc(300, 420, 50, 20, 0, 330, PI);
+        arc(500, 410, 70, 30, 60, PI);
+        arc(560, 450, 50, 20, 0, 270, PI);
+        pop();
+
+        //Grass
+        push();
+        stroke("#05A805")
+        fill("#05A805");
+
+        //Grass on the left side
+        bezier(20, 440, 20, 400, 15, 380, 25, 330);
+        bezier(15, 440, 15, 400, 10, 380, 15, 330);
+        bezier(30, 440, 30, 400, 25, 380, 35, 330);
+        bezier(10, 440, 10, 400, 5, 380, 10, 330);
+        bezier(40, 440, 35, 400, 30, 380, 45, 330);
+        bezier(50, 430, 50, 400, 45, 380, 55, 330);
+        bezier(60, 420, 60, 400, 55, 380, 65, 330);
+
+
+        //Grass on the right side
+        bezier(620, 440, 620, 400, 615, 380, 625, 330);
+        bezier(615, 440, 615, 400, 610, 380, 615, 330);
+        bezier(610, 440, 610, 400, 615, 380, 605, 330);
+        bezier(630, 440, 630, 400, 635, 380, 630, 330);
+        bezier(600, 440, 605, 400, 610, 380, 595, 330);
+        bezier(590, 430, 590, 400, 595, 380, 585, 330);
+        bezier(580, 420, 580, 400, 585, 380, 575, 330);
+
+        pop();
+
+        drawnightsky();
+        moveFly();
+        drawFly();
+
+        //the bumblebee will start of invisible and only when visible does the function draws it
+        if (bumblebee.active) {
+            drawBumblebee();
+            moveBumblebee();
+            checkTongueBumblebeeOverlap()
+            bumblebeeFlyOverlap();
+        }
+
+        moveFrog();
+        moveTongue();
+        drawFrog();
+        checkTongueFlyOverlap();
+        scoreboard();
+
+    }
+
+    else if (gameState === "instrustion") {
+        drawInstructionScreen();
+    }
+
+    else if (gameState === "end") {
+        drawEndScreen();
     }
 
 
-    //The lake
-    push();
-    fill("#488ec4ff");
-    stroke("#488ec4ff")
-    rect(0, 380, 640, 150);
-    pop();
-
-    //Lily pads
-    push();
-    fill("#02bd02ff")
-    arc(80, 440, 70, 30, 60, PI);
-    arc(150, 410, 50, 20, 0, 270, PI);
-    arc(300, 420, 50, 20, 0, 330, PI);
-    arc(500, 410, 70, 30, 60, PI);
-    arc(560, 450, 50, 20, 0, 270, PI);
-    pop();
-
-    //Grass
-    push();
-    stroke("#05A805")
-    fill("#05A805");
-
-    //Grass on the left side
-    bezier(20, 440, 20, 400, 15, 380, 25, 330);
-    bezier(15, 440, 15, 400, 10, 380, 15, 330);
-    bezier(30, 440, 30, 400, 25, 380, 35, 330);
-    bezier(10, 440, 10, 400, 5, 380, 10, 330);
-    bezier(40, 440, 35, 400, 30, 380, 45, 330);
-    bezier(50, 430, 50, 400, 45, 380, 55, 330);
-    bezier(60, 420, 60, 400, 55, 380, 65, 330);
-
-
-    //Grass on the right side
-    bezier(620, 440, 620, 400, 615, 380, 625, 330);
-    bezier(615, 440, 615, 400, 610, 380, 615, 330);
-    bezier(610, 440, 610, 400, 615, 380, 605, 330);
-    bezier(630, 440, 630, 400, 635, 380, 630, 330);
-    bezier(600, 440, 605, 400, 610, 380, 595, 330);
-    bezier(590, 430, 590, 400, 595, 380, 585, 330);
-    bezier(580, 420, 580, 400, 585, 380, 575, 330);
-
-    pop();
-
-    drawnightsky();
-    moveFly();
-    drawFly();
-
-    //the bumblebee will start of invisible and only when visible does the function draws it
-    if (bumblebee.active) {
-        drawBumblebee();
-        moveBumblebee();
-        checkTongueBumblebeeOverlap()
-        bumblebeeFlyOverlap();
-    }
-
-    moveFrog();
-    moveTongue();
-    drawFrog();
-    checkTongueFlyOverlap();
-    scoreboard();
-
-    /* }
-
-else if (gameState === "instrustion"){
-drawInstructionScreen();
-} 
-
-else if (gameState === "end"){
-drawEndScreen();
-} 
-
-*/
 
     drawTitleScreen();
     drawInstructionScreen();
