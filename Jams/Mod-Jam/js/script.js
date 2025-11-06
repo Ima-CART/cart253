@@ -595,7 +595,8 @@ function mousePressed() {
         frog.tongue.state = "outbound";
     }
 
-    else if (gameState === "titlescreen" && mouseX > instructionsButton.x && mouseX < instructionsButton.x + instructionsButton.length && mouseY > instructionsButton.y && mouseY < instructionsButton.y + instructionsButton.height) {
+    else if (gameState === "titlescreen" && mouseX < instructionsButton.x + instructionsButton.length / 2 && mouseY < instructionsButton.y + instructionsButton.height / 2
+        && mouseX > instructionsButton.x - instructionsButton.length / 2 && mouseY > instructionsButton.y - instructionsButton.height / 2) {
         gameState = "instruction"
     }
 
@@ -669,7 +670,7 @@ function drawInstructionScreen() {
     text("Eat flies without interacting with your competition", 80, 325, 500, 400);
     text("Last note: The day will change and the competiton will become harder", 80, 360, 500, 400)
     textSize(36);
-    text("Beware", 200, 230, 250, 250)
+    text("Beeware", 200, 230, 250, 250)
 
 
     //Start button
