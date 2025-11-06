@@ -595,13 +595,14 @@ function mousePressed() {
         frog.tongue.state = "outbound";
     }
 
+    else if (gameState === "titlescreen" && mouseX > instructionsButton.x && mouseX < instructionsButton.x + instructionsButton.length && mouseY > instructionsButton.y && mouseY < instructionsButton.y + instructionsButton.height) {
+        gameState = "instruction"
+    }
 
+    else if (gameState === "instruction" && mouseX > instructionsButton.x && mouseX < instructionsButton.x + instructionsButton.length && mouseY > instructionsButton.y && mouseY < instructionsButton.y + instructionsButton.height) {
+        gameState = "game"
+    }
 }
-
-function keyPressed() {
-    if (gameState === "titlescreen") { gameState = "game" }
-}
-
 
 
 //scoreboard
