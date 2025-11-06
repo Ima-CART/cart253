@@ -464,14 +464,14 @@ function drawFrog() {
     push();
     fill(frog.eye.fill.r, frog.eye.fill.g, frog.eye.fill.b)
     noStroke();
-    ellipse(frog.eye.x, frog.eye.y, frog.eye.size)
+    ellipse(frog.body.x - 50, frog.body.y - 80, frog.body.size - 125)
     pop();
 
     //The left eye
     push();
     fill(frog.eye.fill.r, frog.eye.fill.g, frog.eye.fill.b)
     noStroke();
-    ellipse(frog.eye.x + 100, frog.eye.y, frog.eye.size)
+    ellipse(frog.body.x + 50, frog.body.y - 80, frog.body.size - 125)
     pop();
 
     //The pupil
