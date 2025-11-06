@@ -1,3 +1,10 @@
+//Loops Challenge
+/*Author
+Ima Williams
+Camelia Pitsilis
+Tasha Oest O Leary
+*/
+
 "use strict";
 
 let x = 0;
