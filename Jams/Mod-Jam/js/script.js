@@ -123,8 +123,8 @@ const bumblebee = {
 const batflying = {
     x: 0,
     y: 10,
-    size: 5,
-    speed: 30,
+    size: 100,
+    speed: 10,
     active: false// the bat will only come out at night
 }
 
@@ -156,7 +156,7 @@ const startButton = {
 const retryButton = {
     x: 240,
     y: 370,
-    height: 100,
+    height: 50,
     length: 150
 }
 
@@ -199,9 +199,9 @@ function draw() {
 
         //The sky backgrpund will become over a short period of time
         background(sky.r, sky.g, sky.b);
-        sky.r = constrain(sky.r - .01, 5, 135)
-        sky.g = constrain(sky.g - .01, 55, 206)
-        sky.b = constrain(sky.b - .01, 110, 235)
+        sky.r = constrain(sky.r - .1, 5, 135)
+        sky.g = constrain(sky.g - .1, 55, 206)
+        sky.b = constrain(sky.b - .1, 110, 235)
         if (sky.r === 5 && sky.g === 55 && sky.b === 110) {
             daytime = false
         }
@@ -258,7 +258,7 @@ function draw() {
         if (bumblebee.active) {
             drawBumblebee();
             moveBumblebee();
-            checkTongueBumblebeeOverlap()
+            checkTongueBumblebeeOverlap();
             bumblebeeFlyOverlap();
         }
 
@@ -271,6 +271,9 @@ function draw() {
         if (batflying.active) {
             drawBatFlying();
             moveBatFlying();
+            checkTongueBatFlyingOverlap();
+            batflyingFlyOverlap();
+
         }
 
     }
@@ -279,6 +282,8 @@ function draw() {
     else if (gameState === "end") {
         drawEndScreen();
     }
+
+    drawEndScreen();
 
 }
 
@@ -311,7 +316,7 @@ function moveFly() {
     // Move the fly
     fly.x += fly.speed;
     //fly will be buzzing and movin in a wave using the sin function
-    let buzzingY = sin(angle) * 15;
+    let buzzingY = sin(angle) * 20;
     fly.y = constrain(fly.y - buzzingY, 0, 460);
     angle += 20;
     // Handle the fly going off the canvas
@@ -578,6 +583,7 @@ function checkTongueBumblebeeOverlap() {
         frog.eye.fill.r = constrain(frog.eye.fill.r - 100, 0, 255)
         frog.eye.fill.g = constrain(frog.eye.fill.g - 100, 0, 255)
         frog.eye.fill.b = constrain(frog.eye.fill.b - 100, 0, 255)
+        if (frog.body.fill.g === 0) { gameState = "end" }
 
 
         //frog.tongue.fill.r -= 10
@@ -625,7 +631,7 @@ function mousePressed() {
 
     }
 
-    else if (gameState === "end" && mouseX > retryButtonButton.x && mouseX < retryButtonButton.x + retryButtonButton.length && mouseY > retryButtonButton.y && mouseY < retryButtonButton.y + retryButtonButton.height) {
+    else if (gameState === "end" && mouseX > retryButton.x && mouseX < retryButton.x + retryButton.length && mouseY > retryButton.y && mouseY < retryButton.y + retryButton.height) {
         gameState = "game"
 
 
@@ -669,7 +675,7 @@ function drawScoreBoard() {
 
 function drawBatFlying() {
 
-    image(batflyingIMG, batflying.x, batflying.y, batflying.size);
+    image(batflyingIMG, batflying.x, batflying.y);
 
 
 }
@@ -677,24 +683,61 @@ function drawBatFlying() {
 function moveBatFlying() {
     // Move the fly
     batflying.x += batflying.speed;
-    /*//fly will be buzzing and movin in a wave using the sin function
-    let buzzingY = sin(angle) * 15;
+    ///batflying will be buzzing and movin in a wave using the sin function
+    let buzzingY = sin(angle) * 40;
     batflying.y = constrain(batflying.y - buzzingY, 0, 460);
-    angle += 20;*/
-    // Handle the fly going off the canvas
+    angle += 20;
+    // Handle the batflying going off the canvas
     if (batflying.x > width) {
         resetBatFlying();
     }
 
 
 }
-
+/**
+ * Batflying resets at random when it reaches max width
+ */
 function resetBatFlying() {
     batflying.x = 0;
     batflying.y = random(0, 300);
 }
 
+/**
+ *  Tongue overlapping the Batflying
+ */
+function checkTongueBatFlyingOverlap() {
+    // Get distance from tongue to Batflying
+    const d = dist(frog.tongue.x, frog.tongue.y, batflying.x, batflying.y);
+    // Check if it's an overlap
+    const eaten = (d < frog.tongue.size + batflying.size);
+    if (eaten) {
+        // Reset the fly
+        resetBatFlying();
+        // Bring back the tongue
+        frog.tongue.state = "inbound";
+        //Change the color of the frog
+        frog.body.fill.g = constrain(frog.body.fill.g - 100, 0, 255)
+        //change color of the white part of the eye
+        frog.eye.fill.r = constrain(frog.eye.fill.r - 100, 0, 255)
+        frog.eye.fill.g = constrain(frog.eye.fill.g - 100, 0, 255)
+        frog.eye.fill.b = constrain(frog.eye.fill.b - 100, 0, 255)
+        if (frog.body.fill.g === 0) { gameState = "end" }
+    }
 
+}
+
+function batflyingFlyOverlap() {
+    //Get the distance from batflying to fly
+    const d = dist(fly.x, fly.y, batflying.x, batflying.y);
+    //check overlap
+    const overlap = (d < fly.size / 2 + batflying.size)
+    if (overlap) {
+        // Reset fly (Flies are the prey. When bumblebee overlaps, they get eaten)
+        resetFly();
+    }
+
+
+}
 
 function drawTitleScreen() {
     background(sky.r, sky.g, sky.b);
@@ -758,11 +801,11 @@ function drawInstructionScreen() {
 
 function drawEndScreen() {
     background("#000");
-    image(frogonlilypad, 200, 150, 250, 250);
+    image(frogonlilypad, 150, 130, 350, 245);
     textAlign(CENTER);
-    textAlign(48);
+    textSize(48);
     fill("#fff");
-    text("GAME OVER", 50, 240, 250, 250)
+    text("GAME OVER", 80, 70, 500, 300)
 
 
     //Retry button
@@ -770,15 +813,15 @@ function drawEndScreen() {
     push();
     strokeWeight(2);
     fill("#81ef85ff");
-    rect(retryButton.x, retryButton.y + 35, retryButton.length, retryButton.height, 30);
+    rect(retryButton.x, retryButton.y + 25, retryButton.length, retryButton.height, 30);
     pop();
 
     //text in button
     push();
-    fill("#000000ff");
+    fill("#000");
     textAlign(CENTER);
     textSize(36);
-    text("Rery", retryButton.x, retryButton.y + 43, retryButtone.length, retryButton.height);
+    text("Retry", retryButton.x, retryButton.y + 33, retryButton.length, retryButton.height);
     pop();
 
 
