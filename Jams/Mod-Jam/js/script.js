@@ -148,17 +148,12 @@ const instructionsButton = {
 
 const startButton = {
     x: 240,
-    y: 370,
+    y: 400,
     height: 50,
     length: 150
 }
 
-const retryButton = {
-    x: 240,
-    y: 370,
-    height: 50,
-    length: 150
-}
+
 
 /**
  * Creates the canvas and initializes the fly
@@ -194,8 +189,6 @@ function draw() {
     }
 
     else if (gameState === "game") {
-
-
 
         //The sky backgrpund will become over a short period of time
         background(sky.r, sky.g, sky.b);
@@ -282,8 +275,6 @@ function draw() {
     else if (gameState === "end") {
         drawEndScreen();
     }
-
-    drawEndScreen();
 
 }
 
@@ -625,19 +616,11 @@ function mousePressed() {
         gameState = "instruction"
     }
 
-    else if (gameState === "instruction" && mouseX > instructionsButton.x && mouseX < instructionsButton.x + instructionsButton.length && mouseY > instructionsButton.y && mouseY < instructionsButton.y + instructionsButton.height) {
+    else if (gameState === "instruction" && mouseX > startButton.x && mouseX < startButton.x + startButton.length && mouseY > startButton.y && mouseY < startButton.y + startButton.height) {
         gameState = "game"
 
 
     }
-
-    else if (gameState === "end" && mouseX > retryButton.x && mouseX < retryButton.x + retryButton.length && mouseY > retryButton.y && mouseY < retryButton.y + retryButton.height) {
-        gameState = "game"
-
-
-    }
-
-
 }
 
 
@@ -771,21 +754,22 @@ function drawInstructionScreen() {
     textSize(48);
     text("Instructions", 200, 30, 250, 250);
     textSize(16)
-    text("The starving frog just wants to eat flies in peace", 80, 110, 500, 100);
-    text("Use move the frog left and right with the keyboard", 80, 145, 500, 400);
-    text("Click on the mouse to launch the tongue and eat what is in sight", 80, 180, 500, 400);
-    text("You aren't the only ones hungry", 80, 290, 500, 400,);
-    text("Eat flies without interacting with your competition", 80, 325, 500, 400);
+    text("The starving frog just wants to eat flies in peace", 80, 100, 500, 100);
+    text("Use move the frog left and right with the keyboard", 80, 130, 500, 400);
+    text("Click on the mouse to launch the tongue and eat what is in sight", 80, 160, 500, 400);
+    text("You aren't the only ones hungry", 80, 250, 500, 400,);
+    text("Eat flies without interacting with your competition to gain life", 80, 280, 500, 400);
+    text("Touch your competition and the frog get sick. Touch them 3 times and you die", 80, 310, 480, 400);
     text("Last note: The day will change and the competiton will become harder", 80, 360, 500, 400)
     textSize(36);
-    text("Beeware", 200, 230, 250, 250)
+    text("Beeware", 200, 200, 250, 250)
 
 
     //Start button
     push();
     strokeWeight(2);
     fill("#81ef85ff");
-    rect(startButton.x, startButton.y + 35, startButton.length, startButton.height, 30);
+    rect(startButton.x, startButton.y, startButton.length, startButton.height, 30);
     pop();
 
     //text in button
@@ -793,7 +777,7 @@ function drawInstructionScreen() {
     fill("#000000ff");
     textAlign(CENTER);
     textSize(36);
-    text("Start", startButton.x, startButton.y + 43, startButton.length, startButton.height);
+    text("Start", startButton.x, startButton.y + 8, startButton.length, startButton.height);
     pop();
 
 }
@@ -808,20 +792,12 @@ function drawEndScreen() {
     text("GAME OVER", 80, 70, 500, 300)
 
 
-    //Retry button
-
-    push();
-    strokeWeight(2);
-    fill("#81ef85ff");
-    rect(retryButton.x, retryButton.y + 25, retryButton.length, retryButton.height, 30);
-    pop();
-
     //text in button
     push();
-    fill("#000");
+    fill("#81ef85ff");
     textAlign(CENTER);
-    textSize(36);
-    text("Retry", retryButton.x, retryButton.y + 33, retryButton.length, retryButton.height);
+    textSize(30);
+    text("Ctrl+R to retry", 70, 350 + 43, 500, 300);
     pop();
 
 
