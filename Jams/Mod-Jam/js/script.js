@@ -1,13 +1,14 @@
 /**
- * Frogfrogfrog
+ * Frog in a Swamp
  * Ima Williams
  * 
  * A game of catching flies with your frog-tongue
  * 
  * Instructions:
- * - Move the frog with your mouse
+ * - Make the frog move left and right with the keyboard
  * - Click to launch the tongue
  * - Catch flies
+ * -Avoid eating the bumblebee and the hidden bat
  * 
  * Made with p5
  * https://p5js.org/
@@ -18,9 +19,6 @@
 // The title screen
 let gameState = "titlescreen";
 
-
-//Game over screen
-let gameOver;
 
 //scoreboard
 let score = 0
@@ -139,6 +137,10 @@ function preload() {
 
 }
 
+/**
+ * Handles all the buttons
+ */
+
 const instructionsButton = {
     x: 240,
     y: 370,
@@ -177,6 +179,10 @@ function setup() {
 }
 
 function draw() {
+
+    /**
+     * The game start from the title screen then goes to the instruction then the game
+     */
 
     if (gameState === "titlescreen") {
 
@@ -271,7 +277,9 @@ function draw() {
 
     }
 
-
+    /**
+     * Game ends when the frog can no longer continue
+     */
     else if (gameState === "end") {
         drawEndScreen();
     }
@@ -292,11 +300,6 @@ function drawTitleScreen() {
 
 
 }
-
-/** 
- * The night background
- * 
-*/
 
 
 /**
@@ -576,10 +579,6 @@ function checkTongueBumblebeeOverlap() {
         frog.eye.fill.b = constrain(frog.eye.fill.b - 100, 0, 255)
         if (frog.body.fill.g === 0) { gameState = "end" }
 
-
-        //frog.tongue.fill.r -= 10
-        //frog.tongue.fill.g += 50
-        //frog.tongue.fill.b += 20
     }
 
 }
@@ -597,7 +596,6 @@ function bumblebeeFlyOverlap() {
         // Reset fly (Flies are the prey. When bumblebee overlaps, they get eaten)
         resetFly();
     }
-
 
 }
 
@@ -619,12 +617,11 @@ function mousePressed() {
     else if (gameState === "instruction" && mouseX > startButton.x && mouseX < startButton.x + startButton.length && mouseY > startButton.y && mouseY < startButton.y + startButton.height) {
         gameState = "game"
 
-
     }
 }
 
 
-//scoreboard
+// Handles scoreboard
 function drawScoreBoard() {
 
 
@@ -648,7 +645,7 @@ function drawScoreBoard() {
 
 
 
-
+    // The fly counter
     textSize(20);
     textAlign(CENTER);
     fill("#fff");
@@ -656,6 +653,9 @@ function drawScoreBoard() {
 
 }
 
+/**
+ * Drawinf the function of the bat and using an image
+ */
 function drawBatFlying() {
 
     image(batflyingIMG, batflying.x, batflying.y);
@@ -663,6 +663,9 @@ function drawBatFlying() {
 
 }
 
+/**
+ * handle the movement of the bat random
+ */
 function moveBatFlying() {
     // Move the fly
     batflying.x += batflying.speed;
@@ -709,6 +712,9 @@ function checkTongueBatFlyingOverlap() {
 
 }
 
+/**
+ * Handles the batflying fly overlap
+ */
 function batflyingFlyOverlap() {
     //Get the distance from batflying to fly
     const d = dist(fly.x, fly.y, batflying.x, batflying.y);
@@ -722,6 +728,10 @@ function batflyingFlyOverlap() {
 
 }
 
+
+/**
+ * Drawing the title screen
+ */
 function drawTitleScreen() {
     background(sky.r, sky.g, sky.b);
     image(frogeatingfly, 200, 150, 250, 250);
@@ -782,7 +792,9 @@ function drawInstructionScreen() {
 
 }
 
-
+/**
+ * The end screen
+ */
 function drawEndScreen() {
     background("#000");
     image(frogonlilypad, 150, 130, 350, 245);
