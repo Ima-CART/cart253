@@ -765,7 +765,7 @@ function drawInstructionScreen() {
     text("Instructions", 200, 30, 250, 250);
     textSize(16)
     text("The starving frog just wants to eat flies in peace", 80, 100, 500, 100);
-    text("Use move the frog left and right with the keyboard", 80, 130, 500, 400);
+    text("Move the frog left and right with the keyboard", 80, 130, 500, 400);
     text("Click on the mouse to launch the tongue and eat what is in sight", 80, 160, 500, 400);
     text("You aren't the only ones hungry", 80, 250, 500, 400,);
     text("Eat flies without interacting with your competition to gain life", 80, 280, 500, 400);
