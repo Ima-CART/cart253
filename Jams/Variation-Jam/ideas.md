@@ -26,7 +26,7 @@ Flies from from all different direction (Right, Left, Up, Down)
 
 Flies are bouncing of the wall
 
-Flies are the predatory and you are the prey. (Frog can eat the flies but the flies will be aiming to for the frogs body.)
+Flies are the predatory and you are the prey. (Frog can eat the flies but the flies be aiming to for the frogs body.)
 
 Flies can be dropping like a meteor, instead of using the tongue to try and eat them, you just need to catch them fall.(Falling flies catch the flies that are fillin randomly)
 
