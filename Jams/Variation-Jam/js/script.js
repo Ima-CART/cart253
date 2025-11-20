@@ -28,7 +28,7 @@ const frog = {
         x: undefined,
         y: 480,
         size: 20,
-        speed: 40, //20,
+        speed: 50, //20,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     }
@@ -40,7 +40,7 @@ const fly = {
     x: 0,
     y: 200, // Will be random
     size: 10,
-    speed: 10,//3
+    speed: 20,//3
 };
 
 /**
