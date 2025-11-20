@@ -1,11 +1,12 @@
 /**
  * Frogfrogfrog
- * Pippin Barr
+ * Ima Williams
  * 
- * A game of catching flies with your frog-tongue
+ * The variation is called hyperspeed. It's a chaotic version where everything is extremely fast and
+ * there is no way to control the tongue and know if you caught a fly.
  * 
  * Instructions:
- * - Move the frog with your mouse
+ * - Move the frog with the left and right keys
  * - Click to launch the tongue
  * - Catch flies
  * 
@@ -53,7 +54,7 @@ function setup() {
             x: 0,
             y: random(100, 200), // Will be random
             size: 10,
-            speed: random(50, 200),
+            speed: random(50, 150),
             fill: "#000"
         };
 
