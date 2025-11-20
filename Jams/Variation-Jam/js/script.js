@@ -28,7 +28,7 @@ const frog = {
         x: undefined,
         y: 480,
         size: 20,
-        speed: 100, //20,
+        speed: 20,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     }
@@ -40,7 +40,7 @@ const fly = {
     x: 0,
     y: 200, // Will be random
     size: 10,
-    speed: 20,//3
+    speed: 3
 };
 
 /**
@@ -99,15 +99,7 @@ function resetFly() {
  * Moves the frog to the mouse position on x
  */
 function moveFrog() {
-    //frog.body.x = mouseX - mouseX;//mouseX;
-
-    if (keyIsDown(LEFT_ARROW)) {
-        frog.body.x = constrain(frog.body.x - frog.tongue.speed, 10, 630)
-    }
-
-    else if (keyIsDown(RIGHT_ARROW)) {
-        frog.body.x = constrain(frog.body.x + frog.tongue.speed, 10, 630)
-    }
+    frog.body.x = mouseX;
 }
 
 /**
