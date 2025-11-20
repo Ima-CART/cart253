@@ -10,7 +10,7 @@ Instead of the frog tongue reaching out for the fly, the frog can be spitting/sh
 
 If the frog eats a fly the fly grows in size (In this case the fly can only be eating once it grows twice. The frog could start out really huge and will only be satisified if the fly is 2 or 3 times bigger in size)
 
-The frog can start off big or the fly can start of small and you eould need to hit the flies a couple of times in order to eat them.
+The frog can start off big or the fly can start of small and you would need to hit the flies a couple of times in order to eat them.
 
 Different flies(Red or black) If you touch the Red flies you lose you tongue.
 
@@ -22,7 +22,7 @@ Everything can be extremely small and everything get slowly bigger if you are ab
 
 Fly can reset anywhere on a timely manner
 
-Flies from from all different direction (Right, Left, Up, Down)
+Flies fall from all different direction (Right, Left, Up, Down)
 
 Flies are bouncing of the wall
 

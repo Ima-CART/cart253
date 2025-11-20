@@ -1,4 +1,4 @@
- Froginswamp
+ Froginaswamp
 
 Ima Williams
 
@@ -33,7 +33,7 @@ https://www.vecteezy.com/
 ![Fly Silhouette](<fly-silhouette-vector copy.png>)
 ![House Fly](house-fly-24629_1280.png)
 
-All images came fro vecteezy.com from various different artist. 
+All images came from vecteezy.com and from various different artist. 
 
 -For this project I have learned how to use active by talking with Prof. Pippin Baar, which has allowed me to make the bumblebee and the bat active at different stages of the game.
 -Bezier is a function that was learned from p5js.org in order to create the grass.
