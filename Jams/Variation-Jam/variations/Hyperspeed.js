@@ -16,6 +16,8 @@
 "use strict";
 
 // Our frog
+let flies = []
+
 const frog = {
     // The frog's body has a position and size
     body: {
@@ -42,7 +44,7 @@ const fly = {
     size: 10,
     speed: 20
 };
-
+flies.push(fly)
 /**
  * Creates the canvas and initializes the fly
  */
@@ -50,47 +52,65 @@ function setup() {
     createCanvas(640, 480);
 
     // Give the fly its first random position
-    resetFly();
+    resetFly(fly);
+
+    function createFly() {
+
+        const newFlies = {
+            x: random(0, 200),
+            y: random(100, 200), // Will be random
+            size: 10,
+            speed: random(100, 200),
+            fill: "#000"
+        };
+
+        return newFlies;
+    }
+    flies.push(createFly())
+    flies.push(createFly())
 }
 
 function draw() {
     background("#87ceeb");
-    moveFly();
-    drawFly();
+    for (let fly of flies) {
+        moveFly(fly);
+        drawFly(fly);
+        checkTongueFlyOverlap(fly);
+    }
     moveFrog();
     moveTongue();
     drawFrog();
-    checkTongueFlyOverlap();
 }
 
 /**
  * Moves the fly according to its speed
  * Resets the fly if it gets all the way to the right
  */
-function moveFly() {
+function moveFly(fly) {
     // Move the fly
     fly.x += fly.speed;
     // Handle the fly going off the canvas
     if (fly.x > width) {
-        resetFly();
+        resetFly(fly);
     }
 }
 
 /**
  * Draws the fly as a black circle
  */
-function drawFly() {
+function drawFly(fly) {
     push();
     noStroke();
     fill("#000000");
     ellipse(fly.x, fly.y, fly.size);
     pop();
+
 }
 
 /**
  * Resets the fly to the left with a random y
  */
-function resetFly() {
+function resetFly(fly) {
     fly.x = 0;
     fly.y = random(0, 300);
 }
@@ -167,14 +187,14 @@ function drawFrog() {
 /**
  * Handles the tongue overlapping the fly
  */
-function checkTongueFlyOverlap() {
+function checkTongueFlyOverlap(fly) {
     // Get distance from tongue to fly
     const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
     // Check if it's an overlap
     const eaten = (d < frog.tongue.size / 2 + fly.size / 2);
     if (eaten) {
         // Reset the fly
-        resetFly();
+        resetFly(fly);
         // Bring back the tongue
         frog.tongue.state = "inbound";
     }
