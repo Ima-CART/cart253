@@ -38,13 +38,6 @@ const frog = {
 
 // Our fly
 // Has a position, size, and speed of horizontal movement
-const fly = {
-    x: 0,
-    y: 200, // Will be random
-    size: 10,
-    speed: 20
-};
-flies.push(fly)
 /**
  * Creates the canvas and initializes the fly
  */
@@ -52,20 +45,21 @@ function setup() {
     createCanvas(640, 480);
 
     // Give the fly its first random position
-    resetFly(fly);
+    //resetFly(fly);
 
     function createFly() {
 
         const newFlies = {
-            x: random(0, 200),
+            x: 0,
             y: random(100, 200), // Will be random
             size: 10,
-            speed: random(100, 200),
+            speed: random(50, 200),
             fill: "#000"
         };
 
         return newFlies;
     }
+    flies.push(createFly())
     flies.push(createFly())
     flies.push(createFly())
 }
