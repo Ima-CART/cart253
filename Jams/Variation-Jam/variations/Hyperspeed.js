@@ -37,17 +37,14 @@ const frog = {
     }
 };
 
-// Our fly
-// Has a position, size, and speed of horizontal movement
 /**
  * Creates the canvas and initializes the fly
- */
+*/
 function setup() {
     createCanvas(640, 480);
 
-    // Give the fly its first random position
-    //resetFly(fly);
-
+    // Our fly
+    // Has a position, size, and speed of horizontal movement
     function createFly() {
 
         const newFlies = {
@@ -67,11 +64,16 @@ function setup() {
 
 function draw() {
     background("#87ceeb");
+
+    /**
+     * Applies the array to functions that involves the fly
+     */
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
         checkTongueFlyOverlap(fly);
     }
+
     moveFrog();
     moveTongue();
     drawFrog();
@@ -103,7 +105,7 @@ function drawFly(fly) {
 }
 
 /**
- * Resets the fly to the left with a random y
+ * Reset the fly when it reaches width
  */
 function resetFly(fly) {
     fly.x = 0;
