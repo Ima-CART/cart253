@@ -28,7 +28,7 @@ const frog = {
         x: undefined,
         y: 480,
         size: 20,
-        speed: 50, //20,
+        speed: 100, //20,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     }
