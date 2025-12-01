@@ -51,8 +51,18 @@ const fly = {
 function setup() {
     createCanvas(640, 480);
 
-    // Give the fly its first random position
-    resetFly();
+    function createFly() {
+
+        const newFlies = {
+            x: 0,
+            y: random(100, 200), //Give the fly its first random position between 100 and 200
+            size: 10,
+            speed: random(.1, .5), // I want the flies to appear slow
+            fill: "#000"
+
+        }
+        return newFlies;
+    }
 }
 
 function draw() {
