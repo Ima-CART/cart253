@@ -82,6 +82,7 @@ function draw() {
         moveFly(fly);
         drawFly(fly);
         checkTongueFlyOverlap(fly);
+        repelFly(fly);
 
     }
     moveFrog();
@@ -203,12 +204,23 @@ function checkTongueFlyOverlap(fly) {
         // Reset the fly
         resetFly(fly);
         // Bring back the tongue
-        frog.tongue.state = "inbound";
+        frog.tongue.state = "outbound"
+        // frog.tongue.state = "inbound";
     }
 }
 
+function repelFly(fly) {
+    const r = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
+
+    const repel = (r < 20);
+    if (repel) {
+        fly.y -= 5
+        // resetFly(fly)
+    }
+
+}
 /**
- * Launch the tongue on click (if it's not launched yet)
+ * Launch the tongue on click (if it's not lauxnched yet)
  */
 function mousePressed() {
     if (frog.tongue.state === "idle") {
