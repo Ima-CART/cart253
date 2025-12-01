@@ -67,12 +67,17 @@ function setup() {
 
 function draw() {
     background("#87ceeb");
-    moveFly();
-    drawFly();
+
+    for (let fly of flies) {
+
+        moveFly(fly);
+        drawFly(fly);
+        checkTongueFlyOverlap(fly);
+
+    }
     moveFrog();
     moveTongue();
     drawFrog();
-    checkTongueFlyOverlap();
 }
 
 /**
