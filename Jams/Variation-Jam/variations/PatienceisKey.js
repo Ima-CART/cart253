@@ -17,6 +17,8 @@
 // Arrays for flies
 
 let flies = []
+let angle; //adding the angle for the moving of the fly
+
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -50,6 +52,8 @@ const fly = {
  */
 function setup() {
     createCanvas(640, 480);
+    angleMode(DEGREES); //adding the angle for the movement of fly
+    angle = 0;
 
     function createFly() {
 
@@ -92,6 +96,9 @@ function draw() {
 function moveFly(fly) {
     // Move the fly
     fly.x += fly.speed;
+    let buzzingY = sin(angle) * 10
+    fly.y = constrain(fly.y - buzzingY, 0, 460);
+    angle += 20
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly(fly);
