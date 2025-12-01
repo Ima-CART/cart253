@@ -17,7 +17,6 @@
 "use strict";
 
 //Arrays for many flies
-
 let flies = []
 
 
@@ -41,6 +40,7 @@ const frog = {
     }
 };
 
+
 /**
  * Creates the canvas and initializes the fly
 */
@@ -55,7 +55,7 @@ function setup() {
             x: 0,
             y: random(100, 200), // Will be random
             size: 10,
-            speed: random(50, 150),
+            speed: random(10, 30),
             fill: "#000"
         };
 
