@@ -16,8 +16,12 @@
 
 "use strict";
 
-// Our frog
+//Arrays for many flies
+
 let flies = []
+
+
+// Our frog
 
 const frog = {
     // The frog's body has a position and size
