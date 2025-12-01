@@ -17,6 +17,7 @@
 // Arrays for flies
 
 let flies = []
+let score = 0
 let angle; //adding the angle for the moving of the fly
 
 // Our frog
