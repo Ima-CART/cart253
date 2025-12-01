@@ -63,6 +63,12 @@ function setup() {
         }
         return newFlies;
     }
+
+    // the creation of flies in the array 
+    flies.push(createFly())
+    flies.push(createFly())
+    flies.push(createFly())
+    flies.push(createFly())
 }
 
 function draw() {
