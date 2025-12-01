@@ -221,11 +221,28 @@ function repelFly(fly) {
     }
 
 }
+
+
+/**
+ * Tongue will be launched with the spacebar
+ */
+
+function keyPressed() {
+    if (keyCode === 32) {
+        if (frog.tongue.state === "idle") {
+            frog.tongue.state = "outbound";
+
+        }
+
+    }
+
+}
+
 /**
  * Launch the tongue on click (if it's not lauxnched yet)
  */
-function mousePressed() {
-    if (frog.tongue.state === "idle") {
-        frog.tongue.state = "outbound";
-    }
-}
+// function mousePressed() {
+//     if (frog.tongue.state === "idle") {
+//         frog.tongue.state = "outbound";
+//     }
+// }
