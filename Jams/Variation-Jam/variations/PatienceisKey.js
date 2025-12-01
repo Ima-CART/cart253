@@ -96,9 +96,9 @@ function draw() {
 function moveFly(fly) {
     // Move the fly
     fly.x += fly.speed;
-    let buzzingY = sin(angle) * 1
+    let buzzingY = sin(angle) * .3
     fly.y = constrain(fly.y - buzzingY, 0, 460);
-    angle += 2
+    angle += .2
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly(fly);
