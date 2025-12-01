@@ -34,7 +34,7 @@ const frog = {
         x: undefined,
         y: 480,
         size: 20,
-        speed: 100,
+        speed: 60,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     }
@@ -55,7 +55,7 @@ function setup() {
             x: 0,
             y: random(100, 200), // Will be random
             size: 10,
-            speed: random(10, 30),
+            speed: random(10, 50),
             fill: "#000"
         };
 
@@ -201,11 +201,29 @@ function checkTongueFlyOverlap(fly) {
     }
 }
 
+
+
+/**
+ * Tongue will be launched with the spacebar
+ */
+function keyPressed() {
+    if (keyCode === 32) {
+        if (frog.tongue.state === "idle") {
+            frog.tongue.state = "outbound";
+
+        }
+
+    }
+
+}
+
+
+
 /**
  * Launch the tongue on click (if it's not launched yet)
  */
-function mousePressed() {
-    if (frog.tongue.state === "idle") {
-        frog.tongue.state = "outbound";
-    }
-}
+// function mousePressed() {
+//     if (frog.tongue.state === "idle") {
+//         frog.tongue.state = "outbound";
+//     }
+// }
