@@ -203,8 +203,9 @@ function checkTongueFlyOverlap(fly) {
     if (eaten) {
         // Reset the fly
         resetFly(fly);
-        // Bring back the tongue
+        //The tongue will continue to be outbound
         frog.tongue.state = "outbound"
+        // Bring back the tongue
         // frog.tongue.state = "inbound";
     }
 }
@@ -215,6 +216,7 @@ function repelFly(fly) {
     const repel = (r < 20);
     if (repel) {
         fly.y -= 5
+        fly.x += 2
         // resetFly(fly)
     }
 
