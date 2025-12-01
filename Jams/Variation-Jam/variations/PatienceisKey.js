@@ -14,7 +14,9 @@
  */
 
 "use strict";
+// Arrays for flies
 
+let flies = []
 // Our frog
 const frog = {
     // The frog's body has a position and size
