@@ -19,7 +19,7 @@ let flies = []
 let jarFlies = []
 let score = 0 // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
-let dialogue = "";
+let dialogue = "";// adding dialogue to the game
 
 // Our frog
 const frog = {
@@ -95,6 +95,14 @@ function setup() {
 function draw() {
     background("#87ceeb");
 
+    if (dialogue !== "") {
+        fill("#000");
+        textSize(22);
+        textAlign(CENTER);
+        text(dialogue, 320, 240)
+
+    }
+
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
@@ -168,6 +176,7 @@ function moveTongue() {
     }
     // If the tongue is outbound, it moves up
     else if (frog.tongue.state === "outbound") {
+        dialogue = ""
         frog.tongue.y += -frog.tongue.speed;
         // The tongue bounces back if it hits the top
         if (frog.tongue.y <= 0) {
@@ -180,6 +189,9 @@ function moveTongue() {
         // The tongue stops if it hits the bottom
         if (frog.tongue.y >= height) {
             frog.tongue.state = "idle";
+            if (score === 0) {
+                dialogue = " I am so hungry";
+            }
         }
     }
 }
@@ -322,6 +334,9 @@ function keyPressed() {
     if (keyCode === 32) {
         if (frog.tongue.state === "idle") {
             frog.tongue.state = "outbound";
+
+
+
 
         }
 
