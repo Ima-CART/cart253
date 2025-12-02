@@ -250,14 +250,22 @@ function drawCaptureJar() {
     fill("#000");
     noStroke();
 
-    for (let i = 0; i < score; i++) {
-        ellipse(jar.x + random(-1, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
-
-
-
-
+    //adding the jarFlies variable in the capture jar function
+    jarFlies[i] = {
+        x: random(jar.x + 10, jar.x + jar.width - 10),
+        y: random(jar.y + 10, jar.y + jar.height - 10),
 
     }
+
+
+
+    // ellipse(jar.x + random(-1, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
+
+
+
+
+
+
 }
 
 /**
