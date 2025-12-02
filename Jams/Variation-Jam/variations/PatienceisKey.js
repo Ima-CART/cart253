@@ -177,7 +177,7 @@ function moveTongue() {
     // If the tongue is outbound, it moves up
     else if (frog.tongue.state === "outbound") {
         //dialogue disappears when tongue iis outbound
-        dialogue = ""
+        // dialogue = ""
         frog.tongue.y += -frog.tongue.speed;
         // The tongue bounces back if it hits the top
         if (frog.tongue.y <= 0) {
@@ -190,10 +190,10 @@ function moveTongue() {
         // The tongue stops if it hits the bottom
         if (frog.tongue.y >= height) {
             frog.tongue.state = "idle";
-            //dialogue appears when score is zero
-            if (score === 0) {
-                dialogue = " I am so hungry";
-            }
+            // //dialogue appears when score is zero
+            // if (score === 0) {
+            //     dialogue = " I am so hungry";
+            // }
         }
     }
 }
@@ -237,10 +237,29 @@ function checkTongueFlyOverlap(fly) {
         resetFly(fly);
         //The tongue will continue to be outbound
         frog.tongue.state = "outbound"
-        // Bring back the tongue
-        // frog.tongue.state = "inbound";
+
         // Score increases
         score = score + 1
+        consecutiveCatches++
+
+        if (consecutiveCatches === 3 && frog.tongue.state === "outbound") {
+            dialogue = "Three in a row! You're moving forward";
+            consecutiveCatches = 0;// reset the streak
+        }
+        else if (consecutiveCatches === 0) {
+            dialogue = "I am so hungry. Can't you catch anything"
+        }
+
+        else {
+            dialogue = "";
+
+        }
+
+
+
+
+        // Bring back the tongue
+        // frog.tongue.state = "inbound";
     }
 }
 
