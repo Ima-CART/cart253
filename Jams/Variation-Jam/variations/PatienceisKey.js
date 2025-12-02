@@ -20,7 +20,7 @@ let jarFlies = []
 let score = 0 // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
 let dialogue = "";// adding dialogue to the game
-
+let consecutiveCatches = 0;//variable for flies that are caught in succession
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -176,6 +176,7 @@ function moveTongue() {
     }
     // If the tongue is outbound, it moves up
     else if (frog.tongue.state === "outbound") {
+        //dialogue disappears when tongue iis outbound
         dialogue = ""
         frog.tongue.y += -frog.tongue.speed;
         // The tongue bounces back if it hits the top
@@ -189,6 +190,7 @@ function moveTongue() {
         // The tongue stops if it hits the bottom
         if (frog.tongue.y >= height) {
             frog.tongue.state = "idle";
+            //dialogue appears when score is zero
             if (score === 0) {
                 dialogue = " I am so hungry";
             }
