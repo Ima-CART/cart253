@@ -52,10 +52,10 @@ const fly = {
 // Capture Jar
 
 const jar = {
-    x: 600,
-    y: 400,
-    width: 50,
-    height: 20
+    x: 550,
+    y: 20,
+    width: 70,
+    height: 90
 
 
 }
@@ -224,6 +224,8 @@ function checkTongueFlyOverlap(fly) {
         frog.tongue.state = "outbound"
         // Bring back the tongue
         // frog.tongue.state = "inbound";
+        // Score increases
+        score = score + 1
     }
 }
 
@@ -240,8 +242,13 @@ function repelFly(fly) {
 }
 
 function drawCaptureJar() {
+    push();
+    fill("#ffffff62")
+    noStroke();
+    rect(jar.x, jar.y, jar.width, jar.height,)
+
     for (let i = 0; i < score; i++) {
-        ellipse
+        ellipse(fly.x, fly.y, fly.size);
 
     }
 
