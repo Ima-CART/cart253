@@ -247,6 +247,13 @@ function drawCaptureJar() {
     noStroke();
     rect(jar.x, jar.y, jar.width, jar.height, 10) //The outline of the jar
 
+    fill("#000");
+    textSize(18);
+    textAlign(CENTER);
+    text(score, 585, 130)
+
+
+
     for (let i = 0; i < score; i++) {
 
         //For smoother transition of the game and to have the function follow everything
