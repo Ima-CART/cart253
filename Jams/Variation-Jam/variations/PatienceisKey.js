@@ -48,6 +48,21 @@ const fly = {
     speed: .1
 };
 
+
+// Capture Jar
+
+const jar = {
+    x: 600,
+    y: 400,
+    width: 50,
+    height: 20
+
+
+}
+
+
+
+
 /**
  * Creates the canvas and initializes the fly
  */
@@ -225,7 +240,10 @@ function repelFly(fly) {
 }
 
 function drawCaptureJar() {
+    for (let i = 0; i < score; i++) {
+        ellipse
 
+    }
 
 
 }
