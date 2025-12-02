@@ -245,28 +245,66 @@ function drawCaptureJar() {
     push();
     fill("#ffffff62")
     noStroke();
-    rect(jar.x, jar.y, jar.width, jar.height,)
+    rect(jar.x, jar.y, jar.width, jar.height,) //The outline of the jar
 
     fill("#000");
     noStroke();
 
-    //adding the jarFlies variable in the capture jar function
-    jarFlies[i] = {
-        x: random(jar.x + 10, jar.x + jar.width - 10),
-        y: random(jar.y + 10, jar.y + jar.height - 10),
+    for (let i = 0; i < score; i++) {
+
+        //adding the jarFlies variable in the capture jar function
+        jarFlies[i] = {
+            x: random(jar.x + 10, jar.x + jar.width - 10),
+            y: random(jar.y + 10, jar.y + jar.height - 10),
+            /**Trying to slow down the speed of the flies in the jar. 
+             * Add velocity for flexibility
+             */
+            vx: random(-0.05, 0.05),//horizontal speed
+            vy: random(-0.05, 0.05),//vertical speed
+            size: 10,
+
+            //move of the (flies in the jar. Using the methond function
+            move: function () {
+
+                //using the word this to specify the x and velocity inside the jarFlies
+                this.x += this.vx;
+                this.y += this.vy;
+
+                //flies will be bouncing in the jar without leaving the jar
+                if (this.x < jar.x + this.size / 2 || this.x > jar.x + jar.width - this.size / 2) {
+                    this.vx *= -1;  // Reverse direction horizontally
+                }
+                if (this.y < jar.y + this.size / 2 || this.y > jar.y + jar.height - this.size / 2) {
+                    this.vy *= -1;  // Reverse direction vertically
+
+
+
+                }
+            },
+            //Method function in order to have the flies display in the jar
+            display: function () {
+                fill("#000");
+                noStroke();
+                ellipse(this.x, this.y, this.size, this.size);
+            }
+
+        };
+
+        // Move and display the fly inside the jar
+        jarFlies[i].move();
+        jarFlies[i].display();
+
+
+        // ellipse(jar.x + random(-1, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
+
+
+
+
 
     }
-
-
-
-    // ellipse(jar.x + random(-1, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
-
-
-
-
-
-
+    pop();
 }
+
 
 /**
  * Tongue will be launched with the spacebar
