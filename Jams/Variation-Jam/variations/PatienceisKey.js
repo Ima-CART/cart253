@@ -16,7 +16,8 @@
 "use strict";
 // Arrays for flies
 let flies = []
-let score = 0
+let jarFlies = []
+let score = 0 // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
 
 // Our frog
@@ -250,7 +251,7 @@ function drawCaptureJar() {
     noStroke();
 
     for (let i = 0; i < score; i++) {
-        ellipse(jar.x + random(-10, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
+        ellipse(jar.x + random(-1, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
 
 
 
