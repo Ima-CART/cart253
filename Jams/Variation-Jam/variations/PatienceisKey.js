@@ -249,12 +249,14 @@ function drawCaptureJar() {
     fill("#000");
     noStroke();
 
-    ellipse(jar.x + random(-10, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
+    for (let i = 0; i < score; i++) {
+        ellipse(jar.x + random(-10, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
 
 
 
 
 
+    }
 }
 
 /**
