@@ -218,7 +218,6 @@ function keyPressed() {
 }
 
 
-
 /**
  * Launch the tongue on click (if it's not launched yet)
  */

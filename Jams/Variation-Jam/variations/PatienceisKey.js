@@ -89,6 +89,7 @@ function draw() {
     moveFrog();
     moveTongue();
     drawFrog();
+    drawCaptureJar()
 }
 
 /**
@@ -223,6 +224,11 @@ function repelFly(fly) {
 
 }
 
+function drawCaptureJar() {
+
+
+
+}
 
 /**
  * Tongue will be launched with the spacebar
