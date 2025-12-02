@@ -19,6 +19,7 @@ let flies = []
 let jarFlies = []
 let score = 0 // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
+let dialogue = "";
 
 // Our frog
 const frog = {
