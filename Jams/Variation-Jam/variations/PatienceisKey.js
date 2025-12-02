@@ -33,7 +33,7 @@ const frog = {
         x: undefined,
         y: 480,
         size: 20,
-        speed: .5,
+        speed: 5,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     }
@@ -247,8 +247,11 @@ function drawCaptureJar() {
     noStroke();
     rect(jar.x, jar.y, jar.width, jar.height,)
 
+    fill("#000");
+    noStroke();
+
     for (let i = 0; i < score; i++) {
-        ellipse(fly.x, fly.y, fly.size);
+        ellipse(jar.x + random(-10, 60) + 10, jar.y + random(-10, 70) + 15, fly.size / 2);
 
     }
 
