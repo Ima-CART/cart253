@@ -93,7 +93,7 @@ function setup() {
     }
 
     // the creation of flies in the array 
-    for (let i = 0; i < 6; i++) flies.push(createFly());
+    for (let i = 0; i < 4; i++) flies.push(createFly());
     // flies.push(createFly())
     // flies.push(createFly())
     // flies.push(createFly())
@@ -426,10 +426,30 @@ function drawFloatingText(floatingText) {
     text(floatingText.text, floatingText.x, floatingText.y);
     pop();
 
+
+
 }
 
+/**
+ * Repel when tongue is near 
+ */
+
+function repelFloatingText(floatingText) {
+    const d = dist(frog.tongue.x, frog.tongue.y, floatingText.x, floatingText.y);
+    const repelF = (d < 50)
+    if (repelF) {
+        // Change text content to focus on the game
+        floatingText.text = "Focus! Flies are your targets!";
+        floatingText.fill = "#ff0000"; // Change text color to indicate focus
+
+        // Repel the floating text away from the tongue
+        const angle = atan2(floatingText.y - frog.tongue.y, floatingText.x - frog.tongue.x);
+        floatingText.x += cos(angle) * 5; // Push text away along the angle
+        floatingText.y += sin(angle) * 5;
+    }
 
 
+}
 
 
 /**
