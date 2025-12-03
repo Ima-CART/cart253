@@ -236,13 +236,13 @@ function checkTongueFlyOverlap(fly) {
         // Reset the fly
         resetFly(fly);
         //The tongue will continue to be outbound
-        frog.tongue.state = "outbound"
+        // frog.tongue.state = "outbound"
 
         // Score increases
         score = score + 1
         consecutiveCatches++
 
-        if (consecutiveCatches === 3 && frog.tongue.state === "outbound") {
+        if (consecutiveCatches === 3) {
             dialogue = "Three in a row! You're moving forward";
             consecutiveCatches = 0;// reset the streak
         }
@@ -259,7 +259,7 @@ function checkTongueFlyOverlap(fly) {
 
 
         // Bring back the tongue
-        // frog.tongue.state = "inbound";
+        frog.tongue.state = "inbound";
     }
 }
 
@@ -372,4 +372,4 @@ function keyPressed() {
 //     if (frog.tongue.state === "idle") {
 //         frog.tongue.state = "outbound";
 //     }
-// }
+// 
