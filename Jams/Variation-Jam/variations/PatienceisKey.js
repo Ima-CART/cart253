@@ -297,6 +297,15 @@ function checkTongueFlyOverlap(fly) {
         else if (consecutiveCatches === 5) {
             dialogue = "Five streak! You are nearing the goal";
             dialogueTimer = 150;
+
+            //Reveal the floating text when 5 flies have been caught in succession
+            floatingText = {
+                x: width / 2,
+                y: 100,
+                text: "5 in a row! Keep it up",
+                fill: "#f9770dff"
+            }
+            floatingTextTimer = 600; //Floating text will only appear for 10 seconds
         }
 
         else if (consecutiveCatches === 10) {
