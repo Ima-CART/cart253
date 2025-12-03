@@ -265,17 +265,29 @@ function checkTongueFlyOverlap(fly) {
     if (eaten) {
         // Reset the fly
         resetFly(fly);
-        //The tongue will continue to be outbound
-        // frog.tongue.state = "outbound"
-
         // Score increases
         score++
+        //Consecutive catches increase
         consecutiveCatches++
 
         if (consecutiveCatches === 3) {
             dialogue = "Three in a row! You're moving forward";
             dialogueTimer = 120; //2 second
             //streak will reset when tongue becomes inbound/idle 
+        }
+
+        else if (consecutiveCatches === 5) {
+            dialogue = "Five streak! You are nearing the goal";
+            dialogueTimer = 150;
+        }
+
+        else if (consecutiveCatches === 10) {
+            dialogue = " That's it you did it. I am full";
+            dialogueTimer = 180;
+        }
+
+        else {
+            dialogue = ""
         }
         // frog.tongue.state = "inbound";
     }
