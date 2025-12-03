@@ -23,6 +23,7 @@ let angle; //adding the angle for the moving of the fly
 let dialogue = "";// adding dialogue to the game
 let dialogueTimer = 0; // timer for showing dialogue
 let consecutiveCatches = 0;//variable for flies that are caught in succession
+let bgMusic;
 
 // adding a fun element a floating interactive text
 let floatingText = null
@@ -68,7 +69,10 @@ const jar = {
 
 }
 
-
+//Add a calming song to the game
+function preload() {
+    bgMusic = loadSound("assets/sounds/reflected-light-147979.mp3")
+}
 
 
 /**
@@ -78,6 +82,11 @@ function setup() {
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
+    bgMusic.loop();
+
+    bgMusic.setVolume(0.2);
+    bgMusic.rate(1);
+
 
     function createFly() {
 
