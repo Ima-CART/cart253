@@ -80,9 +80,7 @@ function setup() {
 
         return newFlies;
     }
-    flies.push(createFly())
-    flies.push(createFly())
-    flies.push(createFly())
+    for (let i = 0; i < 3; i++) flies.push(createFly());
 }
 
 function draw() {
