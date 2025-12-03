@@ -46,15 +46,15 @@ const frog = {
     }
 };
 
-// const goldenFly = {
-//     x: 0,
-//     y: (100, 200),//will be random
-//     size: 8,
-//     speed: random(100, 180),
-//     fill: "#efdf84ff"
+const goldenFly = {
+    x: 0,
+    y: (100, 200),//will be random
+    size: 8,
+    speed: (100, 180),
+    fill: "#ffe760ff"
 
 
-// }
+}
 
 const jar = {
     x: 550,
@@ -72,7 +72,10 @@ const jar = {
  * Creates the canvas and initializes the fly
 */
 function setup() {
+
     createCanvas(640, 480);
+
+    resetGoldenFly();
 
     // Our fly
     // Has a position, size, and speed of horizontal movement
@@ -103,10 +106,14 @@ function draw() {
         checkTongueFlyOverlap(fly);
     }
 
+    moveGoldenFly();
+    //tongueGoldenFlyOverlap();
+    drawGoldenFly();
     moveFrog();
     moveTongue();
     drawFrog();
     drawCaptureJar();
+
 }
 
 /**
@@ -141,6 +148,37 @@ function resetFly(fly) {
     fly.x = 0;
     fly.y = random(0, 300);
 }
+
+/**
+ * Golden fly moves at hyper speed
+ */
+function moveGoldenFly() {
+    goldenFly.x += goldenFly.speed
+    if (goldenFly.x > width) {
+        resetGoldenFly();
+    }
+
+}
+
+/**
+ * Draw golden Fly
+ */
+function drawGoldenFly() {
+    push();
+    noStroke();
+    fill(goldenFly.fill);
+    ellipse(goldenFly.x, goldenFly.y, goldenFly.size);
+    pop();
+
+}
+
+function resetGoldenFly() {
+    goldenFly.x = 0
+    goldenFly.y = random(0, 250)
+
+}
+
+
 
 /**
  * Moves the frog to the mouse position on x
