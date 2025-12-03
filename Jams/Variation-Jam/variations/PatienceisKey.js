@@ -93,7 +93,7 @@ function setup() {
     }
 
     // the creation of flies in the array 
-    for (let i = 0; i < 4; i++) flies.push(createFly());
+    for (let i = 0; i < 6; i++) flies.push(createFly());
     // flies.push(createFly())
     // flies.push(createFly())
     // flies.push(createFly())
@@ -407,6 +407,29 @@ function drawCaptureJar() {
     pop();
 
 }
+
+
+/**
+ * Draw floating text
+ */
+
+function drawFloatingText(floatingText) {
+
+    // Ensure the text stays within canvas bounds (adjust if near edges)
+    floatingText.x = constrain(floatingText.x, 10, 600); // Keep it within the horizontal bounds
+    floatingText.y = constrain(floatingText.y, 10, 400);  // Keep it within the vertical bounds
+
+    push();
+    fill(floatingText.fill);
+    textSize(20);
+    textAlign(CENTER);
+    text(floatingText.text, floatingText.x, floatingText.y);
+    pop();
+
+}
+
+
+
 
 
 /**
