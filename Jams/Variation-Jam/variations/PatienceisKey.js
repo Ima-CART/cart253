@@ -118,6 +118,18 @@ function draw() {
 
     }
 
+    if (floatingText) {
+        drawFloatingText(floatingText);
+        repelFloatingText(floatingText); //FloatingText will repel if tongue gets close
+
+        //When the timer runs out, remove the floatingtext
+        floatingTextTimer--;
+        if (floatingTextTimer <= 0) {
+            floatingText = null;//Remove floating text after 10 seconds
+        }
+
+    }
+
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
