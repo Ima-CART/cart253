@@ -18,6 +18,12 @@
 
 //Arrays for many flies
 let flies = []
+let silverFlies = []
+let jarFlies = []
+let score = 0
+let angle
+let dialogue = ""
+let dialogueTimer = 0
 
 
 // Our frog
@@ -39,6 +45,19 @@ const frog = {
         state: "idle" // State can be: idle, outbound, inbound
     }
 };
+
+const goldenFly = {
+    x: 0,
+    y: (100, 200),//will be random
+    size: 8,
+    speed: random(100, 180),
+    fill: "#efdf84ff"
+
+
+}
+
+
+
 
 
 /**
