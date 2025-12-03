@@ -294,11 +294,10 @@ function checkTongueFlyOverlap(fly) {
 }
 
 /**
- * Repels flies near tongue
+ * Repels flies when near tongue
  */
 function repelFly(fly) {
     const r = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
-
     const repel = (r < 20);
     if (repel) {
         fly.y -= 5
@@ -342,7 +341,7 @@ function drawCaptureJar() {
                 vy: random(-0.05, 0.05),//vertical speed
                 size: 10,
 
-                //move of the (flies in the jar. Using the methond function
+                //move of the flies in the jar. Using the methond function
                 move: function () {
 
                     //using the word this to specify the x and velocity inside the jarFlies
