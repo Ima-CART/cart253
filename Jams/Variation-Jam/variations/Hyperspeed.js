@@ -46,16 +46,24 @@ const frog = {
     }
 };
 
-const goldenFly = {
-    x: 0,
-    y: (100, 200),//will be random
-    size: 8,
-    speed: random(100, 180),
-    fill: "#efdf84ff"
+// const goldenFly = {
+//     x: 0,
+//     y: (100, 200),//will be random
+//     size: 8,
+//     speed: random(100, 180),
+//     fill: "#efdf84ff"
+
+
+// }
+
+const jar = {
+    x: 550,
+    y: 20,
+    width: 70,
+    height: 90
 
 
 }
-
 
 
 
@@ -98,6 +106,7 @@ function draw() {
     moveFrog();
     moveTongue();
     drawFrog();
+    drawCaptureJar();
 }
 
 /**
@@ -215,6 +224,8 @@ function checkTongueFlyOverlap(fly) {
         resetFly(fly);
         // Bring back the tongue
         frog.tongue.state = "inbound";
+        //score increases
+        score++
     }
 }
 
@@ -233,6 +244,82 @@ function keyPressed() {
     }
 
 }
+
+/**
+ * Draws the capture jar and the flies inside
+ */
+
+function drawCaptureJar() {
+    push();
+    fill("#ffffff62")
+    noStroke();
+    rect(jar.x, jar.y, jar.width, jar.height, 10) //The outline of the jar
+
+    fill("#000");
+    textSize(18);
+    textAlign(CENTER);
+    text(score, 585, 130)
+
+
+
+    for (let i = 0; i < score; i++) {
+
+        //For smoother transition of the game and to have the function follow everything
+        if (!jarFlies[i]) {
+
+            //adding the jarFlies variable in the capture jar function
+            jarFlies[i] = {
+
+                x: random(jar.x + 10, jar.x + jar.width - 10),
+                y: random(jar.y + 10, jar.y + jar.height - 10),
+
+                /**Trying to slow down the speed of the flies in the jar. 
+                 * Add velocity for flexibility
+                 */
+                vx: random(4, 8),//horizontal speed
+                vy: random(4, 8),//vertical speed
+                size: 10,
+
+                //move of the flies in the jar. Using the methond function
+                move: function () {
+
+                    //using the word this to specify the x and velocity inside the jarFlies
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    //flies will be bouncing in the jar without leaving the jar
+                    if (this.x < jar.x + this.size / 2 || this.x > jar.x + jar.width - this.size / 2) {
+                        this.vx *= -1;  // Reverse direction horizontally
+                    }
+                    if (this.y < jar.y + this.size / 2 || this.y > jar.y + jar.height - this.size / 2) {
+                        this.vy *= -1;  // Reverse direction vertically
+
+                    }
+                },
+
+
+                //Method function in order to have the flies display in the jar
+                display: function () {
+                    fill("#000");
+                    noStroke();
+                    ellipse(this.x, this.y, this.size / 2);
+                }
+
+            };
+
+
+        }
+
+
+        // Move and display the fly inside the jar
+        jarFlies[i].move();
+        jarFlies[i].display();
+
+    }
+    pop();
+
+}
+
 
 
 /**
