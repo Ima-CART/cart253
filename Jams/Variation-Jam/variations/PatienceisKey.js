@@ -88,10 +88,11 @@ function setup() {
     }
 
     // the creation of flies in the array 
-    flies.push(createFly())
-    flies.push(createFly())
-    flies.push(createFly())
-    flies.push(createFly())
+    for (let i = 0; i < 4; i++) flies.push(createFly());
+    // flies.push(createFly())
+    // flies.push(createFly())
+    // flies.push(createFly())
+    // flies.push(createFly())
 }
 
 function draw() {
