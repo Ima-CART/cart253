@@ -14,6 +14,7 @@
  */
 
 "use strict";
+
 // Arrays for flies
 let flies = []
 let jarFlies = []
@@ -22,6 +23,10 @@ let angle; //adding the angle for the moving of the fly
 let dialogue = "";// adding dialogue to the game
 let dialogueTimer = 0; // timer for showing dialogue
 let consecutiveCatches = 0;//variable for flies that are caught in succession
+
+// adding a fun element a floating interactive text
+let floatingText = null
+let floatingTextTimer = 0;
 
 // Our frog
 const frog = {
