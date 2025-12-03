@@ -20,7 +20,9 @@ let jarFlies = []
 let score = 0 // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
 let dialogue = "";// adding dialogue to the game
+let dialogueTimer = 0; // timer for showing dialogue
 let consecutiveCatches = 0;//variable for flies that are caught in succession
+
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -95,6 +97,13 @@ function setup() {
 function draw() {
     background("#87ceeb");
 
+    if (dialogueTimer > 0) {
+        dialogueTimer--;
+    } else if (dialogueTimer === 0) {
+        dialogue = "";
+    }
+
+    //Display dialogue
     if (dialogue !== "") {
         fill("#000");
         textSize(22);
@@ -113,7 +122,7 @@ function draw() {
     moveFrog();
     moveTongue();
     drawFrog();
-    drawCaptureJar()
+    drawCaptureJar();
 }
 
 /**
@@ -176,12 +185,11 @@ function moveTongue() {
     }
     // If the tongue is outbound, it moves up
     else if (frog.tongue.state === "outbound") {
-        //dialogue disappears when tongue iis outbound
-        // dialogue = ""
         frog.tongue.y += -frog.tongue.speed;
         // The tongue bounces back if it hits the top
         if (frog.tongue.y <= 0) {
             frog.tongue.state = "inbound";
+            consecutiveCatches = 0;
         }
     }
     // If the tongue is inbound, it moves down
@@ -190,13 +198,35 @@ function moveTongue() {
         // The tongue stops if it hits the bottom
         if (frog.tongue.y >= height) {
             frog.tongue.state = "idle";
-            // //dialogue appears when score is zero
-            // if (score === 0) {
+            consecutiveCatches = 0;
             //     dialogue = " I am so hungry";
-            // }
+
         }
     }
 }
+
+// function moveTongue() {
+//     frog.tongue.x = frog.body.x;
+//     //If the tongue is outbound, it moves up
+//     if (frog.tongue.state === "outbound") {
+//         frog.tongue.y -= frog.tongue.speed;
+
+//         // Switch to inbound when reaching top
+//         if (frog.tongue.y <= 0) {
+//             frog.tongue.state = "inbound";
+//             consecutiveCatches = 0; // reset streak
+//         }
+//         //If the tongue is inbound, it moves down
+//     } else if (frog.tongue.state === "inbound") {
+//         frog.tongue.y += frog.tongue.speed;
+
+//         // The tongue stops if it hits the bottom
+//         if (frog.tongue.y >= height) {
+//             frog.tongue.state = "idle"; //Do nothing
+//             consecutiveCatches = 0; // reset streak
+//         }
+//     }
+// }
 
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
@@ -239,30 +269,21 @@ function checkTongueFlyOverlap(fly) {
         // frog.tongue.state = "outbound"
 
         // Score increases
-        score = score + 1
+        score++
         consecutiveCatches++
 
         if (consecutiveCatches === 3) {
             dialogue = "Three in a row! You're moving forward";
-            consecutiveCatches = 0;// reset the streak
+            dialogueTimer = 120; //2 second
+            //streak will reset when tongue becomes inbound/idle 
         }
-        else if (consecutiveCatches === 0) {
-            dialogue = "I am so hungry. Can't you catch anything"
-        }
-
-        else {
-            dialogue = "";
-
-        }
-
-
-
-
-        // Bring back the tongue
-        frog.tongue.state = "inbound";
+        // frog.tongue.state = "inbound";
     }
 }
 
+/**
+ * Repels flies near tongue
+ */
 function repelFly(fly) {
     const r = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
 
@@ -270,10 +291,13 @@ function repelFly(fly) {
     if (repel) {
         fly.y -= 5
         fly.x += 2
-        // resetFly(fly)
     }
 
 }
+
+/**
+ * Draws the capture jar and the flies inside
+ */
 
 function drawCaptureJar() {
     push();
@@ -348,7 +372,7 @@ function drawCaptureJar() {
 
 
 /**
- * Tongue will be launched with the spacebar
+ * Tongue will be launched with the spacebar 
  */
 
 function keyPressed() {
