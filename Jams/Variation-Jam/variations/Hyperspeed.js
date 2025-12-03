@@ -107,8 +107,8 @@ function draw() {
     }
 
     moveGoldenFly();
-    //tongueGoldenFlyOverlap();
     drawGoldenFly();
+    tongueGoldenFlyOverlap();
     moveFrog();
     moveTongue();
     drawFrog();
@@ -175,6 +175,17 @@ function drawGoldenFly() {
 function resetGoldenFly() {
     goldenFly.x = 0
     goldenFly.y = random(0, 250)
+
+}
+
+
+function tongueGoldenFlyOverlap() {
+    const d = dist(frog.tongue.x, frog.tongue.y, goldenFly.x, goldenFly.y);
+    const consumed = (d < frog.tongue.size / 2 + goldenFly.size / 2)
+    if (consumed) {
+        dialogue = "you win"
+        dialogueTimer = 120;
+    }
 
 }
 
