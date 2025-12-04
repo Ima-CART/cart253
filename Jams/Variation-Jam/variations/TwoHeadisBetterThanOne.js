@@ -38,7 +38,7 @@ const frog = {
         x: undefined,
         y: 480,
         size: 20,
-        speed: 5,
+        speed: 20,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     }
@@ -50,7 +50,7 @@ const fly = {
     x: 0,
     y: 200, // Will be random
     size: 10,
-    speed: .1
+    speed: 3
 };
 
 
@@ -77,7 +77,7 @@ const jar = {
 function setup() {
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
-    // angle = 0;
+    angle = 0;
     // bgMusic.loop();
 
     // bgMusic.setVolume(0.2);
@@ -90,7 +90,7 @@ function setup() {
             x: 0,
             y: random(100, 200), //Give the fly its first random position between 100 and 200
             size: 10,
-            speed: random(.1, .5), // I want the flies to appear slow
+            speed: random(1, 5), // I want the flies to appear slow
             fill: "#000"
 
         }
@@ -98,24 +98,24 @@ function setup() {
     }
 
     // the creation of flies in the array 
-    for (let i = 0; i < 4; i++) flies.push(createFly());
+    for (let i = 0; i < 1; i++) flies.push(createFly());
 }
 
 function draw() {
     background("#87ceeb");
 
-    if (dialogueTimer > 0) {
-        dialogueTimer--;
-    } else if (dialogueTimer === 0) {
-        dialogue = "";
-    }
+    // if (dialogueTimer > 0) {
+    //     dialogueTimer--;
+    // } else if (dialogueTimer === 0) {
+    //     dialogue = "";
+    // }
 
 
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
         checkTongueFlyOverlap(fly);
-        repelFly(fly);
+        // repelFly(fly);
 
     }
     moveFrog();
@@ -131,9 +131,9 @@ function draw() {
 function moveFly(fly) {
     // Move the fly
     fly.x += fly.speed;
-    let buzzingY = sin(angle) * .3
+    let buzzingY = sin(angle) * 5
     fly.y = constrain(fly.y - buzzingY, 0, 460);
-    angle += .2
+    angle += 10
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly(fly);
@@ -241,28 +241,24 @@ function checkTongueFlyOverlap(fly) {
         resetFly(fly);
         // Score increases
         score++
+
+        frog.tongue.state = "inbound";
     }
-
-
-    else {
-
-    }
-    // frog.tongue.state = "inbound";
 }
 
 
 /**
  * Repels flies when near tongue
  */
-function repelFly(fly) {
-    const r = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
-    const repel = (r < 20);
-    if (repel) {
-        fly.y -= 5
-        fly.x += 2
-    }
+// function repelFly(fly) {
+//     const r = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
+//     const repel = (r < 20);
+//     if (repel) {
+//         fly.y -= 5
+//         fly.x += 2
+//     }
 
-}
+// }
 
 /**
  * Draws the capture jar and the flies inside

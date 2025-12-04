@@ -557,7 +557,7 @@ function restartGame() {
     sparkles = [];
 }
 
-// function restartGame() {
+// function restartGame() {  
 //     gameState = "play";
 //     score = 0;
 //     sparkles = [];
