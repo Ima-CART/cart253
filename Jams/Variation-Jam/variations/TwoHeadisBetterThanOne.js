@@ -28,7 +28,7 @@ let bgMusic;
 let frogs = []
 
 // to track the frog appearing on the border
-let borderFrog = 0
+let newBorderFrogIndex = 0
 
 // Our frog
 const frog = {
@@ -113,7 +113,7 @@ function setup() {
         return newFlies;
     }
 
-    // the creation of flies in the array 
+    // The amount of flies in the array
     for (let i = 0; i < 1; i++) flies.push(createFly());
 }
 
@@ -228,6 +228,7 @@ function moveTongue() {
  * Displays the tongue (tip and line connection) and the frog (body)
  */
 function drawFrog() {
+
     // Draw the tongue tip
     push();
     fill("#ff0000");
@@ -265,9 +266,20 @@ function checkTongueFlyOverlap(fly) {
         score++
 
         frog.tongue.state = "inbound";
+        spawnBorderFrog();
     }
 }
 
+function spawnBorderFrog() {
+    if (newBorderFrogIndex < borderFrogs.length) {
+        let newFrog = borderFrogs[newBorderFrogIndex];
+
+        frogs.push({
+            body: { ...newFrog.body },
+        })
+        newBorderFrogIndex++;
+    }
+}
 
 /**
  * Repels flies when near tongue
