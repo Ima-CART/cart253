@@ -40,7 +40,7 @@ let hyperDialogueTimer = 0;
 
 
 // Our frog
-
+let frogGlow = 0
 const frog = {
     // The frog's body has a position and size
     body: {
@@ -473,53 +473,31 @@ function keyPressed() {
 /**
  * Restarting the game
  */
-
 function restartGame() {
     gameState = "play";
     score = 0;
     sparkles = [];
     goldenTrail = [];
     jarFlies = [];
-    frogGlow = 0;
     hypermode = false;
 
     frog.tongue.state = "idle";
     frog.tongue.y = 480;
-    frog.tongue.speed = 30; // reset speed
+    frog.speed = 30
 
     flies = [];
     silverFlies = [];
-    for (let i = 0; i < 3; i++) flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
-    for (let i = 0; i < 2; i++) silverFlies.push({ x: 0, y: random(50, 250), size: 12, speed: random(5, 15), fill: "#d6d4d4ff" });
+
+    for (let i = 0; i < 3; i++)
+        flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
+
+    for (let i = 0; i < 2; i++)
+        silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
 
     resetGoldenFly();
+
+
 }
-
-// function restartGame() {
-//     gameState = "play";
-//     score = 0;
-//     sparkles = [];
-//     goldenTrail = [];
-//     jarFlies = [];
-//     hypermode = false;
-
-//     frog.tongue.state = "idle";
-//     frog.tongue.y = 480;
-//     frog.speed = 30
-
-//     flies = [];
-//     silverFlies = [];
-
-//     for (let i = 0; i < 3; i++)
-//         flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
-
-//     for (let i = 0; i < 2; i++)
-//         silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
-
-//     resetGoldenFly();
-
-
-// }
 
 /**
  * Draws the capture jar and the flies inside
