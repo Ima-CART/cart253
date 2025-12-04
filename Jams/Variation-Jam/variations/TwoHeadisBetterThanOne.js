@@ -28,28 +28,24 @@ let bgMusic;
 let frogs = []
 
 
-
-
-// // Our frog
-// const frog = {
-//     // The frog's body has a position and size
-//     body: {
-//         x: 320,
-//         y: 520,
-//         size: 150
-//     },
-//     // The frog's tongue has a position, size, speed, and state
-//     tongue: {
-//         x: undefined,
-//         y: 480,
-//         size: 20,
-//         speed: 20,
-//         // Determines how the tongue moves each frame
-//         state: "idle" // State can be: idle, outbound, inbound
-//     }
-// };
-
-
+// Our frog
+const frog = {
+    // The frog's body has a position and size
+    body: {
+        x: 320,
+        y: 520,
+        size: 150
+    },
+    // The frog's tongue has a position, size, speed, and state
+    tongue: {
+        x: undefined,
+        y: 480,
+        size: 20,
+        speed: 20,
+        // Determines how the tongue moves each frame
+        state: "idle" // State can be: idle, outbound, inbound
+    }
+};
 
 // Our fly
 // Has a position, size, and speed of horizontal movement
@@ -106,32 +102,7 @@ function setup() {
 
     // the creation of flies in the array 
     for (let i = 0; i < 1; i++) flies.push(createFly());
-
-    function createfrog() {
-
-        const newFrogs = {
-            // The frog's body has a position and size
-            body: {
-                x: 320,
-                y: 520,
-                size: 150
-            },
-            // The frog's tongue has a position, size, speed, and state
-            tongue: {
-                x: undefined,
-                y: 480,
-                size: 20,
-                speed: 20,
-                // Determines how the tongue moves each frame
-                state: "idle" // State can be: idle, outbound, inbound
-            }
-        }
-        return newFrogs;
-    }
-    for (let i = 0; i < 1; i++) frogs.push(createfrog());
-
 }
-
 
 function draw() {
     background("#87ceeb");
@@ -150,12 +121,9 @@ function draw() {
         // repelFly(fly);
 
     }
-
-    for (let frog of frogs) {
-        moveFrog(frog);
-        moveTongue(frog);
-        drawFrog(frog);
-    }
+    moveFrog();
+    moveTongue();
+    drawFrog();
     drawCaptureJar();
 }
 
@@ -197,7 +165,7 @@ function resetFly(fly) {
 /**
  * Moves the frog to the mouse position on x
  */
-function moveFrog(frog) {
+function moveFrog() {
     if (keyIsDown(LEFT_ARROW)) {
         frog.body.x = constrain(frog.body.x - frog.tongue.speed, 10, 630)
     }
@@ -210,7 +178,7 @@ function moveFrog(frog) {
 /**
  * Handles moving the tongue based on its state
  */
-function moveTongue(frog) {
+function moveTongue() {
     // Tongue matches the frog's x
     frog.tongue.x = frog.body.x;
     // If the tongue is idle, it doesn't do anything
@@ -240,7 +208,7 @@ function moveTongue(frog) {
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
  */
-function drawFrog(frog) {
+function drawFrog() {
     // Draw the tongue tip
     push();
     fill("#ff0000");
