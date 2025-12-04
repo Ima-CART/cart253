@@ -27,8 +27,6 @@ let jarFlies = [];
 //for score
 let score = 0;
 let angle;
-let dialogue = "";
-let dialogueTimer = 0;
 
 //Golden Fly effects
 let goldentrail = [];
@@ -63,7 +61,7 @@ const goldenFly = {
     x: 0,
     y: (100, 200),//will be random
     size: 8,
-    speed: 14,
+    speed: 30,
     fill: "#ffe760ff"
 
 
@@ -110,7 +108,7 @@ function setup() {
         const newSilverFlies = {
             x: 0,
             y: random(50, 250),
-            size: 30,  //12,
+            size: 12,
             speed: random(5, 15),
             fill: "#d6d4d4ff"
         };
@@ -145,12 +143,23 @@ function draw() {
     }
 
     if (gameState === "play") {
-        for (let fly of flies) { moveFly(fly); drawFly(fly); checkTongueFlyOverlap(fly, false); }
-        for (let silverfly of silverFlies) { moveFly(silverfly); drawSilverFly(silverfly); checkTongueFlyOverlap(silverfly, true); }
+        for (let fly of flies) {
+            moveFly(fly);
+            drawFly(fly);
+            checkTongueFlyOverlap(fly, false);
+        }
+
+        for (let silverfly of silverFlies) {
+            moveFly(silverfly);
+            drawSilverFly(silverfly);
+            checkTongueFlyOverlap(silverfly, true);
+        }
+
         //Goldenfly and it's effect
         moveGoldenFly();
         drawGoldenTrail();
         drawGoldenFly();
+        createGoldenFlyingSparkles();
         drawSparkles();
         tongueGoldenFlyOverlap();
 
@@ -162,11 +171,13 @@ function draw() {
     }
 
     //Win Screen
-    if (gameState === "win") {
+    else if (gameState === "win") {
         drawSparkles()
         drawWinSpeech();
         return;
     }
+
+    //Lose Screen
     else if (gameState === "lose") {
         drawLoseSpeech()
     }
@@ -212,7 +223,7 @@ function moveFly(fly) {
 function drawFly(fly) {
     push();
     noStroke();
-    fill("#000000");
+    fill(fly.fill);
     ellipse(fly.x, fly.y, fly.size);
     pop();
 
@@ -241,7 +252,7 @@ function drawSilverFly(silverfly) {
  */
 function resetFly(fly) {
     fly.x = 0;
-    fly.y = random(0, 300);
+    fly.y = random(50, 300);
 }
 
 /**
@@ -258,10 +269,6 @@ function moveGoldenFly() {
     });
 
     if (goldentrail.length > 50) goldentrail.shift();
-
-    //small sparkles following the fly
-    createFlyingSparkle(goldenFly.x, goldenFly.y);
-
 
     if (goldenFly.x > width) {
         resetGoldenFly();
@@ -292,13 +299,14 @@ function drawGoldenTrail() {
 
 }
 
-function createFlyingSparkle(x, y) {
+function createGoldenFlyingSparkles() {
     sparkles.push({
-        x, y,
+        x: goldenFly.x + random(-2, 2),
+        y: goldenFly.y + random(-2, 2),
         vx: random(-1, 1),
         vy: random(-1, 1),
         size: random(2, 4),
-        life: random(20, 40),
+        life: 30,
         color: color(random(200, 255), random(180, 255), 0)
     });
 }
@@ -328,14 +336,16 @@ function resetGoldenFly() {
 function tongueGoldenFlyOverlap() {
     const d = dist(frog.tongue.x, frog.tongue.y, goldenFly.x, goldenFly.y);
 
-    if (d < frog.tongue.size / 2 + goldenFly.size / 2) {
+    if (d < frog.tongue.size / 2 + goldenFly.size / 2 && gameState === "play") {
         gameState = "win";
 
         //Going to make fireworks appears
         for (let i = 0; i < 60; i++) {
             sparkles.push({
-                x: goldenFly.x, y: goldenFly.y,
-                vx: random(-3, 3), vy: random(-3, 3),
+                x: goldenFly.x,
+                y: goldenFly.y,
+                vx: random(-3, 3),
+                vy: random(-3, 3),
                 size: random(2, 4),
                 life: random(40, 80),
                 color: color(random(200, 255), random(180, 255), random(0, 255))
@@ -450,10 +460,12 @@ function checkTongueFlyOverlap(fly, silverfly) {
             if (!hypermode) {
                 gameState = "pause";
                 hyperDialogueTimer = 120; // ~2 seconds
-            } else {
+            }
+            else {
                 gameState = "lose";
             }
-        } else {
+        }
+        else {
 
             frogGlow = 15; // glow effect for normal flies
         }
@@ -479,49 +491,98 @@ function startHypermode() {
 /**
  * Tongue will be launched with the spacebar
  */
+// function keyPressed() {
+//     if (keyCode === 32) {
+//         if (frog.tongue.state === "idle") {
+//             frog.tongue.state = "outbound";
+
+//         }
+//     }
+
+//     if (gameState === "win" && key === "r") {
+//         restartGame();
+//     }
+
+// }
 function keyPressed() {
-    if (keyCode === 32) {
-        if (frog.tongue.state === "idle") {
-            frog.tongue.state = "outbound";
-
-        }
-    }
-
-    if (gameState === "win" && key === "r") {
-        restartGame();
-    }
-
+    if (keyCode === 32 && frog.tongue.state === "idle") frog.tongue.state = "outbound";
+    if (key === "r" && (gameState === "win" || gameState === "lose")) restartGame();
 }
+
 
 /**
  * Restarting the game
  */
+
 function restartGame() {
+    // Reset game state and score
     gameState = "play";
     score = 0;
-    sparkles = [];
-    goldenTrail = [];
-    jarFlies = [];
     frogGlow = 0;
-    hypermode = false;
+    hypermode = false;  // Reset hypermode here!
 
+    // Reset frog's tongue state
     frog.tongue.state = "idle";
-    frog.tongue.y = 480;
-    frog.speed = 30
+    frog.tongue.y = 480;  // Reset tongue to starting position
 
+    // Reset flies
     flies = [];
     silverFlies = [];
 
-    for (let i = 0; i < 3; i++)
-        flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
+    // Reset frog's speed and the speed of all flies
+    frog.tongue.speed = 30;  // Default tongue speed
+    for (let i = 0; i < 3; i++) {
+        flies.push({
+            x: 0,
+            y: random(100, 200),
+            size: 10,
+            speed: random(10, 30),
+            fill: "#000"
+        });
+    }
 
-    for (let i = 0; i < 2; i++)
-        silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
+    for (let i = 0; i < 2; i++) {
+        silverFlies.push({
+            x: 0,
+            y: random(50, 250),
+            size: 12,
+            speed: random(5, 15),
+            fill: "#d6d4d4ff"
+        });
+    }
 
+    // Reset the golden fly and its trail
     resetGoldenFly();
-
-
+    goldentrail = [];
+    sparkles = [];
 }
+
+// function restartGame() {
+//     gameState = "play";
+//     score = 0;
+//     sparkles = [];
+//     goldenTrail = [];
+//     jarFlies = [];
+//     frogGlow = 0;
+//     hypermode = false;
+
+//     frog.tongue.state = "idle";
+//     frog.tongue.y = 480;
+//     frog.speed = 30
+
+//     flies = [];
+//     silverFlies = [];
+
+//     for (let i = 0; i < 3; i++)
+//         flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
+
+//     for (let i = 0; i < 2; i++)
+//         silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
+
+//     resetGoldenFly();
+
+
+// }
 
 /**
  * Draws the capture jar and the flies inside
