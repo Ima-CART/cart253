@@ -17,7 +17,7 @@
 "use strict";
 
 //Game State
-let gamestate = "play"
+let gameState = "play"
 
 //Arrays for many flies
 let flies = []
@@ -55,8 +55,8 @@ const frog = {
 const goldenFly = {
     x: 0,
     y: (100, 200),//will be random
-    size: 8,
-    speed: (100, 180),
+    size: 50,//8,
+    speed: 2,//(100, 180),
     fill: "#ffe760ff"
 
 
@@ -97,7 +97,8 @@ function setup() {
 
         return newFlies;
     }
-    for (let i = 0; i < 3; i++) flies.push(createFly());
+
+
     function createSilverFly() {
         const newSilverFlies = {
             x: 0,
@@ -109,6 +110,7 @@ function setup() {
         return newSilverFlies;
     }
 
+    for (let i = 0; i < 3; i++) flies.push(createFly());
     for (let i = 0; i < 2; i++) silverFlies.push(createSilverFly());
 }
 
@@ -118,8 +120,9 @@ function draw() {
 
     //Win Screen
 
-    if (gamestate === "win") {
+    if (gameState === "win") {
         drawWinSpeech();
+        return;
     }
 
     /**
@@ -234,9 +237,9 @@ function resetGoldenFly() {
 
 function tongueGoldenFlyOverlap() {
     const d = dist(frog.tongue.x, frog.tongue.y, goldenFly.x, goldenFly.y);
-    const consumed = (d < frog.tongue.size / 2 + goldenFly.size / 2)
-    if (consumed) {
-        gamestate === "win"
+
+    if (d < frog.tongue.size / 2 + goldenFly.size / 2) {
+        gameState = "win";
     }
 
 }
@@ -343,7 +346,7 @@ function keyPressed() {
         }
     }
 
-    if (gamestate === "win" && key === "r") {
+    if (gameState === "win" && key === "r") {
         restartGame();
     }
 
