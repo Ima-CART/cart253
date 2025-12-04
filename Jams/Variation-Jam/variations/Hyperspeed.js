@@ -20,16 +20,18 @@
 let gameState = "play"
 
 //Arrays for many flies
-let flies = []
-let silverFlies = []
-let jarFlies = []
+let flies = [];
+let silverFlies = [];
+let jarFlies = [];
 
 //for score
-let score = 0
-let angle
-let dialogue = ""
-let dialogueTimer = 0
+let score = 0;
+let angle;
+let dialogue = "";
+let dialogueTimer = 0;
 
+//Golden Fly effects
+let goldentrail = [];
 
 
 // Our frog
@@ -55,8 +57,8 @@ const frog = {
 const goldenFly = {
     x: 0,
     y: (100, 200),//will be random
-    size: 50,//8,
-    speed: 2,//(100, 180),
+    size: 8,
+    speed: (100, 180),
     fill: "#ffe760ff"
 
 
@@ -144,6 +146,7 @@ function draw() {
     }
 
     moveGoldenFly();
+    drawGoldenTrail();
     drawGoldenFly();
     tongueGoldenFlyOverlap();
     moveFrog();
