@@ -16,10 +16,15 @@
 
 "use strict";
 
+//Game State
+let gamestate = "play"
+
 //Arrays for many flies
 let flies = []
 let silverFlies = []
 let jarFlies = []
+
+//for score
 let score = 0
 let angle
 let dialogue = ""
