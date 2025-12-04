@@ -58,7 +58,6 @@ frogs.push(frog)
 
 const borderFrogs = [
     { body: { x: 320, y: -40, size: 150 }, visible: false },//Top frog. Will only appear when fly is caught
-    { body: { x: 320, y: 520, size: 150 }, visible: false },//Bottm frog. Will only appear when fly is caught
     { body: { x: -40, y: 240, size: 150 }, visible: false },//Left frog. Will only appear when fly is caught
     { body: { x: 680, y: 240, size: 150 }, visible: false }//Right frog. Will only appear when fly is caught
 ]
@@ -229,28 +228,32 @@ function moveTongue() {
  */
 function drawFrog() {
 
-    // Draw the tongue tip
-    push();
-    fill("#ff0000");
-    noStroke();
-    ellipse(frog.tongue.x, frog.tongue.y, frog.tongue.size);
-    pop();
+    for (let f of frogs) {
 
-    // Draw the rest of the tongue
-    push();
-    stroke("#ff0000");
-    strokeWeight(frog.tongue.size);
-    line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
-    pop();
+        if (f === frog) {
+            // Draw the tongue tip
+            push();
+            fill("#ff0000");
+            noStroke();
+            ellipse(frog.tongue.x, frog.tongue.y, frog.tongue.size);
+            pop();
 
-    // Draw the frog's body
-    push();
-    fill("#00ff00");
-    noStroke();
-    ellipse(frog.body.x, frog.body.y, frog.body.size);
-    pop();
+            // Draw the rest of the tongue
+            push();
+            stroke("#ff0000");
+            strokeWeight(frog.tongue.size);
+            line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
+            pop();
+        }
+
+        // Draw the frog's body
+        push();
+        fill("#00ff00");
+        noStroke();
+        ellipse(f.body.x, f.body.y, f.body.size);
+        pop();
+    }
 }
-
 /**
  * Handles the tongue overlapping the fly
  */
