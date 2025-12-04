@@ -390,6 +390,19 @@ function moveTongue() {
  * Displays the tongue (tip and line connection) and the frog (body)
  */
 function drawFrog() {
+
+    if (frogGlow > 0) {
+        push();
+        noStroke();
+        let fogPulse = 30 + sin(frameCount * 2) * 8;
+        for (let i = 0; i < 4; i++) {
+            fill(200, 255, 200, 40 - i * 8);
+            ellipse(frog.body.x, frog.body.y, frog.body.size + fogPulse + i * 25);
+        }
+        pop();
+        frogGlow--;
+    }
+
     // Draw the tongue tip
     push();
     fill("#ff0000");
@@ -427,6 +440,7 @@ function checkTongueFlyOverlap(fly, silverfly) {
         frog.tongue.state = "inbound";
         //score increases
         score++
+        frogGlow = 15;
 
         if (silverfly) {
             if (!hypermode) {
@@ -434,6 +448,7 @@ function checkTongueFlyOverlap(fly, silverfly) {
                 hyperDialogueTimer = 120; // ~2 seconds
             }
         }
+
     }
 }
 
@@ -479,6 +494,7 @@ function restartGame() {
     sparkles = [];
     goldenTrail = [];
     jarFlies = [];
+    frogGlow = 0;
     hypermode = false;
 
     frog.tongue.state = "idle";
