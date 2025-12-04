@@ -125,13 +125,13 @@ function setup() {
 function draw() {
     background("#87ceeb");
 
-    //Screen will pause and say engage hypermode
+    //Screen will pause and say engage hypermode  
     if (gameState === "pause") {
         push();
         textAlign(CENTER);
         textSize(48);
-        fill("#ffcc00");
-        stroke("#000");
+        fill("#fc1f10ff");
+        stroke("#f93737ff");
         strokeWeight(4);
         text("Engage Hypermode!", width / 2, height / 2);
         pop();
@@ -139,6 +139,7 @@ function draw() {
         hyperDialogueTimer--;
         if (hyperDialogueTimer <= 0) {
             startHypermode();
+            gameState = "play"
         }
         return; // pause everything else
     }
@@ -472,30 +473,53 @@ function keyPressed() {
 /**
  * Restarting the game
  */
+
 function restartGame() {
     gameState = "play";
     score = 0;
     sparkles = [];
     goldenTrail = [];
     jarFlies = [];
+    frogGlow = 0;
     hypermode = false;
 
     frog.tongue.state = "idle";
     frog.tongue.y = 480;
+    frog.tongue.speed = 30; // reset speed
 
     flies = [];
     silverFlies = [];
-
-    for (let i = 0; i < 3; i++)
-        flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
-
-    for (let i = 0; i < 2; i++)
-        silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
+    for (let i = 0; i < 3; i++) flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
+    for (let i = 0; i < 2; i++) silverFlies.push({ x: 0, y: random(50, 250), size: 12, speed: random(5, 15), fill: "#d6d4d4ff" });
 
     resetGoldenFly();
-
-
 }
+
+// function restartGame() {
+//     gameState = "play";
+//     score = 0;
+//     sparkles = [];
+//     goldenTrail = [];
+//     jarFlies = [];
+//     hypermode = false;
+
+//     frog.tongue.state = "idle";
+//     frog.tongue.y = 480;
+//     frog.speed = 30
+
+//     flies = [];
+//     silverFlies = [];
+
+//     for (let i = 0; i < 3; i++)
+//         flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
+
+//     for (let i = 0; i < 2; i++)
+//         silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
+
+//     resetGoldenFly();
+
+
+// }
 
 /**
  * Draws the capture jar and the flies inside
