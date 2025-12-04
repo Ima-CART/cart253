@@ -455,18 +455,18 @@ function drawCaptureJar() {
 function drawWinSpeech() {
     push();
     textAlign(CENTER);
-    textSize(50);
+    textSize(80);
     fill("#fff765ff");
-    stroke("#ffe640ff");
+    stroke("#ebd231ff");
     strokeWeight(4);
     text("YOU WIN!", width / 2, height / 2);
 
 
-    textSize(24);
+    textSize(30);
     fill("#f0ededff");
-    stroke("#ffffffff")
+    noStroke();
     strokeWeight(2);
-    text("Press R to Restart", width / 2, height / 2 + 50);
+    text("Press R to Restart", width / 2, height / 2 + 70);
     pop();
 
 };
