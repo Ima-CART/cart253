@@ -116,6 +116,12 @@ function setup() {
 function draw() {
     background("#87ceeb");
 
+    //Win Screen
+
+    if (gamestate === "win") {
+        drawWinSpeech();
+    }
+
     /**
      * Applies the array to functions that involves the fly
      */
@@ -230,8 +236,7 @@ function tongueGoldenFlyOverlap() {
     const d = dist(frog.tongue.x, frog.tongue.y, goldenFly.x, goldenFly.y);
     const consumed = (d < frog.tongue.size / 2 + goldenFly.size / 2)
     if (consumed) {
-        dialogue = "you win"
-        dialogueTimer = 120;
+        gamestate === "win"
     }
 
 }
@@ -336,8 +341,35 @@ function keyPressed() {
             frog.tongue.state = "outbound";
 
         }
-
     }
+
+    if (gamestate === "win" && key === "r") {
+        restartGame();
+    }
+
+}
+
+/**
+ * Restarting the game
+ */
+function restartGame() {
+    gameState = "play";
+    score = 0;
+    jarFlies = [];
+    frog.tongue.state = "idle";
+    frog.tongue.y = 480;
+
+    flies = [];
+    silverFlies = [];
+
+    for (let i = 0; i < 3; i++)
+        flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
+
+    for (let i = 0; i < 2; i++)
+        silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
+
+    resetGoldenFly();
+
 
 }
 
@@ -415,6 +447,27 @@ function drawCaptureJar() {
     pop();
 
 }
+
+
+function drawWinSpeech() {
+    push();
+    textAlign(CENTER);
+    textSize(50);
+    fill("#fff765ff");
+    stroke("#ffe640ff");
+    strokeWeight(4);
+    text("YOU WIN!", width / 2, height / 2);
+
+
+    textSize(24);
+    fill("#f0ededff");
+    stroke("#ffffffff")
+    strokeWeight(2);
+    text("Press R to Restart", width / 2, height / 2 + 50);
+    pop();
+
+};
+
 
 
 
