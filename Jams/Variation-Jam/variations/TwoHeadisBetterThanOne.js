@@ -27,6 +27,8 @@ let bgMusic;
 //Frog will be an array to allow for easy flexiblity
 let frogs = []
 
+// to track the frog appearing on the border
+let borderFrog = 0
 
 // Our frog
 const frog = {
@@ -46,6 +48,10 @@ const frog = {
         state: "idle" // State can be: idle, outbound, inbound
     }
 };
+
+frogs.push(frog)
+
+
 
 // Our fly
 // Has a position, size, and speed of horizontal movement
@@ -126,6 +132,12 @@ function draw() {
     drawFrog();
     drawCaptureJar();
 }
+
+
+/**
+ *Creating border frog 
+ */
+
 
 /**
  * Moves the fly according to its speed
@@ -294,8 +306,8 @@ function drawCaptureJar() {
                 /**Trying to slow down the speed of the flies in the jar. 
                  * Add velocity for flexibility
                  */
-                vx: random(-0.05, 0.05),//horizontal speed
-                vy: random(-0.05, 0.05),//vertical speed
+                vx: random(-2, 2),//horizontal speed
+                vy: random(-2, 2),//vertical speed
                 size: 10,
 
                 //move of the flies in the jar. Using the methond function
