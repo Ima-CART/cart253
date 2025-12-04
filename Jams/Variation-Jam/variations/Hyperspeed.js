@@ -124,6 +124,7 @@ function draw() {
     //Win Screen
 
     if (gameState === "win") {
+        drawSparkles()
         drawWinSpeech();
         return;
     }
@@ -298,6 +299,17 @@ function tongueGoldenFlyOverlap() {
 
     if (d < frog.tongue.size / 2 + goldenFly.size / 2) {
         gameState = "win";
+
+        //Going to make fireworks appears
+        for (let i = 0; i < 60; i++) {
+            sparkles.push({
+                x: goldenFly.x, y: goldenFly.y,
+                vx: random(-3, 3), vy: random(-3, 3),
+                size: random(2, 4),
+                life: random(40, 80),
+                color: color(random(200, 255), random(180, 255), random(0, 255))
+            });
+        }
     }
 
 }
