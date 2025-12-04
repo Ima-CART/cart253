@@ -36,7 +36,7 @@ let sparkles = [];
 
 //Hypermode
 let hypermode = false;
-let hyperdialogue = 0;
+let hyperDialogueTimer = 0;
 
 
 // Our frog
@@ -110,7 +110,7 @@ function setup() {
         const newSilverFlies = {
             x: 0,
             y: random(50, 250),
-            size: 12,
+            size: 30,  //12,
             speed: random(5, 15),
             fill: "#d6d4d4ff"
         };
@@ -125,8 +125,30 @@ function setup() {
 function draw() {
     background("#87ceeb");
 
-    //Win Screen
+    //Screen will pause and say engage hypermode
+    if (gameState === "pause") {
+        push();
+        textAlign(CENTER);
+        textSize(48);
+        fill("#ffcc00");
+        stroke("#000");
+        strokeWeight(4);
+        text("Engage Hypermode!", width / 2, height / 2);
+        pop();
 
+        hyperDialogueTimer--;
+        if (hyperDialogueTimer <= 0) {
+            startHypermode();
+        }
+        return; // pause everything else
+    }
+
+    if (gameState === "play") {
+        for (let fly of flies) { moveFly(fly); drawFly(fly); checkTongueFlyOverlap(fly, false); }
+        for (let silverfly of silverFlies) { moveFly(silverfly); drawSilverFly(silverfly); checkTongueFlyOverlap(silverfly, true); }
+    }
+
+    //Win Screen
     if (gameState === "win") {
         drawSparkles()
         drawWinSpeech();
@@ -143,13 +165,13 @@ function draw() {
     }
 
     //the silver flies will have the same function as regular flies
-    for (let silverfly of silverFlies) {
-        moveFly(silverfly);
-        drawSilverFly(silverfly);
-        checkTongueFlyOverlap(silverfly);
+    // for (let silverfly of silverFlies) {
+    //     moveFly(silverfly);
+    //     drawSilverFly(silverfly);
+    //     checkTongueFlyOverlap(silverfly);
 
 
-    }
+    // }
     //Goldenfly and it's effect
     moveGoldenFly();
     drawGoldenTrail();
@@ -392,7 +414,7 @@ function drawFrog() {
 /**
  * Handles the tongue overlapping the fly
  */
-function checkTongueFlyOverlap(fly) {
+function checkTongueFlyOverlap(fly, silverfly) {
     // Get distance from tongue to fly
     const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
     // Check if it's an overlap
@@ -404,8 +426,29 @@ function checkTongueFlyOverlap(fly) {
         frog.tongue.state = "inbound";
         //score increases
         score++
+
+        if (silverfly) {
+            if (!hypermode) {
+                gameState = "pause";
+                hyperDialogueTimer = 120; // ~2 seconds
+            }
+        }
     }
 }
+
+/**
+ * HYPERMODE ENGAGE
+ */
+
+function startHypermode() {
+    hypermode = true;
+    goldenFly.speed = 30;
+    frog.tongue.speed = 150; // 5x faster
+    for (let f of flies) f.speed *= 5;
+    silverFlies = [silverFlies[0]]; // only 1 silverfly
+    silverFlies[0].speed *= 5;
+}
+
 
 
 
@@ -432,7 +475,11 @@ function keyPressed() {
 function restartGame() {
     gameState = "play";
     score = 0;
+    sparkles = [];
+    goldenTrail = [];
     jarFlies = [];
+    hypermode = false;
+
     frog.tongue.state = "idle";
     frog.tongue.y = 480;
 
