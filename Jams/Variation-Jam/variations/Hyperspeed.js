@@ -26,6 +26,7 @@ let dialogue = ""
 let dialogueTimer = 0
 
 
+
 // Our frog
 
 const frog = {
@@ -92,7 +93,20 @@ function setup() {
         return newFlies;
     }
     for (let i = 0; i < 3; i++) flies.push(createFly());
+    function createSilverFly() {
+        const newSilverFlies = {
+            x: 0,
+            y: random(50, 250),
+            size: 12,
+            speed: random(5, 15),
+            fill: "#d6d4d4ff"
+        };
+        return newSilverFlies;
+    }
+
+    for (let i = 0; i < 2; i++) silverFlies.push(createSilverFly());
 }
+
 
 function draw() {
     background("#87ceeb");
@@ -106,6 +120,15 @@ function draw() {
         checkTongueFlyOverlap(fly);
     }
 
+    //the silver flies will have the same function as regular flies
+    for (let silverfly of silverFlies) {
+        moveFly(silverfly);
+        drawSilverFly(silverfly);
+        checkTongueFlyOverlap(silverfly);
+
+
+    }
+
     moveGoldenFly();
     drawGoldenFly();
     tongueGoldenFlyOverlap();
@@ -113,6 +136,7 @@ function draw() {
     moveTongue();
     drawFrog();
     drawCaptureJar();
+
 
 }
 
@@ -140,6 +164,24 @@ function drawFly(fly) {
     pop();
 
 }
+
+
+/**
+ * Draw the silver fly as a grey circle
+ * 
+ */
+
+function drawSilverFly(silverfly) {
+    push();
+    noStroke();
+    fill(silverfly.fill);
+    ellipse(silverfly.x, silverfly.y, silverfly.size);
+    pop();
+
+
+}
+
+
 
 /**
  * Reset the fly when it reaches width
