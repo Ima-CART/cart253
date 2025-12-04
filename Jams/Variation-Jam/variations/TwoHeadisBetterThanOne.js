@@ -47,7 +47,7 @@ const frog = {
         // Determines how the tongue moves each frame
         state: "idle", // State can be: idle, outbound, inbound
         dirX: 0,
-        dirY=-1
+        dirY: -1,
 
     }
 };
@@ -60,9 +60,9 @@ frogs.push(frog)
  */
 
 const borderFrogs = [
-    { body: { x: 320, y: -10, size: 80 }, key: 87, visible: false },//Top frog. Will only appear when fly is caught
-    { body: { x: -10, y: 240, size: 80 }, key: 65, visible: false },//Left frog. Will only appear when fly is caught
-    { body: { x: 650, y: 240, size: 80 }, key: 68, visible: false }//Right frog. Will only appear when fly is caught
+    { body: { x: 320, y: -10, size: 80 }, key: 87, dirX: 0, dirY: 1, },//Top frog. Will only appear when fly is caught
+    { body: { x: -10, y: 240, size: 80 }, key: 65, dirX: 1, dirY: 0, },//Left frog. Will only appear when fly is caught
+    { body: { x: 650, y: 240, size: 80 }, key: 68, dirX: -1, dirY: 0, }//Right frog. Will only appear when fly is caught
 ]
 
 /**
@@ -127,9 +127,8 @@ function draw() {
         moveFly(fly);
         drawFly(fly);
         checkTongueFlyOverlap(fly);
-        // repelFly(fly);
-
     }
+
     moveFrog();
     moveTongue();
     drawFrog();
@@ -191,28 +190,54 @@ function moveFrog() {
 function moveTongue() {
     for (let f of frogs) {
         if (!f.tongue) continue;
-        // Tongue matches the frog's x
-        frog.tongue.x = frog.body.x;
+
         // If the tongue is idle, it doesn't do anything
-        if (frog.tongue.state === "idle") {
-            // Do nothing
+        if (f.tongue.state === "idle") {
+            f.tongue.x = f.body.x;
+            f.tongue.y = f.body.y;
         }
+
         // If the tongue is outbound, it moves up
-        else if (frog.tongue.state === "outbound") {
-            frog.tongue.y += -frog.tongue.speed;
-            // The tongue bounces back if it hits the top
-            if (frog.tongue.y <= 0) {
-                frog.tongue.state = "inbound";
+        else if (f.tongue.state === "outbound") {
+            f.tongue.x += f.tongue.speed * f.tongue.dirX;
+            f.tongue.y += f.tongue.speed * f.tongue.dirY;
+        }
+
+        // The tongue bounces back if it hits the top
+        else if (f.tongue.state === "inbound") {
+            f.tongue.x -= f.tongue.speed * f.tongue.dirX;
+            f.tongue.y -= f.tongue.speed * f.tongue.dirY;
+        }
+
+        // Check bounds for inbound/outbound
+        if (f.tongue.state === "outbound") {
+            if (f === frog && f.tongue.y <= 0) f.tongue.state = "inbound";
+
+            // main frog
+            else if (f !== frog) {
+                // Border frog bounds
+                if (f.tongue.dirY === 1 && f.tongue.y >= height) f.tongue.state = "inbound"; // top frog
+                if (f.tongue.dirX === 1 && f.tongue.x >= width) f.tongue.state = "inbound"; // left frog
+                if (f.tongue.dirX === -1 && f.tongue.x <= 0) f.tongue.state = "inbound"; // right frog
             }
         }
-        // If the tongue is inbound, it moves down
-        else if (frog.tongue.state === "inbound") {
-            frog.tongue.y += frog.tongue.speed;
-            // The tongue stops if it hits the bottom
-            if (frog.tongue.y >= height) {
-                frog.tongue.state = "idle";
+
+        if (f.tongue.state === "inbound") {
+            if ((f === frog && f.tongue.y >= height) ||
+                (f !== frog && dist(f.tongue.x, f.tongue.y, f.body.x, f.body.y) < f.tongue.speed)) {
+                f.tongue.state = "idle";
 
 
+
+                // // If the tongue is inbound, it moves down
+                // else if (frog.tongue.state === "inbound") {
+                //     frog.tongue.y += frog.tongue.speed;
+                //     // The tongue stops if it hits the bottom
+                //     if (frog.tongue.y >= height) {
+                //         frog.tongue.state = "idle";
+
+
+                //     }
             }
         }
     }
@@ -278,13 +303,15 @@ function spawnBorderFrog() {
 
         frogs.push({
             body: { ...newFrog.body },
+            key: newFrog.key,
             tongue: {
                 x: newFrog.body.x,
                 y: newFrog.body.y,
                 size: 15,
                 speed: 15,
+                dirX: newFrog.dirX,
+                dirY: newFrog.dirY,
                 state: "idle",
-                key: newFrog.key
 
             }
         })
@@ -370,17 +397,17 @@ function drawCaptureJar() {
  */
 
 function keyPressed() {
-    if (keyCode === 32) {
-        if (frog.tongue.state === "idle") {
-            frog.tongue.state = "outbound";
-        }
-        // Border frog tongues
-        for (let f of frogs) {
-            if (f !== frog && keyCode === f.key && f.tongue.state === "idle") {
-                f.tongue.state = "outbound";
-            }
+    if (keyCode === 32 && frog.tongue.state === "idle") {
+        frog.tongue.state = "outbound";
+    }
 
+    // Border frog tongues
+    for (let f of frogs) {
+        if (f !== frog && keyCode === f.key && f.tongue.state === "idle") {
+            f.tongue.state = "outbound";
         }
 
     }
+
 }
+
