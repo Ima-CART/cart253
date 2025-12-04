@@ -32,6 +32,7 @@ let dialogueTimer = 0;
 
 //Golden Fly effects
 let goldentrail = [];
+let sparkles = [];
 
 
 // Our frog
@@ -144,11 +145,14 @@ function draw() {
 
 
     }
-
+    //Goldenfly and it's effect
     moveGoldenFly();
     drawGoldenTrail();
     drawGoldenFly();
+    drawSparkles();
     tongueGoldenFlyOverlap();
+
+    //The frog
     moveFrog();
     moveTongue();
     drawFrog();
@@ -223,6 +227,9 @@ function moveGoldenFly() {
 
     if (goldentrail.length > 50) goldentrail.shift();
 
+    //small sparkles following the fly
+    createFlyingSparkle(goldenFly.x, goldenFly.y);
+
 
     if (goldenFly.x > width) {
         resetGoldenFly();
@@ -245,12 +252,37 @@ function drawGoldenFly() {
 function drawGoldenTrail() {
     noStroke();
     for (let t of goldentrail) {
-        fill(255, 230, 80, t.alpha);
+        fill(255, 230, 80, t.alpha); // using alpha for the opacity. Learn that alpha is for opacity change. Wanted to give it a try
         ellipse(t.x, t.y, t.size);
-        t.alpha -= 8;
+        t.alpha -= 8; //use t for trail 
     }
     goldentrail = goldentrail.filter(t => t.alpha > 0);
+
 }
+
+function createFlyingSparkle(x, y) {
+    sparkles.push({
+        x, y,
+        vx: random(-1, 1),
+        vy: random(-1, 1),
+        size: random(2, 4),
+        life: random(20, 40),
+        color: color(random(200, 255), random(180, 255), 0)
+    });
+}
+
+function drawSparkles() {
+    for (let s of sparkles) {
+        fill(s.color);
+        noStroke();
+        ellipse(s.x, s.y, s.size);
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life--;
+    }
+    sparkles = sparkles.filter(s => s.life > 0);
+}
+
 
 
 
