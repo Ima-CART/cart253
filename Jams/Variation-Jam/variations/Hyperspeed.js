@@ -147,6 +147,18 @@ function draw() {
     if (gameState === "play") {
         for (let fly of flies) { moveFly(fly); drawFly(fly); checkTongueFlyOverlap(fly, false); }
         for (let silverfly of silverFlies) { moveFly(silverfly); drawSilverFly(silverfly); checkTongueFlyOverlap(silverfly, true); }
+        //Goldenfly and it's effect
+        moveGoldenFly();
+        drawGoldenTrail();
+        drawGoldenFly();
+        drawSparkles();
+        tongueGoldenFlyOverlap();
+
+        //The frog
+        moveFrog();
+        moveTongue();
+        drawFrog();
+        drawCaptureJar();
     }
 
     //Win Screen
@@ -155,15 +167,19 @@ function draw() {
         drawWinSpeech();
         return;
     }
+    else if (gameState === "lose") {
+        drawLoseSpeech()
+    }
+
 
     /**
      * Applies the array to functions that involves the fly
-     */
-    for (let fly of flies) {
-        moveFly(fly);
-        drawFly(fly);
-        checkTongueFlyOverlap(fly);
-    }
+    */
+    // for (let fly of flies) {
+    //     moveFly(fly);
+    //     drawFly(fly);
+    //     checkTongueFlyOverlap(fly);
+    // }
 
     //the silver flies will have the same function as regular flies
     // for (let silverfly of silverFlies) {
@@ -173,18 +189,6 @@ function draw() {
 
 
     // }
-    //Goldenfly and it's effect
-    moveGoldenFly();
-    drawGoldenTrail();
-    drawGoldenFly();
-    drawSparkles();
-    tongueGoldenFlyOverlap();
-
-    //The frog
-    moveFrog();
-    moveTongue();
-    drawFrog();
-    drawCaptureJar();
 
 
 }
@@ -192,7 +196,7 @@ function draw() {
 /**
  * Moves the fly according to its speed
  * Resets the fly if it gets all the way to the right
- */
+*/
 function moveFly(fly) {
     // Move the fly
     fly.x += fly.speed;
@@ -440,15 +444,19 @@ function checkTongueFlyOverlap(fly, silverfly) {
         frog.tongue.state = "inbound";
         //score increases
         score++
-        frogGlow = 15;
+        //frogGlow = 15;
 
         if (silverfly) {
             if (!hypermode) {
                 gameState = "pause";
                 hyperDialogueTimer = 120; // ~2 seconds
+            } else {
+                gameState = "lose";
             }
-        }
+        } else {
 
+            frogGlow = 15; // glow effect for normal flies
+        }
     }
 }
 
@@ -610,6 +618,24 @@ function drawWinSpeech() {
 
 };
 
+
+function drawLoseSpeech() {
+    push();
+    textAlign(CENTER);
+    textSize(80);
+    fill("#ff3636ff");
+    stroke("#ff0000");
+    strokeWeight(4);
+    text("YOU LOSE!", width / 2, height / 2);
+
+    textSize(30);
+    fill("#ffffff");
+    noStroke();
+    text("Press R to Restart", width / 2, height / 2 + 50);
+    pop();
+
+
+}
 
 
 
