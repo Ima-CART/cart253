@@ -282,17 +282,17 @@ function checkTongueFlyOverlap(fly) {
     for (let f of frogs) {
         if (!f.tongue) continue;
         // Get distance from tongue to fly
-        const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
+        const d = dist(f.tongue.x, f.tongue.y, fly.x, fly.y);
         // Check if it's an overlap
-        const eaten = (d < frog.tongue.size / 2 + fly.size / 2);
+        const eaten = (d < f.tongue.size / 2 + fly.size / 2);
         if (eaten) {
             // Reset the fly
             resetFly(fly);
             // Score increases
             score++
 
-            frog.tongue.state = "inbound";
-            spawnBorderFrog();
+            f.tongue.state = "inbound";
+            if (f === frog) spawnBorderFrog();
         }
     }
 }
