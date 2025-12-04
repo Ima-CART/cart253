@@ -51,10 +51,22 @@ const frog = {
 
 frogs.push(frog)
 
+/**
+ * I want the frogs to respawn at a specific location
+ * Border frog will have a similar positioning as the original frog
+ */
 
+const borderFrogs = [
+    { body: { x: 320, y: -40, size: 150 }, visible: false },//Top frog. Will only appear when fly is caught
+    { body: { x: 320, y: 520, size: 150 }, visible: false },//Bottm frog. Will only appear when fly is caught
+    { body: { x: -40, y: 240, size: 150 }, visible: false },//Left frog. Will only appear when fly is caught
+    { body: { x: 680, y: 240, size: 150 }, visible: false }//Right frog. Will only appear when fly is caught
+]
 
-// Our fly
-// Has a position, size, and speed of horizontal movement
+/**
+ * Our Fly
+ * Has a position, size, and speed of horizontal movement
+ */
 const fly = {
     x: 0,
     y: 200, // Will be random
@@ -63,8 +75,10 @@ const fly = {
 };
 
 
-// Capture Jar
-
+/**
+ * Capture Jar
+ * Will keep track of the flies caught
+ */
 const jar = {
     x: 550,
     y: 20,
@@ -74,12 +88,6 @@ const jar = {
 
 }
 
-//Add a calming song to the game
-// function preload() {
-//     bgMusic = loadSound("assets/sounds/reflected-light-147979.mp3")
-// }
-
-
 /**
  * Creates the canvas and initializes the fly
  */
@@ -87,12 +95,11 @@ function setup() {
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
-    // bgMusic.loop();
-
-    // bgMusic.setVolume(0.2);
-    // bgMusic.rate(1);
 
 
+    /**
+     * Creation of the fly
+     */
     function createFly() {
 
         const newFlies = {
