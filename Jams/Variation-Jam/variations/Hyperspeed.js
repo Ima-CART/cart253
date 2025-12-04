@@ -34,6 +34,10 @@ let dialogueTimer = 0;
 let goldentrail = [];
 let sparkles = [];
 
+//Hypermode
+let hypermode = false;
+let hyperdialogue = 0;
+
 
 // Our frog
 
