@@ -58,7 +58,7 @@ const goldenFly = {
     x: 0,
     y: (100, 200),//will be random
     size: 8,
-    speed: (100, 180),
+    speed: 14,
     fill: "#ffe760ff"
 
 
@@ -213,6 +213,17 @@ function resetFly(fly) {
  */
 function moveGoldenFly() {
     goldenFly.x += goldenFly.speed
+
+    goldentrail.push({
+        x: goldenFly.x,
+        y: goldenFly.y,
+        size: random(3, 6),
+        alpha: 255
+    });
+
+    if (goldentrail.length > 50) goldentrail.shift();
+
+
     if (goldenFly.x > width) {
         resetGoldenFly();
     }
@@ -230,6 +241,18 @@ function drawGoldenFly() {
     pop();
 
 }
+
+function drawGoldenTrail() {
+    noStroke();
+    for (let t of goldentrail) {
+        fill(255, 230, 80, t.alpha);
+        ellipse(t.x, t.y, t.size);
+        t.alpha -= 8;
+    }
+    goldentrail = goldentrail.filter(t => t.alpha > 0);
+}
+
+
 
 function resetGoldenFly() {
     goldenFly.x = 0
