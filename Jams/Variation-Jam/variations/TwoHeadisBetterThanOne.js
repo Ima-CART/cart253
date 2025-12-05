@@ -93,13 +93,13 @@ frogs.push(frog)
  */
 
 const borderFrogs = [
-    { body: { x: 320, y: -10, size: 80 }, key: 87, dirX: 0, dirY: 1, },//Top frog. Will only appear when fly is caught
-    { body: { x: -10, y: 240, size: 80 }, key: 65, dirX: 1, dirY: 0, },//Left frog. Will only appear when fly is caught
-    { body: { x: 650, y: 240, size: 80 }, key: 68, dirX: -1, dirY: 0, },//Right frog. Will only appear when fly is caught
-    { body: { x: 10, y: 480, size: 80 }, key: 90, dirX: 1, dirY: -1 }, // Bottom-left frog. Will only appear when fly is caught
-    { body: { x: 630, y: 480, size: 80 }, key: 67, dirX: -1, dirY: -1 },// Bottom-right frog. Will only appear when fly is caught
-    { body: { x: 10, y: 10, size: 80 }, key: 81, dirX: 1, dirY: 1 }, // Top-left corner frog. Will only appear when fly is caught
-    { body: { x: 630, y: 10, size: 80 }, key: 69, dirX: -1, dirY: 1 },// Top-right corner frog. Will only appear when fly is caught
+    { body: { x: 320, y: -10, size: 80 }, key: 87, dirX: 0, dirY: 1, },//Top frog. Will only appear when fly is caught  Key:[W]
+    { body: { x: -10, y: 240, size: 80 }, key: 65, dirX: 1, dirY: 0, },//Left frog. Will only appear when fly is caught Key:[A]
+    { body: { x: 650, y: 240, size: 80 }, key: 68, dirX: -1, dirY: 0, },//Right frog. Will only appear when fly is caught Key:[D]
+    { body: { x: 10, y: 480, size: 80 }, key: 90, dirX: 1, dirY: -1 }, // Bottom-left frog. Will only appear when fly is caught Key:[Z]
+    { body: { x: 630, y: 480, size: 80 }, key: 67, dirX: -1, dirY: -1 },// Bottom-right frog. Will only appear when fly is caught Key:[C]
+    { body: { x: 10, y: 10, size: 80 }, key: 81, dirX: 1, dirY: 1 }, // Top-left corner frog. Will only appear when fly is caught Key: [Q]
+    { body: { x: 630, y: 10, size: 80 }, key: 69, dirX: -1, dirY: 1 },// Top-right corner frog. Will only appear when fly is caught Key:[E]
 ];
 
 /**
@@ -151,9 +151,6 @@ function createRedFly() {
     }
     return newRedFlies;
 }
-
-
-
 
 
 /**
@@ -309,6 +306,8 @@ function moveRedFly(rFly) {
     rFly.x += rFly.speed * rFly.dirX;
     rFly.y += rFly.speed * rFly.dirY;
 
+
+    //The change in direction of the flies once they meet a certain direction
     if (rFly.x < 0) { rFly.x = 0; rFly.dirX *= -1; }
     if (rFly.x > width) { rFly.x = width; rFly.dirX *= -1; }
     if (rFly.y < 0) { rFly.y = 0; rFly.dirY *= -1; }
@@ -326,13 +325,17 @@ function drawRedFly(rFly) {
 /**
  * The effect of the redfly once all borderfrog are active
  * Red flies do nothing until border frogs are all active
+ * uses the red fly and the index. idx stands for index
  */
 function redFlyEffect(rFly, idx) {
     if (newBorderFrogIndex >= borderFrogs.length) allBorderFrogsSpawned = true;
 
+    //If all the border flies are presented the red flies starts to eliminate
     if (allBorderFrogsSpawned) {
         for (let f of frogs) {
             if (!f.tongue) continue;
+
+            //When there is an overlap of the red flies the borderfrog minues
             const d = dist(f.tongue.x, f.tongue.y, rFly.x, rFly.y);
             if (d < f.tongue.size / 2 + rFly.size / 2) {
                 for (let i = frogs.length - 1; i >= 0; i--) {
@@ -343,10 +346,13 @@ function redFlyEffect(rFly, idx) {
                 }
                 redFlies.splice(idx, 1);
 
+                //The red flies will continue to respawn, but will be max 5 redflies
                 if (redFlies.length < maxRedFlies) redFlies.push(createRedFly());
 
+                //Lose game if all border frogs are eliminated
                 if (frogs.filter(f => f !== frog).length === 0) gameOver = true;
 
+                //Breaks the loop
                 break;
             }
         }
@@ -355,7 +361,7 @@ function redFlyEffect(rFly, idx) {
 
 
 /**
- * Moves the frog to the mouse position on x
+ * Moves the frog to the with the left and right keys
  */
 function moveFrog() {
     if (keyIsDown(LEFT_ARROW)) {
@@ -526,6 +532,7 @@ function checkTongueFlyOverlap(fly) {
             // Score increases
             score++
 
+            //Only the main frog can spawn border frig
             f.tongue.state = "inbound";
             if (f === frog) spawnBorderFrog();
         }
@@ -536,6 +543,7 @@ function spawnBorderFrog() {
     if (newBorderFrogIndex < borderFrogs.length) {
         let newFrog = borderFrogs[newBorderFrogIndex];
 
+        //Array to create the border frogs
         frogs.push({
             body: { ...newFrog.body },
             key: newFrog.key,
@@ -555,7 +563,9 @@ function spawnBorderFrog() {
 }
 
 
-
+/**
+ * Draw the Capture Jar
+ */
 function drawCaptureJar() {
     push();
     fill("#ffffff62")
@@ -627,8 +637,10 @@ function drawCaptureJar() {
 
 }
 
+
 /**
  * Tongue will be launched with the spacebar 
+ * The border frog has their own respective keys
  */
 
 function keyPressed() {
