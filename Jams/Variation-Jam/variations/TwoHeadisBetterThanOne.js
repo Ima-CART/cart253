@@ -30,8 +30,9 @@ let score = 0; // the score will start off as zero
 let angle; //adding the angle for the moving of the fly
 let flySpawnTimer = 0;// What the flies to spawn over time
 let flySpawnInterval = 300; // flies spawn after 5 seconds'
-let redFlySpawnInterval = 600; // Red flies will spawn every 10 seconds
+let redFlySpawnInterval = 600; // R ed flies will spawn every 10 seconds
 let bgMusic;
+let audioStarted = false;
 let gameOver = false;
 const maxRedFlies = 5;
 //Frog will be an array to allow for easy flexiblity
@@ -158,6 +159,12 @@ function createRedFly() {
     }
     return newRedFlies;
 }
+
+//Add background music
+function preload() {
+    bgMusic = loadSound("assets/sounds/wildlife-jungle-forest-background-music-263783.mp3")
+}
+
 
 
 /**
@@ -651,6 +658,14 @@ function drawCaptureJar() {
  */
 
 function keyPressed() {
+    // Start audio on first key press
+    if (!audioStarted) {
+        userStartAudio();
+        bgMusic.loop();
+        bgMusic.setVolume(0.2);
+        bgMusic.rate(1);
+        audioStarted = true;
+    }
     if (keyCode === 32 && frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
     }
