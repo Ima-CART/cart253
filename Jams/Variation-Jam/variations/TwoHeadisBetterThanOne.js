@@ -22,7 +22,8 @@ let jarFlies = [];
 let score = 0; // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
 let flySpawnTimer = 0;// What the flies to spawn over time
-let flySpawnInterval = 300; // flies spawn after 5 seconds
+let flySpawnInterval = 300; // flies spawn after 5 seconds'
+let redFlySpawnInterval = 600; // Red flies will spawn every 10 seconds
 let bgMusic;
 
 //Frog will be an array to allow for easy flexiblity
@@ -71,18 +72,6 @@ const borderFrogs = [
 ];
 
 /**
- * Our Fly
- * Has a position, size, and speed of horizontal movement
- */
-// const fly = {
-//     x: 0,
-//     y: 200, // Will be random
-//     size: 10,
-//     speed: 3
-// };
-
-
-/**
  * Capture Jar
  * Will keep track of the flies caught
  */
@@ -114,6 +103,28 @@ function createFly() {
 }
 
 /**
+ * Creation of Red Flies
+ */
+function createRedFly() {
+    const newRedFlies = {
+        x: random(0, 640),
+        y: random(100, 300),
+        size: 6,
+        fill: "#ff0000",
+        dirX: random(-1, 1),
+        dirY: random(-1, 1),
+        speed: random(2, 5),
+        teleportTimer: 0,
+        teleportInterval: int(random(180, 360)) // teleport every 3–6 seconds
+    }
+    return newRedFlies;
+}
+
+
+
+
+
+/**
  * Creates the canvas and initializes the fly
  */
 function setup() {
@@ -121,9 +132,10 @@ function setup() {
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
 
-
     // The amount of flies in the array
     for (let i = 0; i < 1; i++) flies.push(createFly());
+
+    redFlies.push(createRedFly()); // Start with one red fly
 }
 
 function draw() {
@@ -138,10 +150,24 @@ function draw() {
         flySpawnTimer = 0;
     }
 
+    /**
+     * Red flies will spawn, but only a maximum of 5
+     */
+    if (flySpawnTimer % redFlySpawnInterval === 0 && redFlies.length < 5) {
+        redFlies.push(createRedFly());
+    }
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
         checkTongueFlyOverlap(fly);
+    }
+
+
+    // Update red flies
+    for (let rFly of redFlies) {
+        moveRedFly(rFly);
+        drawRedFly(rFly);
+        checkTongueFlyOverlap(rFly);
     }
 
     moveFrog();
@@ -196,6 +222,33 @@ function drawFly(fly) {
     ellipse(fly.x, fly.y, fly.size);
     pop();
 }
+
+/**
+ * Move Red Flies
+ */
+function moveRedFly(rFly) {
+    rFly.dirX += random(-0.5, 0.5);
+    rFly.dirY += random(-0.5, 0.5);
+    rFly.dirX = constrain(rFly.dirX, -1, 1);
+    rFly.dirY = constrain(rFly.dirY, -1, 1);
+
+    rFly.x += rFly.speed * rFly.dirX;
+    rFly.y += rFly.speed * rFly.dirY;
+
+    if (rFly.x < 0) { rFly.x = 0; rFly.dirX *= -1; }
+    if (rFly.x > width) { rFly.x = width; rFly.dirX *= -1; }
+    if (rFly.y < 0) { rFly.y = 0; rFly.dirY *= -1; }
+    if (rFly.y > height) { rFly.y = height; rFly.dirY *= -1; }
+}
+
+function drawRedFly(rFly) {
+    push();
+    noStroke();
+    fill(rFly.fill);
+    ellipse(rFly.x, rFly.y, rFly.size);
+    pop();
+}
+
 
 /**
  * Resets the fly to the left with a random y
