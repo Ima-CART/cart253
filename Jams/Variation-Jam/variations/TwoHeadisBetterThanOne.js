@@ -25,13 +25,14 @@ let flySpawnTimer = 0;// What the flies to spawn over time
 let flySpawnInterval = 300; // flies spawn after 5 seconds'
 let redFlySpawnInterval = 600; // Red flies will spawn every 10 seconds
 let bgMusic;
-
+const maxRedFlies = 5;
 //Frog will be an array to allow for easy flexiblity
 let frogs = []
 
+
 // to track the frog appearing on the border
 let newBorderFrogIndex = 0
-
+let allBorderFrogsSpawned = false;
 // Our frog
 const frog = {
     // The frog's body has a position and size
@@ -152,8 +153,9 @@ function draw() {
 
     /**
      * Red flies will spawn, but only a maximum of 5
+     * Spawns at 2%. Needed more speed
      */
-    if (flySpawnTimer % redFlySpawnInterval === 0 && redFlies.length < 5) {
+    while (redFlies.length < maxRedFlies && random(1) < 0.02) {
         redFlies.push(createRedFly());
     }
     for (let fly of flies) {
