@@ -274,7 +274,7 @@ function drawRedFly(rFly) {
     pop();
 }
 
-function redFlyEffect(rFly) {
+function redFlyEffect(rFly, idx) {
     if (newBorderFrogIndex >= borderFrogs.length) allBorderFrogsSpawned = true;
 
     if (allBorderFrogsSpawned) {
