@@ -62,8 +62,12 @@ frogs.push(frog)
 const borderFrogs = [
     { body: { x: 320, y: -10, size: 80 }, key: 87, dirX: 0, dirY: 1, },//Top frog. Will only appear when fly is caught
     { body: { x: -10, y: 240, size: 80 }, key: 65, dirX: 1, dirY: 0, },//Left frog. Will only appear when fly is caught
-    { body: { x: 650, y: 240, size: 80 }, key: 68, dirX: -1, dirY: 0, }//Right frog. Will only appear when fly is caught
-]
+    { body: { x: 650, y: 240, size: 80 }, key: 68, dirX: -1, dirY: 0, },//Right frog. Will only appear when fly is caught
+    { body: { x: -10, y: 460, size: 80 }, key: 81, dirX: 1, dirY: -1 }, // Bottom-left frog. Will only appear when fly is caught
+    { body: { x: 650, y: 460, size: 80 }, key: 69, dirX: -1, dirY: -1 },// Bottom-right frog. Will only appear when fly is caught
+    { body: { x: -10, y: -10, size: 80 }, key: 90, dirX: 1, dirY: 0 }, // Top-left corner frog. Will only appear when fly is caught
+    { body: { x: 650, y: -10, size: 80 }, key: 88, dirX: -1, dirY: 0 },// Top-right corner frog. Will only appear when fly is caught
+];
 
 /**
  * Our Fly
@@ -81,14 +85,7 @@ const fly = {
  * Capture Jar
  * Will keep track of the flies caught
  */
-const jar = {
-    x: 550,
-    y: 20,
-    width: 70,
-    height: 90
 
-
-}
 
 /**
  * Creates the canvas and initializes the fly
