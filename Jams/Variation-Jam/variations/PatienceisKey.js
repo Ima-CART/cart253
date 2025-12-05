@@ -149,6 +149,7 @@ function draw() {
 
     }
 
+    //Draw the floating text when conditions are met
     if (floatingText) {
         drawFloatingText(floatingText);
         repelFloatingText(floatingText); //FloatingText will repel if tongue gets close
@@ -161,6 +162,7 @@ function draw() {
 
     }
 
+    //Fly loop
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
@@ -228,17 +230,13 @@ function moveFrog() {
 function moveTongue() {
     // Tongue matches the frog's x
     frog.tongue.x = frog.body.x;
-    // If the tongue is idle, it doesn't do anything
-    if (frog.tongue.state === "idle") {
-        // Do nothing
-    }
+
     // If the tongue is outbound, it moves up
-    else if (frog.tongue.state === "outbound") {
-        frog.tongue.y += -frog.tongue.speed;
+    if (frog.tongue.state === "outbound") {
+        frog.tongue.y -= frog.tongue.speed;
         // The tongue bounces back if it hits the top
         if (frog.tongue.y <= 0) {
             frog.tongue.state = "inbound";
-            consecutiveCatches = 0;
         }
     }
     // If the tongue is inbound, it moves down
@@ -247,9 +245,13 @@ function moveTongue() {
         // The tongue stops if it hits the bottom
         if (frog.tongue.y >= height) {
             frog.tongue.state = "idle";
-            consecutiveCatches = 0;
-            //     dialogue = " I am so hungry";
-
+            // Check if game over or won after the tongue reaches idle state
+            if (consecutiveCatches < 3 && !gameWon) {
+                gameOver = true;  // Game over if fewer than 3 consecutive catches
+            } else if (consecutiveCatches >= 10) {
+                gameWon = true;  // Player wins after catching 10 flies consecutively
+            }
+            consecutiveCatches = 0; // Reset consecutive catches
         }
     }
 }
