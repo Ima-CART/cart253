@@ -25,6 +25,7 @@ let flySpawnTimer = 0;// What the flies to spawn over time
 let flySpawnInterval = 300; // flies spawn after 5 seconds'
 let redFlySpawnInterval = 600; // Red flies will spawn every 10 seconds
 let bgMusic;
+let gameOver = false;
 const maxRedFlies = 5;
 //Frog will be an array to allow for easy flexiblity
 let frogs = []
@@ -66,10 +67,10 @@ const borderFrogs = [
     { body: { x: 320, y: -10, size: 80 }, key: 87, dirX: 0, dirY: 1, },//Top frog. Will only appear when fly is caught
     { body: { x: -10, y: 240, size: 80 }, key: 65, dirX: 1, dirY: 0, },//Left frog. Will only appear when fly is caught
     { body: { x: 650, y: 240, size: 80 }, key: 68, dirX: -1, dirY: 0, },//Right frog. Will only appear when fly is caught
-    { body: { x: 10, y: 480, size: 80 }, key: 81, dirX: 1, dirY: -1 }, // Bottom-left frog. Will only appear when fly is caught
-    { body: { x: 630, y: 480, size: 80 }, key: 69, dirX: -1, dirY: -1 },// Bottom-right frog. Will only appear when fly is caught
-    { body: { x: 10, y: 10, size: 80 }, key: 90, dirX: 1, dirY: 1 }, // Top-left corner frog. Will only appear when fly is caught
-    { body: { x: 630, y: 10, size: 80 }, key: 88, dirX: -1, dirY: 1 },// Top-right corner frog. Will only appear when fly is caught
+    { body: { x: 10, y: 480, size: 80 }, key: 90, dirX: 1, dirY: -1 }, // Bottom-left frog. Will only appear when fly is caught
+    { body: { x: 630, y: 480, size: 80 }, key: 67, dirX: -1, dirY: -1 },// Bottom-right frog. Will only appear when fly is caught
+    { body: { x: 10, y: 10, size: 80 }, key: 81, dirX: 1, dirY: 1 }, // Top-left corner frog. Will only appear when fly is caught
+    { body: { x: 630, y: 10, size: 80 }, key: 69, dirX: -1, dirY: 1 },// Top-right corner frog. Will only appear when fly is caught
 ];
 
 /**
@@ -141,6 +142,21 @@ function setup() {
 
 function draw() {
     background("#87ceeb");
+
+    /**
+     * Game over Screen
+     * You lose when all the border frogs are gone
+     */
+    if (gameOver) {
+        background("#000033"); // dark dark blue
+        fill("#ff6600"); // dark orange text
+        textSize(36);
+        textAlign(CENTER, CENTER);
+        text("GAME OVER", width / 2, height / 2 - 40);
+        textSize(28);
+        text("Final Score: " + score, width / 2, height / 2 + 20);
+        return;
+    }
 
     /**
  * Spawn flies over time 
