@@ -4,12 +4,18 @@
  * 
  * The variation is called hyperspeed. It's a chaotic version where everything is extremely fast and
  * there is no way to control the tongue and know if you caught a fly.
+ * There are 2 modes to venture through
+ * 
  * 
  * Instructions:
- * - Move the frog with the left and right keys
- * - Click to launch the tongue
+ * - Move the frog with your left and right keys
+ * - Spacebar to launch the tongue
  * - Catch flies
+ * - Golden fly is the savior 
+ * - silver fly is the tricker
  * 
+ * Prof. Pippin Baar's Frogfrogfrog base game
+ * Just a variation
  * Made with p5
  * https://p5js.org/
  */
@@ -35,6 +41,10 @@ let sparkles = [];
 //Hypermode
 let hypermode = false;
 let hyperDialogueTimer = 0;
+
+//Music
+let hypermodeMusic;
+let regularBgMusic;
 
 
 // Our frog
@@ -107,6 +117,11 @@ const jar = {
 }
 
 
+//Add a background music to the game
+function preload() {
+    regularBgMusic = loadSound("assets/sounds/game-minecraft-gaming-background-music-402451.mp3");
+    hypermodeMusic = loadSound("assets/sounds/royal-reckoning-background-game-music-for-video-224645.mp3")
+}
 
 
 /**
@@ -152,6 +167,27 @@ function setup() {
 
 function draw() {
     background("#87ceeb");
+
+
+
+    // Play regular music if in regular mode and it's not playing already
+    if (gameState === "play" && !hypermode && !regularBgMusic.isPlaying()) {
+        regularBgMusic.loop();  // Start or loop the regular music
+        hypermodeMusic.stop(); // Ensure hypermode music stops if it's playing
+    }
+
+    // Play hypermode music if hypermode is active and it's not playing already
+    if (gameState === "play" && hypermode && !hypermodeMusic.isPlaying()) {
+        hypermodeMusic.loop();  // Start or loop the hypermode music
+        regularBgMusic.stop(); // Ensure regular music stops if it's playing
+    }
+
+    // Stop music when the game is over or paused
+    if (gameState === "win" || gameState === "lose" || gameState === "pause") {
+        regularBgMusic.stop();
+        hypermodeMusic.stop();
+    }
+
 
     //Screen will pause and say engage hypermode  
     if (gameState === "pause") {
@@ -212,24 +248,6 @@ function draw() {
         drawLoseSpeech()
     }
 
-
-    /**
-     * Applies the array to functions that involves the fly
-    */
-    // for (let fly of flies) {
-    //     moveFly(fly);
-    //     drawFly(fly);
-    //     checkTongueFlyOverlap(fly);
-    // }
-
-    //the silver flies will have the same function as regular flies
-    // for (let silverfly of silverFlies) {
-    //     moveFly(silverfly);
-    //     drawSilverFly(silverfly);
-    //     checkTongueFlyOverlap(silverfly);
-
-
-    // }
 
 
 }
@@ -356,11 +374,6 @@ function drawSparkles() {
 
 
 
-function resetGoldenFly() {
-    goldenFly.x = 0
-    goldenFly.y = random(0, 250)
-
-}
 
 
 function tongueGoldenFlyOverlap() {
@@ -385,6 +398,11 @@ function tongueGoldenFlyOverlap() {
 
 }
 
+function resetGoldenFly() {
+    goldenFly.x = 0
+    goldenFly.y = random(0, 250)
+
+}
 
 
 /**
@@ -547,118 +565,6 @@ function checkTongueFlyOverlap(fly, silverfly) {
 }
 
 /**
- * HYPERMODE ENGAGE
- */
-
-function startHypermode() {
-    hypermode = true;
-    goldenFly.speed = 30;
-    frog.tongue.speed = 150; // 5x faster
-    for (let f of flies) f.speed *= 5;
-    silverFlies = [silverFlies[0]]; // only 1 silverfly
-    silverFlies[0].speed *= 5;
-}
-
-
-
-
-/**
- * Tongue will be launched with the spacebar
- */
-// function keyPressed() {
-//     if (keyCode === 32) {
-//         if (frog.tongue.state === "idle") {
-//             frog.tongue.state = "outbound";
-
-//         }
-//     }
-
-//     if (gameState === "win" && key === "r") {
-//         restartGame();
-//     }
-
-// }
-function keyPressed() {
-    if (keyCode === 32 && frog.tongue.state === "idle") frog.tongue.state = "outbound";
-    if (key === "r" && (gameState === "win" || gameState === "lose")) restartGame();
-}
-
-
-/**
- * Restarting the game
- */
-
-function restartGame() {
-    // Reset game state and score
-    gameState = "play";
-    score = 0;
-    frogGlow = 0;
-    hypermode = false;  // Reset hypermode here!
-
-    // Reset frog's tongue state
-    frog.tongue.state = "idle";
-    frog.tongue.y = 480;  // Reset tongue to starting position
-
-    // Reset flies
-    flies = [];
-    silverFlies = [];
-
-    // Reset frog's speed and the speed of all flies
-    frog.tongue.speed = 30;  // Default tongue speed
-    for (let i = 0; i < 3; i++) {
-        flies.push({
-            x: 0,
-            y: random(100, 200),
-            size: 10,
-            speed: random(10, 30),
-            fill: "#000"
-        });
-    }
-
-    for (let i = 0; i < 2; i++) {
-        silverFlies.push({
-            x: 0,
-            y: random(50, 250),
-            size: 12,
-            speed: random(5, 15),
-            fill: "#d6d4d4ff"
-        });
-    }
-
-    // Reset the golden fly and its trail
-    resetGoldenFly();
-    goldentrail = [];
-    sparkles = [];
-}
-
-// function restartGame() {  
-//     gameState = "play";
-//     score = 0;
-//     sparkles = [];
-//     goldenTrail = [];
-//     jarFlies = [];
-//     frogGlow = 0;
-//     hypermode = false;
-
-//     frog.tongue.state = "idle";
-//     frog.tongue.y = 480;
-//     frog.speed = 30
-
-//     flies = [];
-//     silverFlies = [];
-
-//     for (let i = 0; i < 3; i++)
-//         flies.push({ x: 0, y: random(100, 200), size: 10, speed: random(10, 30), fill: "#000" });
-
-//     for (let i = 0; i < 2; i++)
-//         silverFlies.push({ x: 0, y: random(100, 200), size: 12, speed: random(15, 35), fill: "#c0c0c0" });
-
-//     resetGoldenFly();
-
-
-// }
-
-/**
  * Draws the capture jar and the flies inside
  */
 
@@ -734,6 +640,74 @@ function drawCaptureJar() {
 }
 
 
+/**
+ * HYPERMODE ENGAGE
+*/
+function startHypermode() {
+    hypermode = true;
+    goldenFly.speed = 30;
+    frog.tongue.speed = 150; // 5x faster
+    for (let f of flies) f.speed *= 5;
+    silverFlies = [silverFlies[0]]; // only 1 silverfly
+    silverFlies[0].speed *= 5;
+}
+
+
+
+function keyPressed() {
+    if (keyCode === 32 && frog.tongue.state === "idle") frog.tongue.state = "outbound";
+    if (key === "r" && (gameState === "win" || gameState === "lose")) restartGame();
+}
+
+
+/**
+ * Restarting the game
+ */
+function restartGame() {
+    // Reset game state and score
+    gameState = "play";
+    score = 0;
+    frogGlow = 0;
+    hypermode = false;  // Reset hypermode here!
+
+    // Reset frog's tongue state
+    frog.tongue.state = "idle";
+    frog.tongue.y = 480;  // Reset tongue to starting position
+
+    // Reset flies
+    flies = [];
+    silverFlies = [];
+
+    // Reset frog's speed and the speed of all flies
+    frog.tongue.speed = 30;  // Default tongue speed
+    for (let i = 0; i < 3; i++) {
+        flies.push({
+            x: 0,
+            y: random(100, 200),
+            size: 10,
+            speed: random(10, 30),
+            fill: "#000"
+        });
+    }
+
+    for (let i = 0; i < 2; i++) {
+        silverFlies.push({
+            x: 0,
+            y: random(50, 250),
+            size: 12,
+            speed: random(5, 15),
+            fill: "#d6d4d4ff"
+        });
+    }
+
+    // Reset the golden fly and its trail
+    resetGoldenFly();
+    goldentrail = [];
+    sparkles = [];
+}
+
+
+
 function drawWinSpeech() {
     push();
     textAlign(CENTER);
@@ -774,11 +748,3 @@ function drawLoseSpeech() {
 
 
 
-/**
- * Launch the tongue on click (if it's not launched yet)
- */
-// function mousePressed() {
-//     if (frog.tongue.state === "idle") {
-//         frog.tongue.state = "outbound";
-//     }
-// }
