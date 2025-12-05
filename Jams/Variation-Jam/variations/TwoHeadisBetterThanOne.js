@@ -16,9 +16,10 @@
 "use strict";
 
 // Arrays for flies
-let flies = []
-let jarFlies = []
-let score = 0 // the score will start off as zero 
+let flies = [];
+let redFlies = [];
+let jarFlies = [];
+let score = 0; // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
 let flySpawnTimer = 0;// What the flies to spawn over time
 let flySpawnInterval = 300; // flies spawn after 5 seconds
