@@ -81,7 +81,10 @@ function setup() {
     bgMusic.setVolume(0.2);
     bgMusic.rate(1);
 
-
+    /**
+     * Creation of the fly in the array
+     *
+     */
     function createFly() {
 
         const newFlies = {
@@ -95,17 +98,42 @@ function setup() {
         return newFlies;
     }
 
-    // the creation of flies in the array 
-    for (let i = 0; i < 4; i++) flies.push(createFly());
-    // flies.push(createFly())
-    // flies.push(createFly())
-    // flies.push(createFly())
-    // flies.push(createFly())
+    // Set to have 15 flies
+    for (let i = 0; i < 20; i++) flies.push(createFly());
+
 }
 
 function draw() {
     background("#87ceeb");
 
+    //Game Over Screen
+    if (gameOver) {
+        // Show Game Over screen
+        background("#ff0000");  // Game Over background color
+        fill("#ffffff");
+        textSize(40);
+        textAlign(CENTER);
+        text("Game Over!", width / 2, height / 2);
+        textSize(20);
+        text("Press 'R' to Restart", width / 2, height / 2 + 50);
+        return;  // Stop further drawing
+    }
+
+    // Winning Game Screen 
+    if (gameWon) {
+        // Show Win screen
+        background("#32CD32");  // Win background color
+        fill("#ffffff");
+        textSize(40);
+        textAlign(CENTER);
+        text("You Win!", width / 2, height / 2);
+        textSize(20);
+        text("Press 'R' to Restart", width / 2, height / 2 + 50);
+        return;  // Stop further drawing
+    }
+
+
+    //Addition of Dialogue
     if (dialogueTimer > 0) {
         dialogueTimer--;
     } else if (dialogueTimer === 0) {
