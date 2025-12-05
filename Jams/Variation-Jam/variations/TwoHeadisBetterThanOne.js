@@ -20,8 +20,8 @@ let flies = []
 let jarFlies = []
 let score = 0 // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
-let dialogue = "";// adding dialogue to the game
-let dialogueTimer = 0; // timer for showing dialogue
+let flySpawnTimer = 0;// What the flies to spawn over time
+let flySpawnInterval = 300; // flies spawn after 5 seconds
 let bgMusic;
 
 //Frog will be an array to allow for easy flexiblity
