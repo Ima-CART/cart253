@@ -229,15 +229,6 @@ function moveTongue() {
 
 
 
-                // // If the tongue is inbound, it moves down
-                // else if (frog.tongue.state === "inbound") {
-                //     frog.tongue.y += frog.tongue.speed;
-                //     // The tongue stops if it hits the bottom
-                //     if (frog.tongue.y >= height) {
-                //         frog.tongue.state = "idle";
-
-
-                //     }
             }
         }
     }
