@@ -150,14 +150,9 @@ function draw() {
         flies.push(createFly());
         flySpawnTimer = 0;
     }
+    flySpawnInterval = max(20, 200 - score * 5); // faster spawns with higher score
 
-    /**
-     * Red flies will spawn, but only a maximum of 5
-     * Spawns at 2%. Needed more speed
-     */
-    while (redFlies.length < maxRedFlies && random(1) < 0.02) {
-        redFlies.push(createRedFly());
-    }
+    //Fly Funtion
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
@@ -166,10 +161,19 @@ function draw() {
 
 
     // Update red flies
-    for (let rFly of redFlies) {
+    for (let i = redFlies.length - 1; i >= 0; i--) {
+        let rFly = redFlies[i];
         moveRedFly(rFly);
         drawRedFly(rFly);
-        checkTongueFlyOverlap(rFly);
+        redFlyEffect(rFly, i);
+    }
+
+    /**
+     * Red flies will spawn, but only a maximum of 5
+     * Spawns at 2%. Needed more speed
+     */
+    while (redFlies.length < maxRedFlies && random(1) < 0.02) {
+        redFlies.push(createRedFly());
     }
 
     moveFrog();
@@ -226,6 +230,14 @@ function drawFly(fly) {
 }
 
 /**
+ * Resets the fly to the left with a random y
+ */
+function resetFly(fly) {
+    fly.x = 0;
+    fly.y = random(0, 300);
+}
+
+/**
  * Move Red Flies
  */
 function moveRedFly(rFly) {
@@ -262,14 +274,32 @@ function drawRedFly(rFly) {
     pop();
 }
 
+function redFlyEffect(rFly) {
+    if (newBorderFrogIndex >= borderFrogs.length) allBorderFrogsSpawned = true;
 
-/**
- * Resets the fly to the left with a random y
- */
-function resetFly(fly) {
-    fly.x = 0;
-    fly.y = random(0, 300);
+    if (allBorderFrogsSpawned) {
+        for (let f of frogs) {
+            if (!f.tongue) continue;
+            const d = dist(f.tongue.x, f.tongue.y, rFly.x, rFly.y);
+            if (d < f.tongue.size / 2 + rFly.size / 2) {
+                for (let i = frogs.length - 1; i >= 0; i--) {
+                    if (frogs[i] !== frog) {
+                        frogs.splice(i, 1);
+                        break;
+                    }
+                }
+                redFlies.splice(idx, 1);
+
+                if (redFlies.length < maxRedFlies) redFlies.push(createRedFly());
+
+                if (frogs.filter(f => f !== frog).length === 0) gameOver = true;
+
+                break;
+            }
+        }
+    }
 }
+
 
 /**
  * Moves the frog to the mouse position on x
