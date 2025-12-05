@@ -1,18 +1,24 @@
 /**
  * Frogfrogfrog
- * Pippin Barr
+ * Ima Williams
  * 
- * A game of catching flies with your frog-tongue
+ * Variation Patience is Key
+ * You need patience to play this game.
+ * A slow game where you need to catch 3 flies in a row to stay alive
+ * You get more surprise depending on your streak. 
+ * Keep the frog fed
  * 
  * Instructions:
- * - Move the frog with your mouse
- * - Click to launch the tongue
+ * - Move the frog with your left and right keys
+ * - Spacebar to launch the tongue
  * - Catch flies
+ * - Catching consecutive flies is key
  * 
+ * Prof. Pippin Baar's Frogfrogfrog base game
+ * Just a variation
  * Made with p5
  * https://p5js.org/
  */
-
 "use strict";
 
 // Arrays for flies
