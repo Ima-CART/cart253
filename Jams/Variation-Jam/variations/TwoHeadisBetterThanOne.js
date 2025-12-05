@@ -137,6 +137,7 @@ function createFly() {
  * Creation of Red Flies
  */
 function createRedFly() {
+
     const newRedFlies = {
         x: random(0, 640),
         y: random(100, 300),
@@ -159,6 +160,7 @@ function createRedFly() {
  * Creates the canvas and initializes the fly
  */
 function setup() {
+
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
@@ -231,7 +233,8 @@ function draw() {
 
 /**
  * Moves the fly in a jittery fashion
- * Resets the fly if it gets all the way to the right
+ * Flies will stay in the canvas and respawn
+ * The all have different speed
  */
 function moveFly(fly) {
     if (fly.baseSpeed === undefined) fly.baseSpeed = fly.speed;
@@ -444,58 +447,64 @@ function drawFrog() {
             pop();
 
 
-            // Draw the frog's body
+            // Draw  the frog's body
             push();
             fill("#00ff00");
             noStroke();
             ellipse(f.body.x, f.body.y, f.body.size);
             pop();
 
+            /**
+             * The function provided is to allow the frog eyes to appear on all frog
+             * Combined is the scaling of the main frog and the small scale of the smaller frog
+             * 
+             */
 
-            //Draw the frog's green eye
-            //The left eye
+            let scale = f.body.size / 150;
+            let eyeX = 45 * scale;
+            let eyeY = 70 * scale;
+            let pupilY = 73 * scale;
+
+            let dx = f.tongue.dirX;
+            let dy = f.tongue.dirY;
+
+            function rotateOffset(x, y, dirX, dirY) {
+                let a = atan2(dirY, dirX) + 90;
+                let nx = x * cos(a) - y * sin(a);
+                let ny = x * sin(a) + y * cos(a);
+                return { x: nx, y: ny };
+            }
+
+            let left = rotateOffset(-eyeX, -eyeY, dx, dy);
+            let right = rotateOffset(eyeX, -eyeY, dx, dy);
+            let leftP = rotateOffset(-eyeX, -pupilY, dx, dy);
+            let rightP = rotateOffset(eyeX, -pupilY, dx, dy);
+
+            // GREEN EYELIDS
             push();
-            fill(f.eyelid.fill)
             noStroke();
-            ellipse(f.body.x - 45, f.body.y - 70, f.body.size - 105)
+            strokeWeight(0);
+            fill("#00ff00");
+            ellipse(f.body.x + left.x, f.body.y + left.y, f.body.size - 105 * scale);
+            ellipse(f.body.x + right.x, f.body.y + right.y, f.body.size - 105 * scale);
             pop();
 
-            //The right eye
+            // WHITE EYES
             push();
-            fill(f.eyelid.fill)
             noStroke();
-            ellipse(f.body.x + 45, f.body.y - 70, f.body.size - 105)
+            strokeWeight(0);
+            fill("#fff");
+            ellipse(f.body.x + left.x, f.body.y + left.y, f.body.size - 120 * scale);
+            ellipse(f.body.x + right.x, f.body.y + right.y, f.body.size - 120 * scale);
             pop();
 
-
-            //Draw the frog's white part of the eye
-            //The left eye
+            // PUPILS
             push();
-            fill(f.eye.fill)
             noStroke();
-            ellipse(f.body.x - 45, f.body.y - 70, f.body.size - 120)
-            pop();
-
-            //The right eye
-            push();
-            fill(f.eye.fill)
-            noStroke();
-            ellipse(f.body.x + 45, f.body.y - 70, f.body.size - 120)
-            pop();
-
-            //The pupil
-            //The right pupil
-            push();
-            fill(f.pupil.fill)
-            noStroke();
-            ellipse(f.body.x - 45, f.body.y - 73, f.body.size - 130)
-            pop();
-
-            //The left pupil
-            push();
-            fill(f.pupil.fill)
-            noStroke();
-            ellipse(f.body.x + 45, f.body.y - 73, f.body.size - 130)
+            strokeWeight(0);
+            fill("#000");
+            ellipse(f.body.x + leftP.x, f.body.y + leftP.y, f.body.size - 130 * scale);
+            ellipse(f.body.x + rightP.x, f.body.y + rightP.y, f.body.size - 130 * scale);
             pop();
 
         }
@@ -530,9 +539,6 @@ function spawnBorderFrog() {
         frogs.push({
             body: { ...newFrog.body },
             key: newFrog.key,
-            eye: { fill: "white" },
-            eyelid: { fill: "#00aa00" },
-            pupil: { fill: "black" },
             tongue: {
                 x: newFrog.body.x,
                 y: newFrog.body.y,
