@@ -23,6 +23,9 @@ let angle; //adding the angle for the moving of the fly
 let dialogue = "";// adding dialogue to the game
 let dialogueTimer = 0; // timer for showing dialogue
 let consecutiveCatches = 0;//variable for flies that are caught in succession
+let gameOver = false;  // Flag to track game over state
+let gameWon = false;   // Flag to track game win state
+
 let bgMusic;
 
 // adding a fun element a floating interactive text
