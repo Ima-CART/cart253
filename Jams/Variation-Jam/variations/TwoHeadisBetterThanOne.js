@@ -85,6 +85,12 @@ const fly = {
  * Capture Jar
  * Will keep track of the flies caught
  */
+const jar = {
+    x: 550,
+    y: 20,
+    width: 70,
+    height: 90
+};
 
 
 /**
