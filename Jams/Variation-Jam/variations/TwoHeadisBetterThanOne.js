@@ -108,11 +108,14 @@ function setup() {
     function createFly() {
 
         const newFlies = {
-            x: 0,
+            x: random(0, 640),
             y: random(100, 200), //Give the fly its first random position between 100 and 200
             size: 10,
             speed: random(1, 5), // I want the flies to appear slow
-            fill: "#000"
+            fill: "#000",
+            dirX: random(-1, 1),
+            dirY: random(-1, 1),
+            baseSpeed: undefined // Being used as reference so the fly fluctuation does not go to crazy 
 
         }
         return newFlies;
