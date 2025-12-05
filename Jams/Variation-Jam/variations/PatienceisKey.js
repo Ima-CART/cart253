@@ -25,7 +25,7 @@ let dialogueTimer = 0; // timer for showing dialogue
 let consecutiveCatches = 0;//variable for flies that are caught in succession
 let gameOver = false;  // Flag to track game over state
 let gameWon = false;   // Flag to track game win state
-
+let audioStarted = false;// audio will play when key is pressed
 let bgMusic;
 
 // adding a fun element a floating interactive text
@@ -45,7 +45,7 @@ const frog = {
         x: undefined,
         y: 480,
         size: 20,
-        speed: 5,
+        speed: .5,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     },
@@ -98,6 +98,22 @@ function preload() {
     bgMusic = loadSound("assets/sounds/reflected-light-147979.mp3")
 }
 
+/**
+ * Creation of the fly in the array
+ *
+ */
+function createFly() {
+
+    const newFlies = {
+        x: 0,
+        y: random(50, 300), //Give the fly its first random position between 100 and 200
+        size: 10,
+        speed: random(.1, .5), // I want the flies to appear slow
+        fill: "#000"
+
+    }
+    return newFlies;
+}
 
 /**
  * Creates the canvas and initializes the fly
@@ -106,30 +122,10 @@ function setup() {
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
-    bgMusic.loop();
 
-    bgMusic.setVolume(0.2);
-    bgMusic.rate(1);
 
-    /**
-     * Creation of the fly in the array
-     *
-     */
-    function createFly() {
-
-        const newFlies = {
-            x: 0,
-            y: random(100, 200), //Give the fly its first random position between 100 and 200
-            size: 10,
-            speed: random(.1, .5), // I want the flies to appear slow
-            fill: "#000"
-
-        }
-        return newFlies;
-    }
-
-    // Set to have 15 flies
-    for (let i = 0; i < 20; i++) flies.push(createFly());
+    // Set to have 3 0 flies
+    for (let i = 0; i < 30; i++) flies.push(createFly());
 
 }
 
@@ -187,7 +183,7 @@ function draw() {
         //When the timer runs out, remove the floatingtext
         floatingTextTimer--;
         if (floatingTextTimer <= 0) {
-            floatingText = null;//Remove floating text after 10 seconds
+            floatingText = null;//Remove floating text after 20 seconds
         }
 
     }
@@ -374,6 +370,11 @@ function checkTongueFlyOverlap(fly) {
         //Consecutive catches increase
         consecutiveCatches++
 
+
+        /**
+         * INTRODUCING THE STREAKS
+         */
+
         if (consecutiveCatches === 3) {
             dialogue = "Three in a row! You're moving forward";
             dialogueTimer = 120; //2 second
@@ -391,7 +392,7 @@ function checkTongueFlyOverlap(fly) {
                 text: "5 in a row! Keep it up",
                 fill: "#f9770dff"
             }
-            floatingTextTimer = 600; //Floating text will only appear for 10 seconds
+            floatingTextTimer = 1200; //Floating text will only appear for 20 seconds
         }
 
         else if (consecutiveCatches === 10) {
@@ -402,7 +403,6 @@ function checkTongueFlyOverlap(fly) {
         else {
             dialogue = ""
         }
-        // frog.tongue.state = "inbound";
     }
 }
 
@@ -543,24 +543,37 @@ function repelFloatingText(floatingText) {
  */
 
 function keyPressed() {
-    if (keyCode === 32) {
+
+    if (!audioStarted) {
+        userStartAudio();
+        bgMusic.loop();
+        bgMusic.setVolume(0.2);
+        bgMusic.rate(1);
+        audioStarted = true;
+    }
+    if (keyCode === 32 && !gameOver && !gameWon) {
         if (frog.tongue.state === "idle") {
             frog.tongue.state = "outbound";
 
-
-
-
         }
+    }
+    // Restart the game if 'R' is pressed
+    if (key === 'r' || key === 'R') {
+        // Reset game state
+        gameOver = false;
+        gameWon = false;
+        score = 0;
+        consecutiveCatches = 0;
+        flies = [];
+        for (let i = 0; i < 15; i++) flies.push(createFly());
+        // Reset tongue
+        frog.tongue.y = 480;
+        frog.tongue.state = "idle";
+
+        // Reset floating text
+        floatingText = null;
+        floatingTextTimer = 0;
 
     }
 
 }
-
-/**
- * Launch the tongue on click (if it's not lauxnched yet)
- */
-// function mousePressed() {
-//     if (frog.tongue.state === "idle") {
-//         frog.tongue.state = "outbound";
-//     }
-// 
