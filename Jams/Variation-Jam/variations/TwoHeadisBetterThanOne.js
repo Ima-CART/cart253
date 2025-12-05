@@ -134,13 +134,15 @@ function setup() {
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
 
-    // The amount of flies in the array
-    for (let i = 0; i < 1; i++) flies.push(createFly());
+    // Start of with one fly
+    flies.push(createFly());
 
-    redFlies.push(createRedFly()); // Start with one red fly
+    // Start with one red fly
+    redFlies.push(createRedFly());
 }
 
 function draw() {
+
     background("#87ceeb");
 
     /**
@@ -175,6 +177,13 @@ function draw() {
         checkTongueFlyOverlap(fly);
     }
 
+    /**
+       * Red flies will spawn, but only a maximum of 5
+       * Spawns at 2%. Needed more speed
+      */
+    while (redFlies.length < maxRedFlies && random(1) < 0.02) {
+        redFlies.push(createRedFly());
+    }
 
     // Update red flies
     for (let i = redFlies.length - 1; i >= 0; i--) {
@@ -182,14 +191,6 @@ function draw() {
         moveRedFly(rFly);
         drawRedFly(rFly);
         redFlyEffect(rFly, i);
-    }
-
-    /**
-     * Red flies will spawn, but only a maximum of 5
-     * Spawns at 2%. Needed more speed
-     */
-    while (redFlies.length < maxRedFlies && random(1) < 0.02) {
-        redFlies.push(createRedFly());
     }
 
     moveFrog();
@@ -290,6 +291,10 @@ function drawRedFly(rFly) {
     pop();
 }
 
+/**
+ * The effect of the redfly once all borderfrog are active
+ * Red flies do nothing until border frogs are all active
+ */
 function redFlyEffect(rFly, idx) {
     if (newBorderFrogIndex >= borderFrogs.length) allBorderFrogsSpawned = true;
 
@@ -359,9 +364,9 @@ function moveTongue() {
         if (f.tongue.state === "outbound") {
             if (f === frog && f.tongue.y <= 0) f.tongue.state = "inbound";
 
-            // main frog
+            // Border Frogs
             else if (f !== frog) {
-                // Border frog bounds
+                // Border frog Tongues
                 if (f.tongue.dirY === 1 && f.tongue.y >= height) f.tongue.state = "inbound"; // top frog
                 if (f.tongue.dirX === 1 && f.tongue.x >= width) f.tongue.state = "inbound"; // left frog
                 if (f.tongue.dirX === -1 && f.tongue.x <= 0) f.tongue.state = "inbound"; // right frog
@@ -372,11 +377,18 @@ function moveTongue() {
             if ((f === frog && f.tongue.y >= height) ||
                 (f !== frog && dist(f.tongue.x, f.tongue.y, f.body.x, f.body.y) < f.tongue.speed)) {
                 f.tongue.state = "idle";
-
-
-
             }
         }
+
+        if (f.tongue.state === "inbound") {
+            const d = dist(f.tongue.x, f.tongue.y, f.body.x, f.body.y);
+            if (d <= f.tongue.speed || d < 1) {
+                f.tongue.state = "idle";
+                f.tongue.x = f.body.x;
+                f.tongue.y = f.body.y;
+            }
+        }
+
     }
 }
 
