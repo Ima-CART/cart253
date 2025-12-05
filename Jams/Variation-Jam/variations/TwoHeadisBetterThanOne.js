@@ -1,14 +1,21 @@
 /**
  * Frogfrogfrog
- * Pippin Barr
+ * Ima Williams
  * 
- * A game of catching flies with your frog-tongue
+ * Variation Two heads is better than one
+ * A game of catching flies with your frog-tongue and having allies assist you.
+ * Get as many flies as you can before the red flies eliminates your friends
  * 
  * Instructions:
- * - Move the frog with your mouse
- * - Click to launch the tongue
+ * - Move the frog with your left and right keys
+ * - Spacebar to launch the tongue
  * - Catch flies
+ * - Get help from more flies
+ * - Use keys to launch the tongues of your friends 
+ * - Careful the redFlies attack your friends if condition is met 
  * 
+ * Prof. Pippin Baar's Frogfrogfrog base game
+ * Just a variation
  * Made with p5
  * https://p5js.org/
  */
