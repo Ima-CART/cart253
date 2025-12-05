@@ -73,12 +73,12 @@ const borderFrogs = [
  * Our Fly
  * Has a position, size, and speed of horizontal movement
  */
-const fly = {
-    x: 0,
-    y: 200, // Will be random
-    size: 10,
-    speed: 3
-};
+// const fly = {
+//     x: 0,
+//     y: 200, // Will be random
+//     size: 10,
+//     speed: 3
+// };
 
 
 /**
@@ -94,6 +94,25 @@ const jar = {
 
 
 /**
+ * Creation of the fly
+*/
+function createFly() {
+
+    const newFlies = {
+        x: random(0, 640),
+        y: random(100, 200), //Give the fly its first random position between 100 and 200
+        size: 10,
+        speed: random(1, 5), // I want the flies to appear slow
+        fill: "#000",
+        dirX: random(-1, 1),
+        dirY: random(-1, 1),
+        baseSpeed: undefined // Being used as reference so the fly fluctuation does not go to crazy 
+
+    }
+    return newFlies;
+}
+
+/**
  * Creates the canvas and initializes the fly
  */
 function setup() {
@@ -102,25 +121,6 @@ function setup() {
     angle = 0;
 
 
-    /**
-     * Creation of the fly
-     */
-    function createFly() {
-
-        const newFlies = {
-            x: random(0, 640),
-            y: random(100, 200), //Give the fly its first random position between 100 and 200
-            size: 10,
-            speed: random(1, 5), // I want the flies to appear slow
-            fill: "#000",
-            dirX: random(-1, 1),
-            dirY: random(-1, 1),
-            baseSpeed: undefined // Being used as reference so the fly fluctuation does not go to crazy 
-
-        }
-        return newFlies;
-    }
-
     // The amount of flies in the array
     for (let i = 0; i < 1; i++) flies.push(createFly());
 }
@@ -128,6 +128,14 @@ function setup() {
 function draw() {
     background("#87ceeb");
 
+    /**
+ * Spawn flies over time 
+ */
+    flySpawnTimer++;
+    if (flySpawnTimer >= flySpawnInterval) {
+        flies.push(createFly());
+        flySpawnTimer = 0;
+    }
 
     for (let fly of flies) {
         moveFly(fly);
@@ -143,20 +151,39 @@ function draw() {
 
 
 /**
- * Moves the fly according to its speed
+ * Moves the fly in a jittery fashion
  * Resets the fly if it gets all the way to the right
  */
 function moveFly(fly) {
-    // Move the fly
-    fly.x += fly.speed;
-    let buzzingY = sin(angle) * 5
-    fly.y = constrain(fly.y - buzzingY, 0, 460);
-    angle += 10
-    // Handle the fly going off the canvas
-    if (fly.x > width) {
-        resetFly(fly);
+    if (fly.baseSpeed === undefined) fly.baseSpeed = fly.speed;
+
+    // Randomly change direction
+    if (random(1) < 0.05) {
+        fly.dirX = random(-1, 1);
+        fly.dirY = random(-1, 1);
     }
+
+    // Randomly vary speed
+    if (random(1) < 0.05) {
+        fly.speed = fly.baseSpeed * random(0.5, 2);
+    }
+
+    // Move fly
+    fly.x += fly.speed * fly.dirX;
+    fly.y += fly.speed * fly.dirY;
+
+    // Bounce off edges
+    if (fly.x < 0 || fly.x > width) fly.dirX *= -1;
+    if (fly.y < 0 || fly.y > height) fly.dirY *= -1;
+
+    // Subtle buzzing effect
+    fly.y += sin(angle) * 2;
+    angle += 10;
+
+    // Reset if completely off canvas
+    if (fly.x < -10 || fly.x > width + 10) resetFly(fly);
 }
+
 
 /**
  * Draws the fly as a black circle
