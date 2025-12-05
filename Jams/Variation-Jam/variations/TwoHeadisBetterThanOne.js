@@ -53,7 +53,36 @@ const frog = {
         dirX: 0,
         dirY: -1,
 
-    }
+    },
+
+
+    //The frog's eyes
+    //the white part of the eye
+    eyelid: {
+        x: 270,
+        y: 440,
+        size: 45,
+        fill: "#00ff00"
+    },
+
+
+    //The frog's eyes
+    //the white part of the eye
+    eye: {
+        x: 270,
+        y: 440,
+        size: 30,
+        fill: "#fff"
+    },
+
+    //The pupil
+    pupil: {
+        x: 270,
+        y: 440,
+        size: 20,
+        fill: "#000",
+    },
+
 };
 
 frogs.push(frog)
@@ -421,6 +450,54 @@ function drawFrog() {
             noStroke();
             ellipse(f.body.x, f.body.y, f.body.size);
             pop();
+
+
+            //Draw the frog's green eye
+            //The left eye
+            push();
+            fill(frog.eyelid.fill)
+            noStroke();
+            ellipse(frog.body.x - 45, frog.body.y - 70, frog.body.size - 105)
+            pop();
+
+            //The right eye
+            push();
+            fill(frog.eyelid.fill)
+            noStroke();
+            ellipse(frog.body.x + 45, frog.body.y - 70, frog.body.size - 105)
+            pop();
+
+
+            //Draw the frog's white part of the eye
+            //The left eye
+            push();
+            fill(frog.eye.fill)
+            noStroke();
+            ellipse(frog.body.x - 45, frog.body.y - 70, frog.body.size - 120)
+            pop();
+
+            //The right eye
+            push();
+            fill(frog.eye.fill)
+            noStroke();
+            ellipse(frog.body.x + 45, frog.body.y - 70, frog.body.size - 120)
+            pop();
+
+            //The pupil
+            //The right pupil
+            push();
+            fill(frog.pupil.fill)
+            noStroke();
+            ellipse(frog.body.x - 45, frog.body.y - 73, frog.body.size - 130)
+            pop();
+
+            //The left pupil
+            push();
+            fill(frog.pupil.fill)
+            noStroke();
+            ellipse(frog.body.x + 45, frog.body.y - 73, frog.body.size - 130)
+            pop();
+
         }
     }
 }
