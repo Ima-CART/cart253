@@ -227,6 +227,17 @@ function drawFly(fly) {
  * Move Red Flies
  */
 function moveRedFly(rFly) {
+
+    //Teleporation
+    rFly.teleportTimer++;
+    if (rFly.teleportTimer >= rFly.teleportInterval) {
+        rFly.x = random(0, width);
+        rFly.y = random(0, height);
+        rFly.teleportTimer = 0;
+        rFly.teleportInterval = int(random(180, 360)); // reset random interval
+    }
+
+    //Jittery Movement
     rFly.dirX += random(-0.5, 0.5);
     rFly.dirY += random(-0.5, 0.5);
     rFly.dirX = constrain(rFly.dirX, -1, 1);
