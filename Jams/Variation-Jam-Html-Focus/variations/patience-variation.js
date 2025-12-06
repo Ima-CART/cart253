@@ -23,7 +23,7 @@
 
 // Arrays for flies
 let flies = []
-let patienceJarFlies = []
+let jarFlies = []
 let score = 0 // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
 let dialogue = "";// adding dialogue to the game
@@ -31,15 +31,15 @@ let dialogueTimer = 0; // timer for showing dialogue
 let consecutiveCatches = 0;//variable for flies that are caught in succession
 let gameOver = false;  // Flag to track game over state
 let gameWon = false;   // Flag to track game win state
-let patienceAudioStarted = false;// audio will play when key is pressed
-let patienceBgMusic;
+let audioStarted = false;// audio will play when key is pressed
+let bgMusic;
 
 // adding a fun element a floating interactive text
 let floatingText = null
 let floatingTextTimer = 0;
 
 // Our frog
-const patienceFrog = {
+const frog = {
     // The frog's body has a position and size
     body: {
         x: 320,
@@ -90,7 +90,7 @@ const patienceFrog = {
 
 // Capture Jar
 
-const patienceJar = {
+const jar = {
     x: 550,
     y: 20,
     width: 70,
@@ -101,7 +101,7 @@ const patienceJar = {
 
 //Add a calming song to the game
 function preload() {
-    patienceBgMusic = loadSound("assets/sounds/reflected-light-147979.mp3")
+    bgMusic = loadSound("assets/sounds/reflected-light-147979.mp3")
 }
 
 /**
@@ -124,7 +124,7 @@ function createFly() {
 /**
  * Creates the canvas and initializes the fly
  */
-function patienceSetup() {
+function setup() {
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
@@ -135,7 +135,7 @@ function patienceSetup() {
 
 }
 
-function patienceDraw() {
+function draw() {
     background("#87ceeb");
 
     //Game Over Screen
@@ -198,14 +198,14 @@ function patienceDraw() {
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
-        checkPatienceTongueFlyOverlap(fly);
+        checkTongueFlyOverlap(fly);
         repelFly(fly);
 
     }
-    movePatienceFrog();
-    movePatienceTongue();
-    drawPatienceFrog();
-    drawCapturePatienceJar();
+    moveFrog();
+    moveTongue();
+    drawFrog();
+    drawCaptureJar();
 }
 
 /**
@@ -246,37 +246,37 @@ function resetFly(fly) {
 /**
  * Moves the frog to the mouse position on x
  */
-function movePatienceFrog() {
+function moveFrog() {
     if (keyIsDown(LEFT_ARROW)) {
-        patienceFrog.body.x = constrain(patienceFrog.body.x - patienceFrog.tongue.speed, 10, 630)
+        frog.body.x = constrain(frog.body.x - frog.tongue.speed, 10, 630)
     }
 
     else if (keyIsDown(RIGHT_ARROW)) {
-        patienceFrog.body.x = constrain(patienceFrog.body.x + patienceFrog.tongue.speed, 10, 630)
+        frog.body.x = constrain(frog.body.x + frog.tongue.speed, 10, 630)
     }
 }
 
 /**
  * Handles moving the tongue based on its state
  */
-function movePatienceTongue() {
+function moveTongue() {
     // Tongue matches the frog's x
-    patienceFrog.tongue.x = patienceFrog.body.x;
+    frog.tongue.x = frog.body.x;
 
     // If the tongue is outbound, it moves up
-    if (patienceFrog.tongue.state === "outbound") {
-        patienceFrog.tongue.y -= patienceFrog.tongue.speed;
+    if (frog.tongue.state === "outbound") {
+        frog.tongue.y -= frog.tongue.speed;
         // The tongue bounces back if it hits the top
-        if (patienceFrog.tongue.y <= 0) {
-            patienceFrog.tongue.state = "inbound";
+        if (frog.tongue.y <= 0) {
+            frog.tongue.state = "inbound";
         }
     }
     // If the tongue is inbound, it moves down
-    else if (patienceFrog.tongue.state === "inbound") {
-        patienceFrog.tongue.y += patienceFrog.tongue.speed;
+    else if (frog.tongue.state === "inbound") {
+        frog.tongue.y += frog.tongue.speed;
         // The tongue stops if it hits the bottom
-        if (patienceFrog.tongue.y >= height) {
-            patienceFrog.tongue.state = "idle";
+        if (frog.tongue.y >= height) {
+            frog.tongue.state = "idle";
             // Check if game over or won after the tongue reaches idle state
             if (consecutiveCatches < 3 && !gameWon) {
                 gameOver = true;  // Game over if fewer than 3 consecutive catches
@@ -293,81 +293,81 @@ function movePatienceTongue() {
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
  */
-function drawPatienceFrog() {
+function drawFrog() {
     // Draw the tongue tip
     push();
     fill("#ff0000");
     noStroke();
-    ellipse(patienceFrog.tongue.x, patienceFrog.tongue.y, patienceFrog.tongue.size);
+    ellipse(frog.tongue.x, frog.tongue.y, frog.tongue.size);
     pop();
 
     // Draw the rest of the tongue
     push();
     stroke("#ff0000");
-    strokeWeight(patienceFrog.tongue.size);
-    line(patienceFrog.tongue.x, patienceFrog.tongue.y, patienceFrog.body.x, patienceFrog.body.y);
+    strokeWeight(frog.tongue.size);
+    line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
     pop();
 
     // Draw the frog's body
     push();
     fill("#00ff00");
     noStroke();
-    ellipse(patienceFrog.body.x, patienceFrog.body.y, patienceFrog.body.size);
+    ellipse(frog.body.x, frog.body.y, frog.body.size);
     pop();
 
     //Draw the frog's green eye
     //The left eye 
     push();
-    fill(patienceFrog.eyelid.fill)
+    fill(frog.eyelid.fill)
     noStroke();
-    ellipse(patienceFrog.body.x - 45, patienceFrog.body.y - 70, patienceFrog.body.size - 105);
+    ellipse(frog.body.x - 45, frog.body.y - 70, frog.body.size - 105);
     pop();
     //The right eye 
     push();
-    fill(patienceFrog.eyelid.fill);
+    fill(frog.eyelid.fill);
     noStroke();
-    ellipse(patienceFrog.body.x + 45, patienceFrog.body.y - 70, patienceFrog.body.size - 105);
+    ellipse(frog.body.x + 45, frog.body.y - 70, frog.body.size - 105);
     pop();
 
     //Draw the frog's white part of the eye
     // //The left eye
     push();
-    fill(patienceFrog.eye.fill);
+    fill(frog.eye.fill);
     noStroke();
-    ellipse(patienceFrog.body.x - 45, patienceFrog.body.y - 70, patienceFrog.body.size - 120);
+    ellipse(frog.body.x - 45, frog.body.y - 70, frog.body.size - 120);
     pop();
 
     //The right eye
     push();
-    fill(patienceFrog.eye.fill);
+    fill(frog.eye.fill);
     noStroke();
-    ellipse(patienceFrog.body.x + 45, patienceFrog.body.y - 70, patienceFrog.body.size - 120);
+    ellipse(frog.body.x + 45, frog.body.y - 70, frog.body.size - 120);
     pop();
 
     //The pupil
     //The right pupil 
     push();
-    fill(patienceFrog.pupil.fill);
+    fill(frog.pupil.fill);
     noStroke();
-    ellipse(patienceFrog.body.x - 45, patienceFrog.body.y - 73, patienceFrog.body.size - 130);
+    ellipse(frog.body.x - 45, frog.body.y - 73, frog.body.size - 130);
     pop();
 
     //The left pupil
     push();
-    fill(patienceFrog.pupil.fill);
+    fill(frog.pupil.fill);
     noStroke();
-    ellipse(patienceFrog.body.x + 45, patienceFrog.body.y - 73, patienceFrog.body.size - 130);
+    ellipse(frog.body.x + 45, frog.body.y - 73, frog.body.size - 130);
     pop();
 }
 
 /**
  * Handles the tongue overlapping the fly
  */
-function checkPatienceTongueFlyOverlap(fly) {
+function checkTongueFlyOverlap(fly) {
     // Get distance from tongue to fly
-    const d = dist(patienceFrog.tongue.x, patienceFrog.tongue.y, fly.x, fly.y);
+    const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
     // Check if it's an overlap
-    const eaten = (d < patienceFrog.tongue.size / 2 + fly.size / 2);
+    const eaten = (d < frog.tongue.size / 2 + fly.size / 2);
     if (eaten) {
         // Reset the fly
         resetFly(fly);
@@ -416,7 +416,7 @@ function checkPatienceTongueFlyOverlap(fly) {
  * Repels flies when near tongue
  */
 function repelFly(fly) {
-    const r = dist(patienceFrog.tongue.x, patienceFrog.tongue.y, fly.x, fly.y);
+    const r = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
     const repel = (r < 20);
     if (repel) {
         fly.y -= 5
@@ -429,11 +429,11 @@ function repelFly(fly) {
  * Draws the capture jar and the flies inside
  */
 
-function drawCapturePatienceJar() {
+function drawCaptureJar() {
     push();
     fill("#ffffff62")
     noStroke();
-    rect(patienceJar.x, patienceJar.y, patienceJar.width, patienceJar.height, 10) //The outline of the jar
+    rect(jar.x, jar.y, jar.width, jar.height, 10) //The outline of the jar
 
     fill("#000");
     textSize(18);
@@ -445,13 +445,13 @@ function drawCapturePatienceJar() {
     for (let i = 0; i < score; i++) {
 
         //For smoother transition of the game and to have the function follow everything
-        if (!patienceJarFlies[i]) {
+        if (!jarFlies[i]) {
 
             //adding the jarFlies variable in the capture jar function
-            patienceJarFlies[i] = {
+            jarFlies[i] = {
 
-                x: random(patienceJar.x + 10, patienceJar.x + patienceJar.width - 10),
-                y: random(patienceJar.y + 10, patienceJar.y + patienceJar.height - 10),
+                x: random(jar.x + 10, jar.x + jar.width - 10),
+                y: random(jar.y + 10, jar.y + jar.height - 10),
 
                 /**Trying to slow down the speed of the flies in the jar. 
                  * Add velocity for flexibility
@@ -468,10 +468,10 @@ function drawCapturePatienceJar() {
                     this.y += this.vy;
 
                     //flies will be bouncing in the jar without leaving the jar
-                    if (this.x < patienceJar.x + this.size / 2 || this.x > patienceJar.x + patienceJar.width - this.size / 2) {
+                    if (this.x < jar.x + this.size / 2 || this.x > jar.x + jar.width - this.size / 2) {
                         this.vx *= -1;  // Reverse direction horizontally
                     }
-                    if (this.y < patienceJar.y + this.size / 2 || this.y > patienceJar.y + patienceJar.height - this.size / 2) {
+                    if (this.y < jar.y + this.size / 2 || this.y > jar.y + jar.height - this.size / 2) {
                         this.vy *= -1;  // Reverse direction vertically
 
                     }
@@ -492,8 +492,8 @@ function drawCapturePatienceJar() {
 
 
         // Move and display the fly inside the jar
-        patienceJarFlies[i].move();
-        patienceJarFlies[i].display();
+        jarFlies[i].move();
+        jarFlies[i].display();
 
     }
     pop();
@@ -527,7 +527,7 @@ function drawFloatingText(floatingText) {
  */
 
 function repelFloatingText(floatingText) {
-    const d = dist(patienceFrog.tongue.x, patienceFrog.tongue.y, floatingText.x, floatingText.y);
+    const d = dist(frog.tongue.x, frog.tongue.y, floatingText.x, floatingText.y);
     const repelF = (d < 50)
     if (repelF) {
         // Change text content to focus on the game
@@ -535,7 +535,7 @@ function repelFloatingText(floatingText) {
         floatingText.fill = "#ff0000"; // Change text color to indicate focus
 
         // Repel the floating text away from the tongue
-        const angle = atan2(floatingText.y - patienceFrog.tongue.y, floatingText.x - patienceFrog.tongue.x);
+        const angle = atan2(floatingText.y - frog.tongue.y, floatingText.x - frog.tongue.x);
         floatingText.x += cos(angle) * 5; // Push text away along the angle
         floatingText.y += sin(angle) * 5;
     }
@@ -548,21 +548,21 @@ function repelFloatingText(floatingText) {
  * Tongue will be launched with the spacebar 
  */
 
-function patienceKeyPressed(event) {
+function keyPressed(event) {
     if (event.keyCode === 27) {
         state = "menu";
     }
 
-    if (!patienceAudioStarted) {
-        userStartpatienceAudio();
-        patienceBgMusic.loop();
-        patienceBgMusic.setVolume(0.2);
-        patienceBgMusic.rate(1);
-        patienceAudioStarted = true;
+    if (!audioStarted) {
+        userStartAudio();
+        bgMusic.loop();
+        bgMusic.setVolume(0.2);
+        bgMusic.rate(1);
+        audioStarted = true;
     }
     if (keyCode === 32 && !gameOver && !gameWon) {
-        if (patienceFrog.tongue.state === "idle") {
-            patienceFrog.tongue.state = "outbound";
+        if (frog.tongue.state === "idle") {
+            frog.tongue.state = "outbound";
 
         }
     }
@@ -576,8 +576,8 @@ function patienceKeyPressed(event) {
         flies = [];
         for (let i = 0; i < 15; i++) flies.push(createFly());
         // Reset tongue
-        patienceFrog.tongue.y = 480;
-        patienceFrog.tongue.state = "idle";
+        frog.tongue.y = 480;
+        frog.tongue.state = "idle";
 
         // Reset floating text
         floatingText = null;
