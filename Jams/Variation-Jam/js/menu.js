@@ -14,17 +14,17 @@
 const menuText = `
 (H) HyperSpeed 
 (P) PatienceisKey
-(T) TwoHeadisBetterthanOne`
+(T) TwoHeadisBetterthanOne`;
 
 const titleText =
-    `Adventurous Frog `
+    `Adventurous Frog`;
 
 const instructionText = `
 -Use the the left and right keys to move
 -The Spacebar to launch the tongue
 -Extra keys for allies in Two heads
 -Experience different version
-    `
+`;
 
 /**
  * Display the menu
@@ -40,7 +40,6 @@ function menuDraw() {
 
     menuDrawTitle();
     menuDrawInstruction();
-
 }
 
 function menuDrawTitle() {
@@ -52,40 +51,32 @@ function menuDrawTitle() {
     pop();
 }
 
-
 function menuDrawInstruction() {
-
     push();
     fill("#033909ff");
     textSize(24);
     textAlign(CENTER, CENTER);
     text(instructionText, width / 2, 220);
     pop();
-
 }
 
 /**
- * Listen to the keyboard
+ * Listen to the keyboard for menu selections
  */
-function menuKeyPressed(event) {
-    switch (event.keyCode) {
-        case 72:
+function menuKeyPressed() {
+    switch (keyCode) {
+        case 72:  // 'H' for HyperSpeed
             state = "hyperSpeed";
-            hyperSpeedSetup();
             break;
 
-        case 80:
+        case 80:  // 'P' for Patience is Key
             state = "patienceiskey";
-            patienceisKeySetup();
             break;
 
-        case 84:
+        case 84:  // 'T' for TwoHead is Better Than One
             state = "twoHeadisBetterThanOne";
-            twoHeadisBetterThanOneSetup();
             break;
     }
 }
-
-
 
 
