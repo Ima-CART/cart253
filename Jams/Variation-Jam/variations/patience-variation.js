@@ -124,7 +124,7 @@ function createFly() {
 /**
  * Creates the canvas and initializes the fly
  */
-function patienceisKeySetup() {
+function setup() {
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
@@ -135,7 +135,7 @@ function patienceisKeySetup() {
 
 }
 
-function patienceisKeyDraw() {
+function draw() {
     background("#87ceeb");
 
     //Game Over Screen
