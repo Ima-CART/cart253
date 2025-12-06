@@ -24,17 +24,17 @@
 
 
 // Arrays for flies
-let chaosFlies = [];
+let flies = [];
 let redFlies = [];
-let jarChaosFlies = [];
-let chaosScore = 0; // the score will start off as zero 
+let jarFlies = [];
+let score = 0; // the score will start off as zero 
 let angle; //adding the angle for the moving of the fly
 let flySpawnTimer = 0;// What the flies to spawn over time
 let flySpawnInterval = 300; // flies spawn after 5 seconds'
 let redFlySpawnInterval = 600; // R ed flies will spawn every 10 seconds
-let bgChaosMusic;
-let chaosAudioStarted = false;
-let chaosGameOver = false;
+let bgMusic;
+let audioStarted = false;
+let GameOver = false;
 const maxRedFlies = 5;
 //Frog will be an array to allow for easy flexiblity
 let frogs = []
@@ -44,7 +44,7 @@ let frogs = []
 let newBorderFrogIndex = 0
 let allBorderFrogsSpawned = false;
 // Our frog
-const chaosFrog = {
+const frog = {
     // The frog's body has a position and size
     body: {
         x: 320,
@@ -94,7 +94,7 @@ const chaosFrog = {
 
 };
 
-frogs.push(chaosFrog)
+frogs.push(frog)
 
 /**
  * I want the frogs to respawn at a specific location
@@ -115,7 +115,7 @@ const borderFrogs = [
  * Capture Jar
  * Will keep track of the flies caught
  */
-const chaosJar = {
+const jar = {
     x: 550,
     y: 20,
     width: 70,
@@ -126,7 +126,7 @@ const chaosJar = {
 /**
  * Creation of the fly
 */
-function createChaosFly() {
+function createFly() {
 
     const newFlies = {
         x: random(0, 640),
@@ -163,7 +163,7 @@ function createRedFly() {
 
 //Add background music
 function preload() {
-    bgChaosMusic = loadSound("assets/sounds/wildlife-jungle-forest-background-music-263783.mp3")
+    bgMusic = loadSound("assets/sounds/wildlife-jungle-forest-background-music-263783.mp3")
 }
 
 
@@ -171,20 +171,20 @@ function preload() {
 /**
  * Creates the canvas and initializes the fly
  */
-function chaosSetup() {
+function setup() {
 
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
     angle = 0;
 
     // Start of with one fly
-    flies.push(createChaosFly());
+    flies.push(createFly());
 
     // Start with one red fly
     redFlies.push(createRedFly());
 }
 
-function chaosDraw() {
+function draw() {
 
     background("#87ceeb");
 
@@ -199,7 +199,7 @@ function chaosDraw() {
         textAlign(CENTER, CENTER);
         text("GAME OVER", width / 2, height / 2 - 40);
         textSize(28);
-        text("Final Score: " + chaosScore, width / 2, height / 2 + 20);
+        text("Final Score: " + score, width / 2, height / 2 + 20);
         return;
     }
 
@@ -208,15 +208,15 @@ function chaosDraw() {
  */
     flySpawnTimer++;
     if (flySpawnTimer >= flySpawnInterval) {
-        flies.push(createChaosFly());
+        flies.push(createFly());
         flySpawnTimer = 0;
     }
-    flySpawnInterval = max(20, 200 - chaosScore * 5); // faster spawns with higher score
+    flySpawnInterval = max(20, 200 - score * 5); // faster spawns with higher score
 
     //Fly Funtion
     for (let fly of flies) {
-        moveChaosFly(fly);
-        drawChaosFly(fly);
+        moveFly(fly);
+        drawFly(fly);
         checkChaoTongueFlyOverlap(fly);
     }
 
@@ -236,10 +236,10 @@ function chaosDraw() {
         redFlyEffect(rFly, i);
     }
 
-    moveChaosFrog();
-    moveChaosTongue();
-    drawChaosFrog();
-    drawChaosCaptureJar();
+    moveFrog();
+    moveTongue();
+    drawFrog();
+    drawCaptureJar();
 }
 
 
@@ -248,7 +248,7 @@ function chaosDraw() {
  * Flies will stay in the canvas and respawn
  * The all have different speed
  */
-function moveChaosFly(fly) {
+function moveFly(fly) {
     if (fly.baseSpeed === undefined) fly.baseSpeed = fly.speed;
 
     // Randomly change direction
@@ -275,14 +275,14 @@ function moveChaosFly(fly) {
     angle += 10;
 
     // Reset if completely off canvas
-    if (fly.x < -10 || fly.x > width + 10) resetChaosFly(fly);
+    if (fly.x < -10 || fly.x > width + 10) resetFly(fly);
 }
 
 
 /**
  * Draws the fly as a black circle
  */
-function drawChaosFly(fly) {
+function drawFly(fly) {
     push();
     noStroke();
     fill("#000000");
@@ -293,7 +293,7 @@ function drawChaosFly(fly) {
 /**
  * Resets the fly to the left with a random y
  */
-function resetChaosFly(fly) {
+function resetFly(fly) {
     fly.x = 0;
     fly.y = random(0, 300);
 }
@@ -354,7 +354,7 @@ function redFlyEffect(rFly, idx) {
             const d = dist(f.tongue.x, f.tongue.y, rFly.x, rFly.y);
             if (d < f.tongue.size / 2 + rFly.size / 2) {
                 for (let i = frogs.length - 1; i >= 0; i--) {
-                    if (frogs[i] !== chaosFrog) {
+                    if (frogs[i] !== frog) {
                         frogs.splice(i, 1);
                         break;
                     }
@@ -365,7 +365,7 @@ function redFlyEffect(rFly, idx) {
                 if (redFlies.length < maxRedFlies) redFlies.push(createRedFly());
 
                 //Lose game if all border frogs are eliminated
-                if (frogs.filter(f => f !== chaosFrog).length === 0) gameOver = true;
+                if (frogs.filter(f => f !== frog).length === 0) gameOver = true;
 
                 //Breaks the loop
                 break;
@@ -378,20 +378,20 @@ function redFlyEffect(rFly, idx) {
 /**
  * Moves the frog to the with the left and right keys
  */
-function moveChaosFrog() {
+function moveFrog() {
     if (keyIsDown(LEFT_ARROW)) {
-        chaosFrog.body.x = constrain(chaosFrog.body.x - chaosFrog.tongue.speed, 10, 630)
+        frog.body.x = constrain(frog.body.x - frog.tongue.speed, 10, 630)
     }
 
     else if (keyIsDown(RIGHT_ARROW)) {
-        chaosFrog.body.x = constrain(chaosFrog.body.x + chaosFrog.tongue.speed, 10, 630)
+        frog.body.x = constrain(frog.body.x + frog.tongue.speed, 10, 630)
     }
 }
 
 /**
  * Handles moving the tongue based on its state
  */
-function moveChaosTongue() {
+function moveTongue() {
     for (let f of frogs) {
         if (!f.tongue) continue;
 
@@ -415,10 +415,10 @@ function moveChaosTongue() {
 
         // Check bounds for inbound/outbound
         if (f.tongue.state === "outbound") {
-            if (f === chaosFrog && f.tongue.y <= 0) f.tongue.state = "inbound";
+            if (f === frog && f.tongue.y <= 0) f.tongue.state = "inbound";
 
             // Border Frogs
-            else if (f !== chaosFrog) {
+            else if (f !== frog) {
                 // Border frog Tongues
                 if (f.tongue.dirY === 1 && f.tongue.y >= height) f.tongue.state = "inbound"; // top frog
                 if (f.tongue.dirX === 1 && f.tongue.x >= width) f.tongue.state = "inbound"; // left frog
@@ -427,8 +427,8 @@ function moveChaosTongue() {
         }
 
         if (f.tongue.state === "inbound") {
-            if ((f === chaosFrog && f.tongue.y >= height) ||
-                (f !== chaosFrog && dist(f.tongue.x, f.tongue.y, f.body.x, f.body.y) < f.tongue.speed)) {
+            if ((f === frog && f.tongue.y >= height) ||
+                (f !== frog && dist(f.tongue.x, f.tongue.y, f.body.x, f.body.y) < f.tongue.speed)) {
                 f.tongue.state = "idle";
             }
         }
@@ -448,7 +448,7 @@ function moveChaosTongue() {
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
  */
-function drawChaosFrog() {
+function drawFrog() {
 
     for (let f of frogs) {
 
@@ -534,7 +534,7 @@ function drawChaosFrog() {
 /**
  * Handles the tongue overlapping the fly
  */
-function checkChaosTongueFlyOverlap(fly) {
+function checkTongueFlyOverlap(fly) {
     for (let f of frogs) {
         if (!f.tongue) continue;
         // Get distance from tongue to fly
@@ -543,13 +543,13 @@ function checkChaosTongueFlyOverlap(fly) {
         const eaten = (d < f.tongue.size / 2 + fly.size / 2);
         if (eaten) {
             // Reset the fly
-            resetChaosFly(fly);
+            resetFly(fly);
             // Score increases
-            chaosScore++
+            score++
 
             //Only the main frog can spawn border frig
             f.tongue.state = "inbound";
-            if (f === chaosFrog) spawnBorderFrog();
+            if (f === frog) spawnBorderFrog();
         }
     }
 }
@@ -581,29 +581,29 @@ function spawnBorderFrog() {
 /**
  * Draw the Capture Jar
  */
-function drawChaosCaptureJar() {
+function drawCaptureJar() {
     push();
     fill("#ffffff62")
     noStroke();
-    rect(chaosJar.x, chaosJar.y, chaosJar.width, chaosJar.height, 10) //The outline of the jar
+    rect(jar.x, jar.y, jar.width, jar.height, 10) //The outline of the jar
 
     fill("#000");
     textSize(18);
     textAlign(CENTER);
-    text(chaosScore, 585, 130)
+    text(score, 585, 130)
 
 
 
-    for (let i = 0; i < chaosScore; i++) {
+    for (let i = 0; i < score; i++) {
 
         //For smoother transition of the game and to have the function follow everything
-        if (!jarChaosFlies[i]) {
+        if (!jarFlies[i]) {
 
-            //adding the jarChaosFlies variable in the capture jar function
-            jarChaosFlies[i] = {
+            //adding the jarFlies variable in the capture jar function
+            jarFlies[i] = {
 
-                x: random(chaosJar.x + 10, chaosJar.x + chaosJar.width - 10),
-                y: random(chaosJar.y + 10, chaosJar.y + chaosJar.height - 10),
+                x: random(jar.x + 10, jar.x + jar.width - 10),
+                y: random(jar.y + 10, jar.y + jar.height - 10),
 
                 /**Trying to slow down the speed of the flies in the jar. 
                  * Add velocity for flexibility
@@ -615,15 +615,15 @@ function drawChaosCaptureJar() {
                 //move of the flies in the jar. Using the methond function
                 move: function () {
 
-                    //using the word this to specify the x and velocity inside the jarChaosFlies
+                    //using the word this to specify the x and velocity inside the jarFlies
                     this.x += this.vx;
                     this.y += this.vy;
 
                     //flies will be bouncing in the jar without leaving the jar
-                    if (this.x < chaosJar.x + this.size / 2 || this.x > chaosJar.x + chaosJar.width - this.size / 2) {
+                    if (this.x < jar.x + this.size / 2 || this.x > jar.x + jar.width - this.size / 2) {
                         this.vx *= -1;  // Reverse direction horizontally
                     }
-                    if (this.y < chaosJar.y + this.size / 2 || this.y > chaosJar.y + chaosJar.height - this.size / 2) {
+                    if (this.y < jar.y + this.size / 2 || this.y > jar.y + jar.height - this.size / 2) {
                         this.vy *= -1;  // Reverse direction vertically
 
                     }
@@ -644,8 +644,8 @@ function drawChaosCaptureJar() {
 
 
         // Move and display the fly inside the jar
-        jarChaosFlies[i].move();
-        jarChaosFlies[i].display();
+        jarFlies[i].move();
+        jarFlies[i].display();
 
     }
     pop();
@@ -658,26 +658,26 @@ function drawChaosCaptureJar() {
  * The border frog has their own respective keys
  */
 
-function chaosKeyPressed(event) {
+function keyPressed(event) {
 
     if (event.keyCode === 27) {
         state = "menu";
     }
     // Start audio on first key press
-    if (!chaosAudioStarteda) {
+    if (!audioStarteda) {
         userStartAudio();
-        bgChaosMusic.loop();
-        bgChaosMusic.setVolume(0.2);
-        bgChaosMusic.rate(1);
-        chaosAudioStarted = true;
+        bgMusic.loop();
+        bgMusic.setVolume(0.2);
+        bgMusic.rate(1);
+        audioStarted = true;
     }
-    if (keyCode === 32 && chaosFrog.tongue.state === "idle") {
-        chaosFrog.tongue.state = "outbound";
+    if (keyCode === 32 && frog.tongue.state === "idle") {
+        frog.tongue.state = "outbound";
     }
 
     // Border frog tongues
     for (let f of frogs) {
-        if (f !== chaosFrog && keyCode === f.key && f.tongue.state === "idle") {
+        if (f !== frog && keyCode === f.key && f.tongue.state === "idle") {
             f.tongue.state = "outbound";
         }
 
