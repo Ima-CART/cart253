@@ -170,7 +170,7 @@ function preload() {
 /**
  * Creates the canvas and initializes the fly
  */
-function setup() {
+function twoHeadisBetterThanOneSetup() {
 
     createCanvas(640, 480);
     angleMode(DEGREES); //adding the angle for the movement of fly
@@ -183,7 +183,7 @@ function setup() {
     redFlies.push(createRedFly());
 }
 
-function draw() {
+function twoHeadisBetterThanOneDraw() {
 
     background("#87ceeb");
 

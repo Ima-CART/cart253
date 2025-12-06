@@ -127,7 +127,7 @@ function preload() {
 /**
  * Creates the canvas and initializes the fly
 */
-function setup() {
+function hyperSpeedSetup() {
 
     createCanvas(640, 480);
 
@@ -165,7 +165,7 @@ function setup() {
 }
 
 
-function draw() {
+function hyperSpeedDraw() {
     background("#87ceeb");
 
 
