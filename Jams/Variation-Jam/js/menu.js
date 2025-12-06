@@ -8,6 +8,9 @@
  */
 
 
+
+
+
 /**
  * The constant for the menu text
  */
@@ -63,18 +66,21 @@ function menuDrawInstruction() {
 /**
  * Listen to the keyboard for menu selections
  */
-function menuKeyPressed() {
-    switch (keyCode) {
+function menuKeyPressed(event) {
+    switch (event.keyCode) {
         case 72:  // 'H' for HyperSpeed
-            state = "hyperSpeed";
+            state = "hyper-variation";
+            hyperSetup();
             break;
 
         case 80:  // 'P' for Patience is Key
-            state = "patienceiskey";
+            state = "patience-variation";
+            patienceSetup();
             break;
 
         case 84:  // 'T' for TwoHead is Better Than One
-            state = "twoHeadisBetterThanOne";
+            state = "chaos-variation";
+            chaosSetup();
             break;
     }
 }

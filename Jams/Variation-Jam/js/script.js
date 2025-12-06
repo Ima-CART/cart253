@@ -15,6 +15,7 @@
 
 let state = "menu";
 
+
 /**
  * Create Canvas with background
  */
@@ -31,16 +32,16 @@ function draw() {
             menuDraw();
             break;
 
-        case "hyperSpeed":
-            hyperSpeedDraw();
+        case "hyper-variation":
+            hyperDraw();
             break;
 
-        case "patienceisKey":
-            patienceisKeyDraw();
+        case "patience-variation":
+            patienceDraw();
             break;
 
-        case "twoHeadisBetterThanOne":
-            twoHeadisBetterThanOneDraw();
+        case "chaos-variation":
+            chaosDraw();
             break;
     }
 
@@ -60,25 +61,20 @@ function keyPressed(event) {
         case "menu":
             menuKeyPressed(event);
             break;
+
+        case "hyperSpeed":
+            hyperKeyPressed(event);
+            break
+
+        case "patienceisKey":
+            patienceKeyPressed(event);
+            break;
+
+        case "twoHeadisBetterThanOne":
+            chaosKeyPressed(event);
+            break;
+
     }
-    // switch (state) {
-    //     case "menu":
-    //         menuKeyPressed(event);
-    //         break;
-
-    //     case "hyperSpeed":
-    //         hyperKeyPressed(event);
-    //         break
-
-    //     case "patienceisKey":
-    //         patienceKeyPressed(event);
-    //         break;
-
-    //     case "twoHeadisBetterThanOne":
-    //         twoHeadKeyPressed(event);
-    //         break;
-
-    // }
 
     if (key === "m" || key === "M") {
         gameState = "menu";
