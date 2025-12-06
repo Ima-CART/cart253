@@ -34,7 +34,7 @@ let flySpawnInterval = 300; // flies spawn after 5 seconds'
 let redFlySpawnInterval = 600; // R ed flies will spawn every 10 seconds
 let bgMusic;
 let audioStarted = false;
-let GameOver = false;
+let gameOver = false;
 const maxRedFlies = 5;
 //Frog will be an array to allow for easy flexiblity
 let frogs = []
@@ -217,7 +217,7 @@ function draw() {
     for (let fly of flies) {
         moveFly(fly);
         drawFly(fly);
-        checkChaoTongueFlyOverlap(fly);
+        checkTongueFlyOverlap(fly);
     }
 
     /**
@@ -664,7 +664,7 @@ function keyPressed(event) {
         state = "menu";
     }
     // Start audio on first key press
-    if (!audioStarteda) {
+    if (!audioStarted) {
         userStartAudio();
         bgMusic.loop();
         bgMusic.setVolume(0.2);
