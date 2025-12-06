@@ -23,16 +23,16 @@
 "use strict";
 
 //Game State
-let hyperGameState = "play"
+let gameState = "play"
 
 //Arrays for many flies
-let hyperFlies = [];
+let flies = [];
 let silverFlies = [];
-let jarHyperFlies = [];
+let jarFlies = [];
 
 //for score
-let hyperScore = 0;
-let hyperAngle;
+let score = 0;
+let angle;
 
 //Golden Fly effects
 let goldentrail = [];
@@ -43,13 +43,13 @@ let hypermode = false;
 let hyperDialogueTimer = 0;
 
 //Music
-let hypermodeMusic;
+let hyperModeMusic;
 let regularBgMusic;
 
 
 // Our frog
 let frogGlow = 0
-const hyperFrog = {
+const frog = {
     // The frog's body has a position and size
     body: {
         x: 320,
@@ -107,7 +107,7 @@ const goldenFly = {
 
 }
 
-const hyperJar = {
+const jar = {
     x: 550,
     y: 20,
     width: 70,
@@ -117,17 +117,17 @@ const hyperJar = {
 }
 
 
-// // Add a background music to the game
-// function preload() {
-//     regularBgMusic = loadSound("assets/sounds/game-minecraft-gaming-background-music-402451.mp3");
-//     hypermodeMusic = loadSound("assets/sounds/royal-reckoning-background-game-music-for-video-224645.mp3")
-// }
+// Add a background music to the game
+function preload() {
+    regularBgMusic = loadSound("assets/sounds/game-minecraft-gaming-background-music-402451.mp3");
+    hyperModeMusic = loadSound("assets/sounds/royal-reckoning-background-game-music-for-video-224645.mp3")
+}
 
 
 /**
  * Creates the canvas and initializes the fly
 */
-function hyperSetup() {
+function setup() {
 
     createCanvas(640, 480);
 
@@ -135,7 +135,7 @@ function hyperSetup() {
 
     // Our fly
     // Has a position, size, and speed of horizontal movement
-    function createHyperFly() {
+    function createFly() {
 
         const newFlies = {
             x: 0,
@@ -160,37 +160,37 @@ function hyperSetup() {
         return newSilverFlies;
     }
 
-    for (let i = 0; i < 3; i++) hyperFlies.push(createHyperFly());
+    for (let i = 0; i < 3; i++) flies.push(createFly());
     for (let i = 0; i < 2; i++) silverFlies.push(createSilverFly());
 }
 
 
-function hyperDraw() {
+function draw() {
     background("#87ceeb");
 
 
 
-    // Play regular music if in regular mode and it's not playing already
-    // if (hyperGameState === "play" && !hypermode && !regularBgMusic.isPlaying()) {
-    //     regularBgMusic.loop();  // Start or loop the regular music
-    //     hypermodeMusic.stop(); // Ensure hypermode music stops if it's playing
-    // }
+    // // Play regular music if in regular mode and it's not playing already
+    if (gameState === "play" && !hypermode && !regularBgMusic.isPlaying()) {
+        regularBgMusic.loop();  // Start or loop the regular music
+        hyperModeMusic.stop(); // Ensure hypermode music stops if it's playing
+    }
 
-    // // Play hypermode music if hypermode is active and it's not playing already
-    // if (hyperGameState === "play" && hypermode && !hypermodeMusic.isPlaying()) {
-    //     hypermodeMusic.loop();  // Start or loop the hypermode music
-    //     regularBgMusic.stop(); // Ensure regular music stops if it's playing
-    // }
+    // Play hypermode music if hypermode is active and it's not playing already
+    if (gameState === "play" && hypermode && !hyperModeMusic.isPlaying()) {
+        hyperModeMusic.loop();  // Start or loop the hypermode music
+        regularBgMusic.stop(); // Ensure regular music stops if it's playing
+    }
 
-    // // Stop music when the game is over or paused
-    // if (hyperGameState === "win" || hyperGameState === "lose" || hyperGameState === "pause") {
-    //     regularBgMusic.stop();
-    //     hypermodeMusic.stop();
-    // }
+    // Stop music when the game is over or paused
+    if (gameState === "win" || gameState === "lose" || gameState === "pause") {
+        regularBgMusic.stop();
+        hyperModeMusic.stop();
+    }
 
 
     //Screen will pause and say engage hypermode  
-    if (hyperGameState === "pause") {
+    if (gameState === "pause") {
         push();
         textAlign(CENTER);
         textSize(48);
@@ -203,22 +203,22 @@ function hyperDraw() {
         hyperDialogueTimer--;
         if (hyperDialogueTimer <= 0) {
             startHypermode();
-            hyperGameState = "play"
+            gameState = "play"
         }
         return; // pause everything else
     }
 
-    if (hyperGameState === "play") {
-        for (let fly of hyperFlies) {
+    if (gameState === "play") {
+        for (let fly of flies) {
             moveFly(fly);
             drawFly(fly);
-            checkTongueHyperFlyOverlap(fly, false);
+            checkTongueFlyOverlap(fly, false);
         }
 
         for (let silverfly of silverFlies) {
-            moveHyperFly(silverfly);
+            moveFly(silverfly);
             drawSilverFly(silverfly);
-            checkTongueHyperFlyOverlap(silverfly, true);
+            checkTongueFlyOverlap(silverfly, true);
         }
 
         //Goldenfly and it's effect
@@ -230,21 +230,21 @@ function hyperDraw() {
         tongueGoldenFlyOverlap();
 
         //The frog
-        movehyperFrog();
+        moveFrog();
         moveTongue();
-        drawhyperFrog();
-        drawhyperCaptureJar();
+        drawFrog();
+        drawCaptureJar();
     }
 
     //Win Screen
-    else if (hyperGameState === "win") {
+    else if (gameState === "win") {
         drawSparkles()
         drawWinSpeech();
         return;
     }
 
     //Lose Screen
-    else if (hyperGameState === "lose") {
+    else if (gameState === "lose") {
         drawLoseSpeech()
     }
 
@@ -256,7 +256,7 @@ function hyperDraw() {
  * Moves the fly according to its speed
  * Resets the fly if it gets all the way to the right
 */
-function moveHyperFly(fly) {
+function moveFly(fly) {
     // Move the fly
     fly.x += fly.speed;
     // Handle the fly going off the canvas
@@ -268,7 +268,7 @@ function moveHyperFly(fly) {
 /**
  * Draws the fly as a black circle
  */
-function drawHyperFly(fly) {
+function drawFly(fly) {
     push();
     noStroke();
     fill(fly.fill);
@@ -372,15 +372,11 @@ function drawSparkles() {
 }
 
 
-
-
-
-
 function tongueGoldenFlyOverlap() {
-    const d = dist(hyperFrog.tongue.x, hyperFrog.tongue.y, goldenFly.x, goldenFly.y);
+    const d = dist(frog.tongue.x, frog.tongue.y, goldenFly.x, goldenFly.y);
 
-    if (d < hyperFrog.tongue.size / 2 + goldenFly.size / 2 && hyperGameState === "play") {
-        hyperGameState = "win";
+    if (d < frog.tongue.size / 2 + goldenFly.size / 2 && gameState === "play") {
+        gameState = "win";
 
         //Going to make fireworks appears
         for (let i = 0; i < 60; i++) {
@@ -408,14 +404,14 @@ function resetGoldenFly() {
 /**
  * Moves the frog to the mouse position on x
  */
-function movehyperFrog() {
-    //hyperFrog.body.x = mouseX;
+function moveFrog() {
+    //frog.body.x = mouseX;
     if (keyIsDown(LEFT_ARROW)) {
-        hyperFrog.body.x = constrain(hyperFrog.body.x - hyperFrog.tongue.speed, 10, 630)
+        frog.body.x = constrain(frog.body.x - frog.tongue.speed, 10, 630)
     }
 
     else if (keyIsDown(RIGHT_ARROW)) {
-        hyperFrog.body.x = constrain(hyperFrog.body.x + hyperFrog.tongue.speed, 10, 630)
+        frog.body.x = constrain(frog.body.x + frog.tongue.speed, 10, 630)
     }
 
 }
@@ -424,26 +420,26 @@ function movehyperFrog() {
  * Handles moving the tongue based on its state
  */
 function moveTongue() {
-    // Tongue matches the hyperFrog's x
-    hyperFrog.tongue.x = hyperFrog.body.x;
+    // Tongue matches the frog's x
+    frog.tongue.x = frog.body.x;
     // If the tongue is idle, it doesn't do anything
-    if (hyperFrog.tongue.state === "idle") {
+    if (frog.tongue.state === "idle") {
         // Do nothing
     }
     // If the tongue is outbound, it moves up
-    else if (hyperFrog.tongue.state === "outbound") {
-        hyperFrog.tongue.y += -hyperFrog.tongue.speed;
+    else if (frog.tongue.state === "outbound") {
+        frog.tongue.y += -frog.tongue.speed;
         // The tongue bounces back if it hits the top
-        if (hyperFrog.tongue.y <= 0) {
-            hyperFrog.tongue.state = "inbound";
+        if (frog.tongue.y <= 0) {
+            frog.tongue.state = "inbound";
         }
     }
     // If the tongue is inbound, it moves down
-    else if (hyperFrog.tongue.state === "inbound") {
-        hyperFrog.tongue.y += hyperFrog.tongue.speed;
+    else if (frog.tongue.state === "inbound") {
+        frog.tongue.y += frog.tongue.speed;
         // The tongue stops if it hits the bottom
-        if (hyperFrog.tongue.y >= height) {
-            hyperFrog.tongue.state = "idle";
+        if (frog.tongue.y >= height) {
+            frog.tongue.state = "idle";
         }
     }
 }
@@ -451,7 +447,7 @@ function moveTongue() {
 /**
  * Displays the tongue (tip and line connection) and the frog (body)
  */
-function drawhyperFrog() {
+function drawFrog() {
 
     if (frogGlow > 0) {
         push();
@@ -459,7 +455,7 @@ function drawhyperFrog() {
         let fogPulse = 30 + sin(frameCount * 2) * 8;
         for (let i = 0; i < 4; i++) {
             fill(200, 255, 200, 40 - i * 8);
-            ellipse(hyperFrog.body.x, hyperFrog.body.y, hyperFrog.body.size + fogPulse + i * 25);
+            ellipse(frog.body.x, frog.body.y, frog.body.size + fogPulse + i * 25);
         }
         pop();
         frogGlow--;
@@ -469,92 +465,92 @@ function drawhyperFrog() {
     push();
     fill("#ff0000");
     noStroke();
-    ellipse(hyperFrog.tongue.x, hyperFrog.tongue.y, hyperFrog.tongue.size);
+    ellipse(frog.tongue.x, frog.tongue.y, frog.tongue.size);
     pop();
 
     // Draw the rest of the tongue
     push();
     stroke("#ff0000");
-    strokeWeight(hyperFrog.tongue.size);
-    line(hyperFrog.tongue.x, hyperFrog.tongue.y, hyperFrog.body.x, hyperFrog.body.y);
+    strokeWeight(frog.tongue.size);
+    line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
     pop();
 
     // Draw the frog's body
     push();
     fill("#00ff00");
     noStroke();
-    ellipse(hyperFrog.body.x, hyperFrog.body.y, hyperFrog.body.size);
+    ellipse(frog.body.x, frog.body.y, frog.body.size);
     pop();
 
     //Draw the frog's green eye
     //The left eye 
     push();
-    fill(hyperFrog.eyelid.fill)
+    fill(frog.eyelid.fill)
     noStroke();
-    ellipse(hyperFrog.body.x - 45, hyperFrog.body.y - 70, hyperFrog.body.size - 105);
+    ellipse(frog.body.x - 45, frog.body.y - 70, frog.body.size - 105);
     pop();
     //The right eye 
     push();
-    fill(hyperFrog.eyelid.fill);
+    fill(frog.eyelid.fill);
     noStroke();
-    ellipse(hyperFrog.body.x + 45, hyperFrog.body.y - 70, hyperFrog.body.size - 105);
+    ellipse(frog.body.x + 45, frog.body.y - 70, frog.body.size - 105);
     pop();
 
-    //Draw the hyperFrog's white part of the eye
+    //Draw the frog's white part of the eye
     // //The left eye
     push();
-    fill(hyperFrog.eye.fill);
+    fill(frog.eye.fill);
     noStroke();
-    ellipse(hyperFrog.body.x - 45, hyperFrog.body.y - 70, hyperFrog.body.size - 120);
+    ellipse(frog.body.x - 45, frog.body.y - 70, frog.body.size - 120);
     pop();
 
     //The right eye
     push();
-    fill(hyperFrog.eye.fill);
+    fill(frog.eye.fill);
     noStroke();
-    ellipse(hyperFrog.body.x + 45, hyperFrog.body.y - 70, hyperFrog.body.size - 120);
+    ellipse(frog.body.x + 45, frog.body.y - 70, frog.body.size - 120);
     pop();
 
     //The pupil
     //The right pupil 
     push();
-    fill(hyperFrog.pupil.fill);
+    fill(frog.pupil.fill);
     noStroke();
-    ellipse(hyperFrog.body.x - 45, hyperFrog.body.y - 73, hyperFrog.body.size - 130);
+    ellipse(frog.body.x - 45, frog.body.y - 73, frog.body.size - 130);
     pop();
 
     //The left pupil
     push();
-    fill(hyperFrog.pupil.fill);
+    fill(frog.pupil.fill);
     noStroke();
-    ellipse(hyperFrog.body.x + 45, hyperFrog.body.y - 73, hyperFrog.body.size - 130);
+    ellipse(frog.body.x + 45, frog.body.y - 73, frog.body.size - 130);
     pop();
 }
 
 /**
  * Handles the tongue overlapping the fly
  */
-function checkTongueHyperFlyOverlap(fly, silverfly) {
+function checkTongueFlyOverlap(fly, silverfly) {
     // Get distance from tongue to fly
-    const d = dist(hyperFrog.tongue.x, hyperFrog.tongue.y, fly.x, fly.y);
+    const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
     // Check if it's an overlap
-    const eaten = (d < hyperFrog.tongue.size / 2 + fly.size / 2);
+    const eaten = (d < frog.tongue.size / 2 + fly.size / 2);
     if (eaten) {
         // Reset the fly
         resetFly(fly);
         // Bring back the tongue
-        hyperFrog.tongue.state = "inbound";
+        frog.tongue.state = "inbound";
         //score increases
-        hyperScore++
+        score++
         //frogGlow = 15;
 
         if (silverfly) {
             if (!hypermode) {
-                hyperGameState = "pause";
+                gameState = "pause";
                 hyperDialogueTimer = 120; // ~2 seconds
             }
             else {
-                hyperGameState = "lose";
+                gameState = "lose";
             }
         }
         else {
@@ -568,29 +564,29 @@ function checkTongueHyperFlyOverlap(fly, silverfly) {
  * Draws the capture jar and the flies inside
  */
 
-function drawhyperCaptureJar() {
+function drawCaptureJar() {
     push();
     fill("#ffffff62")
     noStroke();
-    rect(hyperJar.x, hyperJar.y, hyperJar.width, hyperJar.height, 10) //The outline of the jar
+    rect(jar.x, jar.y, jar.width, jar.height, 10) //The outline of the jar
 
     fill("#000");
     textSize(18);
     textAlign(CENTER);
-    text(hyperScore, 585, 130)
+    text(score, 585, 130)
 
 
 
-    for (let i = 0; i < hyperScore; i++) {
+    for (let i = 0; i < score; i++) {
 
         //For smoother transition of the game and to have the function follow everything
-        if (!jarHyperFlies[i]) {
+        if (!jarFlies[i]) {
 
-            //adding the jarHyperFlies variable in the capture jar function
-            jarHyperFlies[i] = {
+            //adding the jarFlies variable in the capture jar function
+            jarFlies[i] = {
 
-                x: random(hyperJar.x + 10, hyperJar.x + hyperJar.width - 10),
-                y: random(hyperJar.y + 10, hyperJar.y + hyperJar.height - 10),
+                x: random(jar.x + 10, jar.x + jar.width - 10),
+                y: random(jar.y + 10, jar.y + jar.height - 10),
 
                 /**Trying to slow down the speed of the flies in the jar. 
                  * Add velocity for flexibility
@@ -602,15 +598,15 @@ function drawhyperCaptureJar() {
                 //move of the flies in the jar. Using the methond function
                 move: function () {
 
-                    //using the word this to specify the x and velocity inside the jarHyperFlies
+                    //using the word this to specify the x and velocity inside the jarFlies
                     this.x += this.vx;
                     this.y += this.vy;
 
                     //flies will be bouncing in the jar without leaving the jar
-                    if (this.x < hyperJar.x + this.size / 2 || this.x > hyperJar.x + hyperJar.width - this.size / 2) {
+                    if (this.x < jar.x + this.size / 2 || this.x > jar.x + jar.width - this.size / 2) {
                         this.vx *= -1;  // Reverse direction horizontally
                     }
-                    if (this.y < hyperJar.y + this.size / 2 || this.y > hyperJar.y + hyperJar.height - this.size / 2) {
+                    if (this.y < jar.y + this.size / 2 || this.y > jar.y + jar.height - this.size / 2) {
                         this.vy *= -1;  // Reverse direction vertically
 
                     }
@@ -631,8 +627,8 @@ function drawhyperCaptureJar() {
 
 
         // Move and display the fly inside the jar
-        jarHyperFlies[i].move();
-        jarHyperFlies[i].display();
+        jarFlies[i].move();
+        jarFlies[i].display();
 
     }
     pop();
@@ -646,20 +642,18 @@ function drawhyperCaptureJar() {
 function startHypermode() {
     hypermode = true;
     goldenFly.speed = 30;
-    hyperFrog.tongue.speed = 150; // 5x faster
-    for (let f of hyperFlies) f.speed *= 5;
+    frog.tongue.speed = 150; // 5x faster
+    for (let f of flies) f.speed *= 5;
     silverFlies = [silverFlies[0]]; // only 1 silverfly
     silverFlies[0].speed *= 5;
 }
 
 
 
-function hyperKeyPressed(event) {
-    if (event.keyCode === 27) {
-        state = "menu";
-    }
-    if (event.keycode === 32 && hyperFrog.tongue.state === "idle") hyperFrog.tongue.state = "outbound";
-    if (key === "r" && (hyperGameState === "win" || hyperGameState === "lose")) restartGame();
+function keyPressed() {
+
+    if (keyCode === 32 && frog.tongue.state === "idle") frog.tongue.state = "outbound";
+    if (key === "r" && (gameState === "win" || gameState === "lose")) restartGame();
 }
 
 
@@ -668,23 +662,23 @@ function hyperKeyPressed(event) {
  */
 function restartGame() {
     // Reset game state and hyperScore
-    hyperGameState = "play";
-    hyperScore = 0;
+    gameState = "play";
+    score = 0;
     frogGlow = 0;
     hypermode = false;  // Reset hypermode here!
 
     // Reset frog's tongue state
-    hyperFrog.tongue.state = "idle";
-    hyperFrog.tongue.y = 480;  // Reset tongue to starting position
+    frog.tongue.state = "idle";
+    frog.tongue.y = 480;  // Reset tongue to starting position
 
-    // Reset hyperFlies
-    hyperFlies = [];
+    // Reset flies
+    flies = [];
     silverFlies = [];
 
     // Reset frog's speed and the speed of all flies
-    hyperFrog.tongue.speed = 30;  // Default tongue speed
+    frog.tongue.speed = 30;  // Default tongue speed
     for (let i = 0; i < 3; i++) {
-        hyperFlies.push({
+        flies.push({
             x: 0,
             y: random(100, 200),
             size: 10,

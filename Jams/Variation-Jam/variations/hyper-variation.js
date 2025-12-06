@@ -230,8 +230,8 @@ function hyperDraw() {
         tongueGoldenFlyOverlap();
 
         //The frog
-        movehyperFrog();
-        moveTongue();
+        moveHyperFrog();
+        moveHyperTongue();
         drawhyperFrog();
         drawhyperCaptureJar();
     }
@@ -408,7 +408,7 @@ function resetGoldenFly() {
 /**
  * Moves the frog to the mouse position on x
  */
-function movehyperFrog() {
+function moveHyperFrog() {
     //hyperFrog.body.x = mouseX;
     if (keyIsDown(LEFT_ARROW)) {
         hyperFrog.body.x = constrain(hyperFrog.body.x - hyperFrog.tongue.speed, 10, 630)
@@ -423,7 +423,7 @@ function movehyperFrog() {
 /**
  * Handles moving the tongue based on its state
  */
-function moveTongue() {
+function moveHyperTongue() {
     // Tongue matches the hyperFrog's x
     hyperFrog.tongue.x = hyperFrog.body.x;
     // If the tongue is idle, it doesn't do anything
